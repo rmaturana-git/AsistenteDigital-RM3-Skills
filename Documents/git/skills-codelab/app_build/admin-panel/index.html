@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RM3 Admin — Panel de Configuración</title>
+  <meta name="description" content="Panel administrativo centralizado para gestión de tenants, documentos y facturación del sistema RM3 RAG Chatbot." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+  <!-- ── Sidebar ──────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <span class="logo-icon">⬡</span>
+        <div class="logo-text">
+          <span class="logo-title">RM3 Admin</span>
+          <span class="logo-subtitle">Panel de Control</span>
+        </div>
+      </div>
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Colapsar menú">‹</button>
+    </div>
+
+    <nav class="sidebar-nav" role="navigation" aria-label="Menú principal">
+      <a href="#/" class="nav-item active" id="nav-dashboard" data-view="dashboard">
+        <span class="nav-icon">◈</span>
+        <span class="nav-label">Dashboard</span>
+      </a>
+      <a href="#/tenants" class="nav-item" id="nav-tenants" data-view="tenants">
+        <span class="nav-icon">⬡</span>
+        <span class="nav-label">Tenants</span>
+      </a>
+      <a href="#/documents" class="nav-item" id="nav-documents" data-view="documents">
+        <span class="nav-icon">◫</span>
+        <span class="nav-label">Documentos</span>
+      </a>
+      <a href="#/billing" class="nav-item" id="nav-billing" data-view="billing">
+        <span class="nav-icon">◎</span>
+        <span class="nav-label">Facturación</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">A</div>
+        <div class="user-details">
+          <span class="user-name">Administrador</span>
+          <span class="user-role">Super Admin</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ──────────────────────────────────────── -->
+  <main class="main-content" id="main-content">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Abrir menú">☰</button>
+        <div class="breadcrumb" id="breadcrumb">Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <div class="status-indicator">
+          <span class="status-dot status-online"></span>
+          <span>Sistema Operativo</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="view-container" id="view-container">
+      <!-- Vistas se renderizan aquí por el router -->
+    </div>
+
+  </main>
+
+  <!-- ── Toast Notifications ──────────────────────────────── -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- ── Overlay for mobile sidebar ──────────────────────── -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ── Scripts (orden importante) ──────────────────────── -->
+  <script src="js/api.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/views/dashboard.view.js"></script>
+  <script src="js/views/tenants.view.js"></script>
+  <script src="js/views/tenant-config.view.js"></script>
+  <script src="js/views/documents.view.js"></script>
+  <script src="js/views/billing.view.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

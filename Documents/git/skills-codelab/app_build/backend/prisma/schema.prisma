@@ -1,0 +1,164 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  extensions = [vector]
+}
+
+model Tenant {
+  id              String   @id @default(uuid()) @db.Uuid
+  mandante_code   String
+  proyecto_code   String
+  nombre          String
+  activo          Boolean  @default(true)
+  created_at      DateTime @default(now())
+
+  config          TenantConfig?
+  documents       Document[]
+  chat_sessions   ChatSession[]
+  token_usage     TokenUsage[]
+  tenant_billing  TenantBilling[]
+
+  @@unique([mandante_code, proyecto_code])
+  @@map("tenants")
+}
+
+model TenantConfig {
+  id                  String   @id @default(uuid()) @db.Uuid
+  tenant_id           String   @unique @db.Uuid
+  tenant              Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  
+  api_key_hash        String
+  llm_provider        String
+  llm_model           String
+  llm_api_key         String?  // Encriptada, opcional para motores locales
+  embedding_model     String   @default("fijo-global")
+  max_context_tokens  Int      @default(4000)
+  temperature         Float    @default(0.2)
+  rate_limit_user     Int      @default(30)
+  rate_limit_tenant   Int      @default(200)
+  updated_at          DateTime @updatedAt
+
+  @@map("tenant_configs")
+}
+
+model Document {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenant_id       String   @db.Uuid
+  tenant          Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  
+  titulo          String
+  tipo_documento  String
+  formato         String   // pdf | docx | xlsx
+  file_path       String
+  total_chunks    Int      @default(0)
+  status          String   @default("pending") // pending | processing | ready | error
+  error_message   String?
+  created_at      DateTime @default(now())
+
+  chunks          DocumentChunk[]
+
+  @@map("documents")
+}
+
+model DocumentChunk {
+  id              String   @id @default(uuid()) @db.Uuid
+  document_id     String   @db.Uuid
+  document        Document @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  
+  // Aislamiento: El chunk debe guardar su tenant_id para simplificar las búsquedas vectoriales aisladas.
+  tenant_id       String   @db.Uuid
+  
+  contenido_texto String
+  embedding       Unsupported("vector(1536)")?
+  chunk_index     Int
+  metadata        Json?
+
+  @@map("document_chunks")
+}
+
+model ChatSession {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenant_id       String   @db.Uuid
+  tenant          Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  
+  user_id         String
+  started_at      DateTime @default(now())
+  last_activity   DateTime @updatedAt
+
+  messages        ChatMessage[]
+  token_usages    TokenUsage[]
+
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id              String   @id @default(uuid()) @db.Uuid
+  session_id      String   @db.Uuid
+  session         ChatSession @relation(fields: [session_id], references: [id], onDelete: Cascade)
+  
+  role            String   // user | assistant
+  content         String
+  sources         Json?
+  created_at      DateTime @default(now())
+
+  token_usage     TokenUsage?
+
+  @@map("chat_messages")
+}
+
+model TokenUsage {
+  id              String   @id @default(uuid()) @db.Uuid
+  tenant_id       String   @db.Uuid
+  tenant          Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  
+  session_id      String?  @db.Uuid
+  session         ChatSession? @relation(fields: [session_id], references: [id], onDelete: SetNull)
+  
+  message_id      String?  @unique @db.Uuid
+  message         ChatMessage? @relation(fields: [message_id], references: [id], onDelete: SetNull)
+  
+  llm_provider    String
+  llm_model       String
+  tokens_input    Int
+  tokens_output   Int
+  tokens_total    Int
+  operation_type  String   // chat | embedding
+  created_at      DateTime @default(now())
+
+  @@map("token_usages")
+}
+
+model BillingPeriod {
+  id              String   @id @default(uuid()) @db.Uuid
+  provider        String
+  period_start    DateTime @db.Date
+  period_end      DateTime @db.Date
+  invoice_amount  Decimal  @db.Decimal(10, 2)
+  currency        String
+  status          String   @default("open")
+  created_at      DateTime @default(now())
+
+  tenant_billing  TenantBilling[]
+
+  @@map("billing_periods")
+}
+
+model TenantBilling {
+  id               String   @id @default(uuid()) @db.Uuid
+  billing_period_id String   @db.Uuid
+  billing_period   BillingPeriod @relation(fields: [billing_period_id], references: [id], onDelete: Cascade)
+  
+  tenant_id        String   @db.Uuid
+  tenant           Tenant   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  
+  total_tokens     Int
+  usage_percentage Decimal  @db.Decimal(5, 2)
+  allocated_cost   Decimal  @db.Decimal(10, 2)
+  calculated_at    DateTime @default(now())
+
+  @@map("tenant_billing")
+}

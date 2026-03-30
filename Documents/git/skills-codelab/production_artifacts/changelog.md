@@ -1,0 +1,74 @@
+# Registro de Decisiones (Changelog)
+
+## [2026-03-30] - Fase de Especificación (Product Manager)
+* **Requerimiento Inicial**: Creación de un chatbot embebible para consultas sobre requerimientos documentales de acreditación de personal.
+* **Propuesta de Arquitectura Original**: React (Vite) para el frontend, FastAPI (Python) para el backend RAG, y PostgreSQL (pgvector).
+* **Refinamiento (Feedback)**: Se requirió alineación total con el stack del sistema principal **RM3** y soporte **multi-tenant**.
+* **Arquitectura Definitiva Acordada**:
+    * **Frontend**: Angular Elements (empaquetado como Web Component) con Tailwind CSS.
+    * **Backend**: Microservicio o Módulo en NestJS, reutilizando Guards y estructura base.
+    * **Base de Datos**: PostgreSQL con Prisma ORM (uso de raw queries para pgvector).
+    * **Seguridad y Multi-tenant**: Tokens JWT para autenticación y filtrado estricto de documentos por Tenant_ID en Prisma.
+    * **Infraestructura**: AWS (misma red/clúster de RM3).
+    * **Modelos Dinámicos (MVP Local)**: Soporte multi-modelo (OpenAI, Gemini, Local/Ollama) a través de un `Factory` en NestJS que lee configuración por cada combinación de `mandante-proyecto`.
+    * **Limitación en Vectorización**: Se abordó el riesgo de discrepancia de dimensiones en `pgvector`. Para el MVP, se estandarizará el modelo de embeddings (para evitar problemas de indexado en Postgres al mezclar dimensiones), pero el LLM generativo mantendrá total libertad de configuración.
+
+### Iteración 3 - Diagramas y Revisión Integral
+* **Diagramas Mermaid incorporados a la especificación**:
+    * Diagrama de Arquitectura General (relación Widget → RM3 → Servicio IA → BD → Proveedores LLM).
+    * Diagrama de Secuencia del Flujo RAG completo (desde la pregunta del usuario hasta la respuesta con citas).
+    * Diagrama Entidad-Relación del modelo de datos (Tenant, TenantConfig, Document, DocumentChunk, ChatSession, ChatMessage).
+    * Diagrama Flowchart del Patrón Factory para selección dinámica de LLM por tenant.
+* **Requerimientos tabulados** para mayor claridad (funcionales y no funcionales).
+* **Estructura de carpetas del MVP** definida explícitamente.
+
+### Iteración 4 - Trazabilidad de Tokens y Facturación
+* **Nuevo requerimiento RF-07**: Trazabilidad de consumo de tokens (input + output) por cada interacción, asociado al tenant.
+* **Nueva entidad `TOKEN_USAGE`**: Registra proveedor, modelo, tokens_in, tokens_out, costo en USD, y tipo de operación (chat/embedding).
+* **Diagrama de secuencia actualizado**: Muestra el paso de captura de tokens tras la respuesta del LLM.
+* **Diagrama nuevo de flujo de facturación**: Desde la captura de metadata hasta la agregación por tenant y prorrateo.
+* **Tabla de costos de referencia** por proveedor/modelo para el MVP.
+* **Implementación técnica**: Interceptor NestJS no bloqueante, `TokenTrackingService`, endpoint de reportes de uso.
+* **Módulo `usage/`** agregado a la estructura de carpetas del proyecto.
+
+### Iteración 5 - Prorrateo Proporcional (reemplaza cálculo por token)
+* **Cambio de modelo de facturación**: Se descartó el cálculo estimado de costos por token (`cost_usd` por interacción con tabla `pricing_history`) en favor de un **Prorrateo Proporcional por Uso Real** (*Proportional Cost Allocation*).
+* **Campo `cost_usd` eliminado** de `TOKEN_USAGE`. La tabla ahora solo registra tokens crudos.
+* **Nuevas entidades**: `BILLING_PERIOD` (factura real del proveedor por periodo) y `TENANT_BILLING` (costo asignado proporcionalmente a cada tenant).
+* **Diagrama nuevo**: Flujo de 3 fases (registro en tiempo real → cierre de periodo con factura real → reportes y exportación).
+* **API actualizada**: Se reemplazó módulo `usage/` por `billing/` con endpoints para reportes de tokens, reportes de costos asignados, y registro de facturas reales.
+* **Razón del cambio**: Elimina la necesidad de mantener tablas de precios que se desactualizan, es agnóstico a moneda, y funciona también para Ollama (asignando costo de infraestructura mensual).
+
+### Iteración 6 - Resolución de puntos críticos y alcance MVP
+* **Ingestión de Documentos (RF-08)**: Interfaz admin independiente + endpoint API. Soporte para PDF (`pdf-parse`), DOCX (`mammoth`), XLSX (`exceljs`). Diagrama de secuencia de ingestión completo.
+* **Estrategia de Chunking**: Recursive Character Text Splitting con `chunk_size=800 tokens`, `chunk_overlap=200 tokens`. XLSX se trata fila por fila.
+* **Modelo de Autenticación MVP**: API Key + JWT desacoplado. API Key identifica tenant (hasheada en BD). JWT se decodifica sin validar firma para extraer user_id. Diagrama de secuencia incluido.
+* **Rate Limiting (RF-09)**: `@nestjs/throttler`, 30 req/min por usuario, 200 req/min por tenant. Configurable desde `TENANT_CONFIG`.
+* **Manejo de Errores (RF-10)**: Mensaje genérico al usuario + traza interna con logging estructurado (nivel, timestamp, tenant_id, stack trace).
+* **Respuestas en Español (RF-11)**: Forzado vía system prompt del RAG.
+* **Alcance del MVP definido explícitamente**: Chat RAG + 1 LLM + ingestión + token tracking + billing básico + rate limiting + Docker local.
+* **Fuera del MVP**: Dashboard, múltiples LLMs simultáneos, validación JWT asimétrica, OCR, exportación reportes.
+* **Entidad DOCUMENT actualizada**: Nuevos campos `formato`, `file_path`, `total_chunks`, `status`, `error_message`.
+* **Entidad TENANT_CONFIG actualizada**: Nuevos campos `api_key_hash`, `rate_limit_user`, `rate_limit_tenant`.
+
+### Iteración 7 - Rate Limiting Dinámico y Gestión de Parámetros por Tenant
+* **RF-09 renombrado a "Rate Limiting Dinámico"**: Los límites de req/min ya no son valores hardcodeados ni estáticos del módulo `@nestjs/throttler`. Se leen en tiempo de ejecución desde `TENANT_CONFIG`, permitiendo configuraciones distintas por cada mandante-proyecto.
+* **`DynamicThrottlerGuard`**: Guard personalizado que extiende `ThrottlerGuard`. Consulta `TenantConfigCacheService` para obtener los límites del tenant del request (con fallback a variables `.env` globales). Evalúa dos contadores independientes: por usuario y por tenant.
+* **`TenantConfigCacheService`**: Nuevo servicio singleton introducido como capa de caché en memoria (`Map<tenant_id, config>`) con TTL configurable (`CACHE_TTL_MS`). Implementa resolución lazy y **invalidación explícita** al actualizar `TENANT_CONFIG` vía `PUT /tenants/:id/config`, sin necesidad de reiniciar el servicio.
+* **Jerarquía de configuración formalizada**: `.env` (defaults globales, fallback) → `TENANT_CONFIG` en PostgreSQL (overrides por tenant, en caliente). Este patrón aplica a todos los parámetros operacionales: rate limits, proveedor/modelo LLM, temperatura, tokens de contexto.
+* **Tabla de parámetros dinámicos**: Documentados los 6 parámetros gestionados con su campo en `TENANT_CONFIG` y su variable `.env` correspondiente.
+* **Diagrama actualizado**: Nuevo flowchart que muestra `.env` y `TENANT_CONFIG` alimentando `TenantConfigCacheService`, el cual provee configuración resuelta a `DynamicThrottlerGuard`, `LLM Factory` y `RAG Service`.
+* **Estructura de carpetas ampliada**: Módulos `documents/` (con parsers), `common/` (filters, interceptors, guards), `admin/` (panel frontend), `docs/` (datos de prueba).
+
+### Iteración 8 - Scaffolding de Backend y Flujo Core RAG (LangChain)
+* **Setup de Base de Datos**: Configuración de `docker-compose.yml` utilizando `pgvector/pgvector:16` y porteo completo del diagrama E-R definido al archivo `schema.prisma`.
+* **Ajuste Técnico Prisma V7**: Se detectó deprecación del atributo `url` dentro del bloque `datasource` en Prisma v7. La conexión a BD se delegó a la lectura nativa con el paquete `dotenv` desde `.env`.
+* **Capa Base Transversal de Seguridad**: Implementados en NestJS los siguientes proveedores:
+  * `TenantConfigCacheService` (TTL caching para aislar BD de descargas agresivas de lectura de settings).
+  * `ApiKeyGuard` (Validador SHA256 contra la API Key interceptando JWT para enrutamiento Multi-Tenant).
+  * `DynamicThrottlerGuard` (Sobre-escritura limitadora estricta y per-req al vuelo basándonos en la caché sin reiniciar).
+* **Fundación RAG / LLM (Inteligencia Artificial)**:
+  * `LlmFactoryService` capaz de despachar objetos Model (OpenAI / Gemini / Ollama) evaluando las credenciales interceptadas del Tenant al vuelo.
+  * Extracción de eventos de `LangChain` invocada por interfaz Callback de `rag.service.ts` para capturar asincrónicamente los Tokens (Input/Output) a través de `TokenTrackingService`.
+  * Consulta vectorizada nativa `Similitud Coseno` programada con cláusula explícita a `$queryRaw` respetando casting `::vector` contra el Driver raw en `rag.service.ts`.
+
