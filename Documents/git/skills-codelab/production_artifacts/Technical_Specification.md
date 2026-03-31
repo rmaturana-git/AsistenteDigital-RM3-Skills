@@ -187,11 +187,16 @@ sequenceDiagram
 
     Admin->>Panel: Sube archivo (PDF/DOCX/XLSX)
     Panel->>API: POST /documents/ingest {file, tenant_id}
-    API->>DB: INSERT document (status: processing)
-    API->>Parser: Extrae texto según formato
-    Parser-->>API: Texto plano extraído
-    API->>Chunker: Fragmenta con RecursiveTextSplitter
-    Chunker-->>API: Array de chunks con metadata
+    API->>API: Genera SHA-256 (Hash) del archivo físico
+    API->>DB: Revisa si existe documento con ese hash para este tenant
+    alt MATCH == TRUE
+       API-->>Panel: Error 409 Conflict (Documento idéntico ya existe)
+    else MATCH == FALSE
+       API->>DB: INSERT document (status: processing, file_hash: hash)
+       API->>Parser: Extrae texto según formato
+       Parser-->>API: Texto plano extraído
+       API->>Chunker: Fragmenta con RecursiveTextSplitter
+       Chunker-->>API: Array de chunks con metadata
 
     loop Por cada chunk
         API->>Embedder: Genera vector embedding
@@ -202,7 +207,14 @@ sequenceDiagram
     API->>DB: UPDATE document (status: ready)
     API-->>Panel: Ingestión completada
     Panel-->>Admin: Documento listo para consultas
+    end
 ```
+
+### Limpieza de Archivos (Políticas de Auditoría Transitoria)
+Para soportar eventualidades y re-intentos de ingesta sin obligar al usuario a subir los PDFs pesados de nuevo, el `MulterModule` se pre-configuró con Persistencia Local (carpeta `/uploads/`).
+Para impedir cuellos de botella Out Of Memory (OOM), el Gateway del servidor bloqueará por fuerza mayor de RAM a aquellos archivos que excedan  `MAX_UPLOAD_MB=10` (variables de entorno).
+
+Adicionalmente, se ejecuta un proceso asíncrono (CRON Nocturno) con `@nestjs/schedule` para liberar memoria de almacenamiento, borrando del Sistema Operativo todos los archivos físicos que contengan antigüedades superiores a las **48 horas inyectadas** sin alterar la metadata en PostgreSQL.
 
 ## Flujo de Procesamiento RAG
 
@@ -388,28 +400,33 @@ flowchart LR
 
 ## Trazabilidad de Consumo y Prorrateo de Facturación
 
-El sistema utiliza un modelo de **Prorrateo Proporcional por Uso Real** (*Proportional Cost Allocation*). En lugar de estimar costos por token (lo cual requiere mantener tablas de precios que se desactualizan constantemente), el sistema:
+El sistema utiliza un modelo de **Prorrateo Proporcional por Uso Real** (*Proportional Cost Allocation*), el cual está fuertemente diseñado para soportar que un mismo tenant pueda utilizar múltiples proveedores de IA (ej. OpenAI y Gemini) en un mismo periodo. En lugar de estimar costos por token, el sistema opera así:
 
-1.  **Registra tokens crudos** por cada interacción (sin calcular costos).
-2.  **Al cierre del periodo**, se ingresa la **factura real** del proveedor.
-3.  **Calcula automáticamente** el porcentaje de uso de cada tenant y le asigna su fracción proporcional de la factura.
+1.  **Registra tokens crudos** por cada interacción, adjuntando siempre qué `llm_provider` y `llm_model` procesó dicha petición (sin calcular costos al vuelo).
+2.  **Al cierre del periodo**, el administrador ingresa la **factura real** de cada proveedor de forma independiente (ej: Ingresa factura de OpenAI, luego factura de Google).
+3.  **Calcula automáticamente** el porcentaje de uso de cada tenant **particionado por proveedor**.
+
+### Comportamiento Multi-Proveedor
+Si a mitad de mes el administrador cambia el motor LLM de un `tenant` (ej. pasa de OpenAI a Gemini), el sistema registrará el consumo para cada proveedor de manera aislada. Al final del periodo, ese `tenant` recibirá **cobros fraccionados e independientes**: uno calculado sobre la factura de OpenAI, y otro sobre la porción de uso de la factura de Gemini.
 
 ### Ventajas del modelo
-*   ✅ **Sin tabla de precios que mantener**: no importa si el proveedor cambia sus tarifas.
-*   ✅ **Precisión total**: se reparte la factura real, no una estimación.
-*   ✅ **Agnóstico a moneda**: la factura puede estar en USD, CLP, UF, o cualquier moneda.
-*   ✅ **Funciona para Ollama**: se asigna un costo de infraestructura mensual (ej: costo del servidor) y se prorratea entre los tenants que usaron el modelo local.
+*   ✅ **Tolerancia a Cambios en Caliente**: Cobro matemático exacto incluso si la configuración del proveedor en el tenant cambia múltiples veces durante el mes.
+*   ✅ **Sin tabla de precios que mantener**: no importa si el proveedor cambia o ajusta sus tarifas por token.
+*   ✅ **Precisión total**: se reparte la factura agregada real.
+*   ✅ **Agnóstico a moneda**: la factura base se carga en USD, CLP, UF.
 
-> ⚠️ **Limitación conocida**: No hay visibilidad de costos en tiempo real para el tenant. Solo conocerá su costo asignado al cierre del periodo de facturación. Para el MVP esto es aceptable.
+> ⚠️ **Limitación conocida**: No hay visibilidad del gasto monetario en tiempo real para el tenant. Solo conocerá su consumo de "tokens". El valor monetario nace al cierre tras ingresar la factura de nube.
 
-### Ejemplo Numérico
+### Ejemplo Numérico (Caso Tenant Híbrido)
 
-| Tenant | Tokens consumidos (mes) | % del total | Factura real OpenAI: $50 USD | Costo asignado |
-|---|---|---|---|---|
-| Mandante A - Proyecto 1 | 150.000 | 30% | — | $15.00 USD |
-| Mandante A - Proyecto 2 | 100.000 | 20% | — | $10.00 USD |
-| Mandante B - Proyecto 1 | 250.000 | 50% | — | $25.00 USD |
-| **Total** | **500.000** | **100%** | **$50.00** | **$50.00** |
+Supongamos que el **Proyecto 1** empezó el mes con OpenAI y luego se le cambió a Gemini:
+
+| Tenant | Proveedor | Tokens consumidos | % del volúmen total (por proveedor) | Factura real ingresada | Costo asignado |
+|---|---|---|---|---|---|
+| Mandante A - Proyecto 1 | **OpenAI**| 150.000 | 30% | $50.00 USD (OpenAI)| **$15.00 USD** |
+| Mandante A - Proyecto 2 | **OpenAI**| 350.000 | 70% | — | $35.00 USD |
+| Mandante A - Proyecto 1 | **Gemini**| 50.000  | 100% | $10.00 USD (Google)| **$10.00 USD** |
+| **TOTAL FACTURADO** | | | | **$60.00 USD** | **$60.00 USD** |
 
 ### Flujo de Prorrateo Proporcional
 

@@ -1,17 +1,21 @@
 import { Module } from '@nestjs/common';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { TenantModule } from './tenant/tenant.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { DocumentsModule } from './documents/documents.module';
 
 @Module({
   imports: [
     PrismaModule,
     TenantModule,
+    DocumentsModule,
+    ScheduleModule.forRoot(),
     ThrottlerModule.forRoot([{
       ttl: Number(process.env.THROTTLE_TTL_MS) || 60000,
-      limit: Number(process.env.THROTTLE_USER_LIMIT) || 30, // Patrón global fallback exigido por la librería aunque lo subroguemos dinámicamente
+      limit: Number(process.env.THROTTLE_USER_LIMIT) || 30, // Patrón global fallback
     }]),
   ],
   controllers: [AppController],

@@ -54,6 +54,7 @@ model Document {
   tipo_documento  String
   formato         String   // pdf | docx | xlsx
   file_path       String
+  file_hash       String   @default("") // Firma SHA-256
   total_chunks    Int      @default(0)
   status          String   @default("pending") // pending | processing | ready | error
   error_message   String?
@@ -61,6 +62,7 @@ model Document {
 
   chunks          DocumentChunk[]
 
+  @@unique([tenant_id, file_hash])
   @@map("documents")
 }
 
