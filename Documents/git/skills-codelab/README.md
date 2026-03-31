@@ -22,5 +22,25 @@ El proyecto está separado principalmente en la siguiente estructura:
 4. Cargar y compilar el esquema vectorial de PostgreSQL: `npx prisma db push --accept-data-loss`
 5. Servir el API Base de IA: `npm run start`
 
+## Gestión y Visualización de Base de Datos
+
+El núcleo del ecosistema RAG es una base autogestionada de PostgreSQL optimizada para Inteligencia Artificial mediante **pgvector**. Para inspeccionar las tablas, realizar manipulaciones CRUD o auditar los `document_chunks`, existen dos vías estandarizadas:
+
+**A. Prisma Studio (Recomendado)**
+Entorno gráfico que arranca en el navegador (`localhost:5555`) sin configurar clientes remotos.
+```bash
+cd app_build/backend
+npx prisma studio
+```
+
+**B. Conexión SQL Directa (pgAdmin, DBeaver, DataGrip, VSCode)**
+```text
+Host: localhost
+Puerto: 5432
+Base de Datos: rm3_rag
+Usuario: admin
+Contraseña: password123
+```
+
 ---
 *Este repositorio es mantenido y modificado iterativamente gestionando ciclos estructurados de análisis (Fase 1), diseño (Fase 2) y programación AI asistida (Fase 3).*
