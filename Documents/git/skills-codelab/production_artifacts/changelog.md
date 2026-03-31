@@ -72,3 +72,8 @@
   * Extracción de eventos de `LangChain` invocada por interfaz Callback de `rag.service.ts` para capturar asincrónicamente los Tokens (Input/Output) a través de `TokenTrackingService`.
   * Consulta vectorizada nativa `Similitud Coseno` programada con cláusula explícita a `$queryRaw` respetando casting `::vector` contra el Driver raw en `rag.service.ts`.
 
+### Iteración 8.1 - Fortificación Estructural del Backend (Defensas MVP)
+  * **Excepciones Domadas**: Instalación de `GlobalExceptionFilter` como barrera interceptora para transformar fallos fatales de duplicidad (Prisma `P2002`) en respuestas HTTP 400 serializadas, evitando fuga de datos al cliente.
+  * **Sanitización de Entrada Perimetral**: Activación del `ValidationPipe` de NestJS con políticas estrictas de `whitelist` contra inyecciones de atributos basura usando la suite `class-validator`.
+  * **Endpoint Transaccional API Key**: Creación del `TenantController` y su servicio acoplado para ejecutar el Registro de Inquilino automatizado: Emite por única vez el string aleatorio de la *"API Key Plana"* al Front-End mientras asegura únicamente un cifrado de vía única (SHA-256) en la base de datos PostgreSQL, asegurando inviolabilidad.
+
