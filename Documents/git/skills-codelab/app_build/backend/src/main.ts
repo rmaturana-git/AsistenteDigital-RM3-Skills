@@ -1,3 +1,4 @@
+import 'dotenv/config'; // Config Env Listo
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -6,7 +7,8 @@ import { GlobalExceptionFilter } from './common/filters/global-exception.filter'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Seguridad CORS perimetral
+  // Apertura provisional de CORS para el entorno Embed/Local
+  // Idealmente en Prod, los Origins se restringen a dominios inscritos por el Tenant
   app.enableCors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

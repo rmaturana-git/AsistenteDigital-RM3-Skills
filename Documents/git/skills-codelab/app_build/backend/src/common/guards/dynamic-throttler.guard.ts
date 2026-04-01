@@ -1,5 +1,5 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
-import { ThrottlerGuard, ThrottlerException } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerException, ThrottlerRequest } from '@nestjs/throttler';
 import { TenantConfigCacheService } from '../../tenant/tenant-config-cache.service';
 
 @Injectable()
@@ -8,11 +8,9 @@ export class DynamicThrottlerGuard extends ThrottlerGuard {
   // Obtendremos nuestro servicio de caché desde el contenedor de aplicación al vuelo.
 
   protected async handleRequest(
-    context: ExecutionContext,
-    limit: number,
-    ttl: number,
-    throttler: any,
+    requestProps: ThrottlerRequest,
   ): Promise<boolean> {
+    const { context, limit: injectLimit, ttl: injectTtl, throttler } = requestProps;
     const req = context.switchToHttp().getRequest();
     const tenantId = req.tenant?.id;
     const userId = req.user?.id;
@@ -44,15 +42,17 @@ export class DynamicThrottlerGuard extends ThrottlerGuard {
       2. Evaluación Independiente de Límite Global del Tenant
     */
 
-    const userKey = this.generateKey(context, `${tenantId}:user:${userId}`, throttler.name);
-    const tenantKey = this.generateKey(context, `tenant:${tenantId}`, throttler.name);
+    const userKey = `throttler:${throttler.name}:${tenantId}:user:${userId}`;
+    const tenantKey = `throttler:${throttler.name}:tenant:${tenantId}`;
 
-    const { totalHits: userHits } = await this.storageService.increment(userKey, ttl, userLimit, 0, throttler.name);
+    // @ts-ignore
+    const { totalHits: userHits } = await this.storageService.increment(userKey, injectTtl, userLimit, 0, throttler.name);
     if (userHits > userLimit) {
       throw new ThrottlerException('Límite de peticiones por usuario excedido (429)');
     }
 
-    const { totalHits: tenantHits } = await this.storageService.increment(tenantKey, ttl, tenantLimit, 0, throttler.name);
+    // @ts-ignore
+    const { totalHits: tenantHits } = await this.storageService.increment(tenantKey, injectTtl, tenantLimit, 0, throttler.name);
     if (tenantHits > tenantLimit) {
       throw new ThrottlerException('Límite de peticiones del tenant bloqueado para evitar abuso (429)');
     }

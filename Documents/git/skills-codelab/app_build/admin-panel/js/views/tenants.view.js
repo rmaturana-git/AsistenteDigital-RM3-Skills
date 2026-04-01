@@ -102,12 +102,33 @@ async function renderTenants() {
     const btn = document.getElementById('modal-save');
     btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Creando…';
     try {
-      const { data: t } = await API.createTenant({ nombre, mandante_code:mandante, proyecto_code:proyecto, activo:true });
-      tenants.push(t);
+      const { data: res } = await API.createTenant({ nombre, mandante_code:mandante, proyecto_code:proyecto });
+      
+      // El backend devuelve { tenant_id, cleartext_api_key, message }
+      const newTenant = { 
+        id: res.tenant_id, 
+        nombre, 
+        mandante_code: mandante, 
+        proyecto_code: proyecto, 
+        activo: true, 
+        created_at: new Date().toISOString() 
+      };
+
+      // Guardamos la llave para esta sesión en el navegador (para poder subir archivos)
+      window.localStorage.setItem(`api_key_${res.tenant_id}`, res.cleartext_api_key);
+
+      tenants.push(newTenant);
       renderTenantsTable(tenants);
       closeModal();
-      showToast(`Tenant "${t.nombre}" creado exitosamente`, 'success');
-    } catch(e) { showToast('Error al crear el tenant', 'error'); }
+      
+      // Mostrar la llave al usuario (Critical!)
+      alert(`¡Tenant Creado!\n\nAPI KEY: ${res.cleartext_api_key}\n\nIMPORTANTE: Guarde esta llave ahora. No podrá volver a verla por razones de seguridad.`);
+      showToast(`Tenant "${nombre}" creado y listo`, 'success');
+      
+    } catch(e) { 
+      console.error(e);
+      showToast('Error al crear el tenant', 'error'); 
+    }
     finally { btn.disabled = false; btn.textContent = 'Crear Tenant'; }
   });
 }

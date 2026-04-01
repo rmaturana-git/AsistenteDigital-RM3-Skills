@@ -1,7 +1,9 @@
 ---
-description: description: Start the Autonomous AI Developer Pipeline sequence with a new idea
+description: Start the Autonomous AI Developer Pipeline sequence with a new idea
 ---
 
+When the user types `/pause`, execute the `pause_work.md` skill to generate the context handoff file.
+When the user types `/resume`, explicitly call the **Product Manager** (@pm) to execute the `resume_work.md` skill and orchestrate the next steps.
 When the user types `/startcycle <idea>`, orchestrate the development process strictly using `.agents/agents.md` and `.agents/skills/`.
 
 ## Global Rule
@@ -13,3 +15,6 @@ When the user types `/startcycle <idea>`, orchestrate the development process st
 2. Shift context, act as the **Full-Stack Engineer** (@engineer), and execute the `generate_code.md` skill to build the approved architecture.
 3. Shift context, act as the **QA Engineer** (@qa), and execute the `audit_code.md` skill to ensure no steps were skipped, no secrets are hardcoded, and the code is robust.
 4. Shift context, act as the **DevOps Master** (@devops), and execute the `deploy_app.md` skill to isolate the environment and launch the project locally.
+
+## Help and Guidance
+- If the user asks "What should I do?", "How do I start?", or "How to continue?", execute the logic to explain the `/startcycle`, `/pause`, and `/resume` commands found in `agents.md`.

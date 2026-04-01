@@ -142,7 +142,13 @@ async function renderDocuments(params) {
         showToast(`"${file.name}" enviado a procesamiento`, 'success');
       } catch (e) {
         progress.innerHTML = '';
-        showToast(`Error al ingestar "${file.name}"`, 'error');
+        if (e.status === 409) {
+          showToast(`⚠️ Duplicado: "${file.name}" ya existe idénticamente en la base RAG.`, 'warning');
+        } else if (e.status === 413 || e.status === 400) {
+          showToast(`❌ Denegado: "${file.name}" supera el límite OOM o es inválido.`, 'error');
+        } else {
+          showToast(`Error al ingestar "${file.name}": ${e.message || 'Desconocido'}`, 'error');
+        }
       }
     }
   }

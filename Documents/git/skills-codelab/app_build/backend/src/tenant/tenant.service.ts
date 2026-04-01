@@ -49,4 +49,50 @@ export class TenantService {
       cleartext_api_key: rawApiKey,
     };
   }
+
+  async findAll() {
+    return this.prisma.tenant.findMany({
+      orderBy: { created_at: 'desc' },
+    });
+  }
+
+  async findOne(id: string) {
+    return this.prisma.tenant.findUnique({
+      where: { id },
+      include: { config: true },
+    });
+  }
+
+  async getConfig(tenantId: string) {
+    return this.prisma.tenantConfig.findUnique({
+      where: { tenant_id: tenantId },
+    });
+  }
+
+  async updateConfig(tenantId: string, data: any) {
+    // Evitamos que se pueda actualizar el api_key_hash o tenant_id por este medio directo
+    const { api_key_hash, tenant_id, id, ...updateData } = data;
+    
+    return this.prisma.tenantConfig.update({
+      where: { tenant_id: tenantId },
+      data: updateData,
+    });
+  }
+
+  async regenerateApiKey(tenantId: string) {
+    const rawApiKey = `rm3_${crypto.randomBytes(24).toString('hex')}`;
+    const apiHash = crypto.createHash('sha256').update(rawApiKey).digest('hex');
+
+    await this.prisma.tenantConfig.update({
+      where: { tenant_id: tenantId },
+      data: { api_key_hash: apiHash },
+    });
+
+    this.logger.log(`API Key regenerada para Tenant ID: ${tenantId}`);
+
+    return {
+      message: 'Nueva API Key generada con éxito.',
+      cleartext_api_key: rawApiKey,
+    };
+  }
 }

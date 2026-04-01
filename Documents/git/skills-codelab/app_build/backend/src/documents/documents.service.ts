@@ -190,6 +190,18 @@ export class DocumentsService {
              }
            });
         });
-     });
+      });
+  }
+
+  async findAll() {
+    return this.prisma.document.findMany({
+      orderBy: { created_at: 'desc' },
+    });
+  }
+
+  async deleteDocument(id: string) {
+    return this.prisma.document.delete({
+      where: { id },
+    });
   }
 }

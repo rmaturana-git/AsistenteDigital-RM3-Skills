@@ -1,7 +1,13 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException, Logger } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+  Logger,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import * as jwt from 'jsonwebtoken';
-import { createHash } from 'crypto';
+import * as crypto from 'crypto';
 
 @Injectable()
 export class ApiKeyGuard implements CanActivate {
@@ -11,50 +17,68 @@ export class ApiKeyGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const apiKey = request.headers['x-api-key'] as string;
-    const authHeader = request.headers['authorization'] as string;
+    const authHeader = request.headers.authorization;
+    const xApiKey = request.headers['x-api-key'];
 
-    if (!apiKey) {
-      throw new UnauthorizedException('Missing X-API-Key header');
-    }
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new UnauthorizedException('Missing or invalid Bearer JWT');
+    let apiKey: string | null = null;
+    let jwtToken: string | null = null;
+
+    // 1. Prioridad: X-API-Key header
+    if (xApiKey) {
+      apiKey = Array.isArray(xApiKey) ? xApiKey[0] : xApiKey;
     }
 
-    try {
-      // 1. Validar Tenant via API Key (hasheada en BD con SHA256 para indexado rápido)
-      const hashedKey = createHash('sha256').update(apiKey).digest('hex');
-      
-      const config = await this.prisma.tenantConfig.findFirst({
-        where: { api_key_hash: hashedKey },
-        include: { tenant: true }
+    // 2. Authorization Header (Bearer)
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1];
+      // Si parece un JWT (3 partes separadas por puntos), lo tratamos como tal
+      if (token.split('.').length === 3) {
+        jwtToken = token;
+      } else if (!apiKey) {
+        // Si no es JWT y no tenemos apiKey aún, asumimos que enviaron la apiKey aquí (compatibilidad frontend)
+        apiKey = token;
+      }
+    }
+
+    // 3. Validación de API Key si existe
+    if (apiKey) {
+      const hash = crypto.createHash('sha256').update(apiKey).digest('hex');
+      const tenantConfig = await this.prisma.tenantConfig.findFirst({
+        where: { api_key_hash: hash },
+        select: { tenant_id: true },
       });
 
-      if (!config || !config.tenant.activo) {
-        throw new UnauthorizedException('Invalid API Key or Inactive Tenant');
+      if (tenantConfig) {
+        request.tenant_id = tenantConfig.tenant_id;
+        this.logger.debug(`Tenant identificado vía API Key: ${request.tenant_id}`);
+      } else {
+        this.logger.warn(`API Key inválida proporcionada: ${apiKey.substring(0, 8)}...`);
+        throw new UnauthorizedException('API Key no válida.');
       }
-
-      // 2. Extraer user_id del JWT decodificado (Sin validar firma según MVP)
-      const token = authHeader.split(' ')[1];
-      const decodedJwt = jwt.decode(token) as { user_id?: string; sub?: string };
-      
-      const userId = decodedJwt?.user_id || decodedJwt?.sub;
-      if (!userId) {
-        throw new UnauthorizedException('JWT is missing user identity (user_id / sub)');
-      }
-
-      // 3. Inyectar identificación de Tenant y Usuario en el Request unificado
-      request.tenant = {
-        id: config.tenant_id,
-        mandante_code: config.tenant.mandante_code,
-        proyecto_code: config.tenant.proyecto_code
-      };
-      request.user = { id: userId };
-
-      return true;
-    } catch (error) {
-      this.logger.error(`Authentication failed: ${error.message}`);
-      throw new UnauthorizedException('Authentication failed');
     }
+
+    // 4. Procesamiento de JWT (Decodificación sin validación para el MVP)
+    if (jwtToken) {
+      try {
+        const decoded = jwt.decode(jwtToken) as any;
+        if (decoded) {
+          request.user_id = decoded.sub || decoded.user_id;
+          // Si el JWT trae tenant_id y no lo obtuvimos de la API Key, lo usamos
+          if (!request.tenant_id && decoded.tenant_id) {
+            request.tenant_id = decoded.tenant_id;
+          }
+        }
+      } catch (err) {
+        this.logger.error(`Error al decodificar JWT: ${err.message}`);
+      }
+    }
+
+    // 5. Verificación final de identidad
+    if (!request.tenant_id) {
+      this.logger.warn('Petición rechazada: No se pudo identificar el Tenant (Falta API Key o JWT válido).');
+      throw new UnauthorizedException('Identificación de Tenant requerida.');
+    }
+
+    return true;
   }
 }

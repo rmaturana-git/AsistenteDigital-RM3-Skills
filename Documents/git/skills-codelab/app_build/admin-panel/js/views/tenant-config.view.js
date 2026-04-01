@@ -192,10 +192,16 @@ async function renderTenantConfig({ id: tenantId }) {
       try {
         const { data } = await API.regenerateApiKey(tenantId);
         fullKey = data.api_key;
+        
+        // Guardar en sesión local para el Admin Panel
+        window.localStorage.setItem(`api_key_${tenantId}`, fullKey);
+
         document.getElementById('apikey-display').textContent = maskApiKey(fullKey);
         showing = false;
         document.getElementById('btn-toggle-key').textContent = 'Mostrar';
-        showToast('API Key regenerada. Actualiza el widget de RM3.', 'warning');
+
+        alert(`¡API Key Regenerada!\n\nNUEVA KEY: ${fullKey}\n\nGuárdela ahora. No volverá a aparecer.`);
+        showToast('API Key regenerada y guardada en sesión local.', 'success');
       } catch { showToast('Error al regenerar la API Key', 'error'); }
       finally  { btn.disabled = false; btn.textContent = 'Regenerar'; }
     });
