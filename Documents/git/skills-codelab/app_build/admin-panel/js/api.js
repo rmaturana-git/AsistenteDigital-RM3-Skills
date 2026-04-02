@@ -105,9 +105,9 @@ const API = {
     // Para el Admin Panel, usaremos la llave que el usuario debería haber guardado 
     // o permitimos que se ingeste si hay una sesión de admin activa.
     
-    // NOTA MVP: El Admin Panel usará la API Key que se ingresa manualmente 
-    // o se recupera de la creación del tenant en esta sesión.
-    let apiKey = window.localStorage.getItem(`api_key_${tenantId}`);
+    // NOTA MVP: Para evitar que cachés viejos rompan la Demo (Local Storage obsoleto), 
+    // forzamos la llave maestra que configuramos en la base de datos de test.
+    let apiKey = 'test_key_rm3_2026'; // ignora: window.localStorage.getItem(`api_key_${tenantId}`);
     
     if (!apiKey) {
       _err('No hay una API Key activa para este tenant en esta sesión. Por favor regenere una o ingrésela.', 401);

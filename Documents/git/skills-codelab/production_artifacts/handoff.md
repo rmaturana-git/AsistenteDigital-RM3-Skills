@@ -1,18 +1,20 @@
-# Handoff Document - RM3 RAG Chatbot Phase
+# Handoff Document - RM3 Digital Assistant
+*Documento autogenerado por el Autonomous Development Team.*
 
-**Fecha:** 2026-04-01
+## Qué hice hoy:
+- **Resurrección del Servidor:** Identificamos y limpiamos puertos bloqueados (`Taskkill`) levantando el backend de NestJS con soporte en vivo.
+- **Configuración Langchain:** Integramos la variable `OPENAI_API_KEY` en el `.env` activando a Langchain de los modos pasivos al modo activo.
+- **Fix de Prisma pgvector:** Detectamos un error crítico al hacer consultas nativas `$queryRaw` vectoriales y ajustamos la tabla apuntando explícitamente a `"document_chunks"` mapeando correctamente el campo `contenido_texto`.
+- **Demolición de Caché Obsoleto:** En el "*Admin Panel*" (`api.js`) forzamos la llave primaria `test_key_rm3_2026` para eludir tokens corruptos que guardaba la memoria del navegador.
+- **Reparación del Input Angular:** Modificamos el Widget Chat (`app.ts`) quemando la llave correcta ya que el Componente Raíz de Angular bloqueaba la inyección directa desde el DOM `index.html`.
+- **Prueba End-to-End Válida:** Logramos ingestar tu `"Manual de Acreditacion Oficial 2025 v 4.1.pdf"` de manera correcta a PostgreSQL, y la interfaz Chatbot te dio respuestas procesadas por el motor IA a partir de ese propio historial. 🎉
 
-### Qué hice hoy:
-- Transformación completa de la persistencia Frontend en el **Admin Panel**: se reemplazó la lógica simulada (Mock) de `api.js` por consumos reales a nuestro backend en `http://localhost:3000`.
-- Se resolvieron los errores de "401 Unauthorized" durante la ingesta de documentos (ahora el sistema captura la `cleartext_api_key` generada en tiempo real al crear un tenant y la inyecta al _header_ `x-api-key`).
-- Se reestructuró la lógica de parseo temporal en NestJS: Se cambió el defectuoso módulo `pdf-parse v2` por la integración nativa y robusta de **`PDFLoader` (Langchain FS)** tras realizar un downgrade de dependencia forzoso a la _v1.1.1_.
-- Se habilitaron los controladores administrativos `GET /documents`, `DELETE /documents/:id` y todas las utilidades `CRUD` de configuraciones (LLM provider/modelo).
-- Se validó el flujo de carga: un archivo `.pdf` finalmente es fragmentado (_chunking_) e insertado vectorialmente en `pgvector`.
+## Qué quedó a medias:
+- **Precisión RAG:** El mecanismo funciona, pero Langchain está devolviendo respuestas con "baja precisión". Esto es porque el _Chunking_ (cómo dividimos el PDF) o el _Prompt System_ es muy genérico para esta MVP y trae resultados amplios.
+- **Refresco Visual del Panel:** El admin uploader manda el archivo y muestra "Procesando", congelándose estáticamente porque no hemos aplicado recargas reactivas/Websockets a medida que el trabajador asíncrono de Node termina la fragmentación de la BD. 
+- **Deuda Técnica UI:** Hay variables de ambiente hardcodeadas (`test_key_rm3_2026`) en el código de Angular/JS que en un futuro ciclo deben apuntar nuevamente a una experiencia de login funcional.
 
-### Qué quedó a medias:
-- El módulo de Análisis y Facturación (`Usage & Billing`) del Admin Panel sigue arrojando datos vacíos, requiere la programación de queries de métricas del lado de NestJS.
-- El Frontend Final del usuario para el contratista (El Widget de Angular alojado en `app_build/frontend/src/app`) está en etapa de cascarón y aún requiere ser recompilado con su `chat.service.ts`.
-- En el backend se necesita asegurar que el Endpoint de Chat genere las respuestas sintetizadas por LLM llamando a RAG, verificando contra las cuotas cronometradas.
-
-### Próximo paso exacto:
-Al reanudar, lee rápidamente `app_build/frontend/src/app/chat.service.ts` e inicia el entorno de compilación de Angular en el directorio `app_build/frontend`. El objetivo técnico es cruzar este componente visual con los endpoints LLM del backend recién habilitado usando una API key activa de un Tenant de prueba. Alternativamente, puedes empezar con la programación del controlador del Chat en el backend si no existe.
+## Próximo paso exacto:
+1. Al invocar el comando `/resume`, iniciar ajustando el algoritmo de **Fine-Tuning RAG**.
+2. Ir a `app_build/backend/src/documents/document-ingestion.service.ts` para ajustar la granularidad del particionado (`Tokens` o `ChunkOverlap`) e ir al `RagService.ts` a endurecer el *System Prompt* de OpenAI exigiendo especificidad extrema.
+3. Evaluar implementar memoria temporal / Persistencia en el chat para que éste no sea efímero usando la tabla `chat_messages` de Prisma.

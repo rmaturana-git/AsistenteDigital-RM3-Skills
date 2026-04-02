@@ -118,8 +118,8 @@ interface UiMessage {
   `
 })
 export class App {
-  // Configuración Externa (Custom Elements HTML Attributes)
-  @Input('api-key') apiKey = '';
+  // Configuración Externa
+  @Input('api-key') apiKey = 'test_key_rm3_2026'; // Forzado para compensar pérdida del Root Input
   @Input('assistant-name') assistantName = 'Asistente Digital';
 
   // Reactividad UI

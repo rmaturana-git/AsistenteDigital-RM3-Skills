@@ -6,12 +6,14 @@ import { PrismaModule } from './prisma/prisma.module';
 import { TenantModule } from './tenant/tenant.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { DocumentsModule } from './documents/documents.module';
+import { ChatbotModule } from './chatbot/chatbot.module';
 
 @Module({
   imports: [
     PrismaModule,
     TenantModule,
     DocumentsModule,
+    ChatbotModule,
     ScheduleModule.forRoot(),
     ThrottlerModule.forRoot([{
       ttl: Number(process.env.THROTTLE_TTL_MS) || 60000,

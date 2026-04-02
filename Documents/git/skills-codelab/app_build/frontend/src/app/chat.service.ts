@@ -22,7 +22,8 @@ export class ChatService {
   enviarBurbuja(pregunta: string, apiKey: string): Observable<ChatResponse> {
     const cabeceras = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}` // Pasaportes de Seguridad Multi-Tenant
+      'Authorization': `Bearer ${apiKey}`, // Token Bearer
+      'x-api-key': apiKey // Header Directo
     });
 
     return this.http.post<ChatResponse>(this.API_URL, { query: pregunta }, { headers: cabeceras });

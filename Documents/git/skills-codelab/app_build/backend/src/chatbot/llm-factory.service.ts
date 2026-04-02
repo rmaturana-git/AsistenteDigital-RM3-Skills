@@ -1,25 +1,29 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { TenantConfig } from '@prisma/client';
+import { ChatOpenAI, OpenAIEmbeddings } from '@langchain/openai';
 
 @Injectable()
 export class LlmFactoryService {
   private readonly logger = new Logger(LlmFactoryService.name);
 
-  /** Devuelve la instancia LLM intercambiable según config del Tenant */
+  /** Devuelve la instancia LLM real según config del Tenant */
   createChatModel(config: TenantConfig) {
-    return { provider: config.llm_provider, ready: true }; 
+    this.logger.debug(`Iniciando modelo LLM: ${config.llm_provider} / ${config.llm_model}`);
+    
+    // Por el MVP priorizamos OpenAI, pero extendible a otros proveedores
+    return new ChatOpenAI({
+      openAIApiKey: process.env.OPENAI_API_KEY, 
+      modelName: config.llm_model || process.env.DEFAULT_LLM_MODEL,
+      temperature: Number(config.temperature) || 0.2, // Propiedad correcta es 'temperature'
+    });
   }
 
   /**
-   * Mock Vectorial Estándar para evitar Crash de Node 'ERR_PACKAGE_PATH_NOT_EXPORTED'.
-   * Retorna dimensionalidad fake (dim 1536)
+   * Crea el modelo de Embeddings real para la búsqueda vectorial.
    */
   createEmbeddingModel() {
-    return {
-      embedQuery: async (text: string) => {
-         // Genera vector fantasma de 1536 dimensiones de PGVector
-         return Array(1536).fill(0).map(() => Math.random() * 0.1);
-      }
-    };
+    return new OpenAIEmbeddings({
+      openAIApiKey: process.env.OPENAI_API_KEY,
+    });
   }
 }
