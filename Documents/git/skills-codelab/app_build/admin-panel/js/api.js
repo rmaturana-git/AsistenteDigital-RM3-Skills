@@ -105,12 +105,14 @@ const API = {
     // Para el Admin Panel, usaremos la llave que el usuario debería haber guardado 
     // o permitimos que se ingeste si hay una sesión de admin activa.
     
-    // NOTA MVP: Para evitar que cachés viejos rompan la Demo (Local Storage obsoleto), 
-    // forzamos la llave maestra que configuramos en la base de datos de test.
-    let apiKey = 'test_key_rm3_2026'; // ignora: window.localStorage.getItem(`api_key_${tenantId}`);
+    // Revertimos nuestro "hardcode". Si no hay llave, pedirá usar la correcta, excepto para el tenant demo.
+    let apiKey = window.localStorage.getItem(`api_key_${tenantId}`);
+    if (!apiKey && tenantId === '8f890ac8-b292-428a-bc0c-2d437bdb4091') {
+        apiKey = 'test_key_rm3_2026'; // Auto-fix para el Tenant Original Demo
+    }
     
     if (!apiKey) {
-      _err('No hay una API Key activa para este tenant en esta sesión. Por favor regenere una o ingrésela.', 401);
+      _err('No hay una API Key activa para este tenant en local. Genere una nueva en Configuration y vuelva a intentarlo.', 401);
     }
 
     const formData = new FormData();
@@ -120,21 +122,21 @@ const API = {
     try {
       const response = await fetch(`${API_BASE_URL}/documents/ingest`, {
         method: 'POST',
-        headers: {
-          'x-api-key': apiKey
-        },
+        headers: { 'x-api-key': apiKey },
         body: formData
       });
 
       const json = await response.json();
-
       if (!response.ok) {
         _err(json.message || 'Error del servidor RAG de ingesta', response.status);
       }
 
-      // Como la ingesta es asíncrona, esperamos 2 segundos para dar tiempo y devolvemos el objeto real de DB
-      await new Promise(r => setTimeout(r, 2000));
-      const docRes = await fetch(`${API_BASE_URL}/documents`);
+      // El chunking toma tiempo (~4s reales en Langchain). Esperaremos más.
+      await new Promise(r => setTimeout(r, 4500));
+      // Consultamos el documento de nuevo enviando la API Key para que el backend lo permita
+      const docRes = await fetch(`${API_BASE_URL}/documents?tenant=${tenantId}`, {
+        headers: { 'x-api-key': apiKey }
+      });
       const docs = await docRes.json();
       const newDoc = docs.find(d => d.id === json.data.document_id);
       

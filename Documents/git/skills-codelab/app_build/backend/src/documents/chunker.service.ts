@@ -4,9 +4,11 @@ import { Injectable, Logger } from '@nestjs/common';
 export class ChunkerService {
   private readonly logger = new Logger(ChunkerService.name);
   
-  // Parámetros basados en el MVP
-  private readonly CHUNK_SIZE = 800;
-  private readonly CHUNK_OVERLAP = 200;
+  // Parámetros basados en el MVP (Miden Caracteres, NO tokens). 
+  // 1 token = ~4 caracteres promedio en Español.
+  // 800 Tokens solicitados = 3200 Caracteres
+  private readonly CHUNK_SIZE = 3200;
+  private readonly CHUNK_OVERLAP = 800;
 
   /**
    * Implementación de Text Splitting Recursivo nativo en TypeScript.

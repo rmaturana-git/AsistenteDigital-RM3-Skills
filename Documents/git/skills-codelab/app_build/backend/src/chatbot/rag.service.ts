@@ -51,13 +51,39 @@ export class RagService {
         };
       }
 
-      // 4. Preparar el Contexto para el LLM
+      // 4. Preparar el Contexto para el LLM y extraer las Fuentes (Archivos)
       const contextText = chunks.map(c => c.content).join('\n\n--- SEGMENTO ---\n\n');
-      const sources = Array.from(new Set(chunks.map(c => c.metadata?.source || 'Documento desconocido')));
+      const sources = Array.from(new Set(chunks.map(c => c.metadata?.source || 'Este o múltiples documentos en Base de Datos')));
+
+      // --- LOG DEBUG: Diagnóstico Vectorial Físico ---
+      const fechaActual = new Date().toLocaleString('es-ES');
+      let debugText = `================ DIAGNÓSTICO RAG ================\n`;
+      debugText += `FECHA Y HORA : ${fechaActual}\n`;
+      debugText += `TENANT ID    : ${tenantId}\n`;
+      debugText += `ARCHIVOS     : ${sources.join(', ')}\n`;
+      debugText += `-------------------------------------------------\n`;
+      debugText += `PREGUNTA     : ${question}\n`;
+      debugText += `CHUNKS USADOS: Top ${chunks.length}\n=================================================\n\n`;
+
+      chunks.forEach((c, idx) => {
+        debugText += `[CHUNK ${idx + 1}] DISTANCIA VECTORIAL: ${c.distance.toFixed(4)}\n`;
+        debugText += `(Mientras más cerca a 0.000, más perfecta es la similitud matemática)\n`;
+        debugText += `EXTRACTO REAL ENVIADO A LA IA: \n"${c.content}"\n\n`;
+      });
+      
+      try {
+        require('fs').writeFileSync('rag_ultimo_diagnostico.txt', debugText);
+      } catch (e) {}
 
       // 5. Chain de Respuesta (Prompt Engineering)
+      const baseSystemPrompt = config.system_prompt 
+        ? config.system_prompt 
+        : "Eres un asistente corporativo de la plataforma RM3 especializado en acreditación de personal.";
+      
+      const strictRules = "REGLA ESTRICTA: Responde a la pregunta del usuario utilizando UNICAMENTE la información del contexto proporcionado abajo. Si la información no está presente explícitamente en el contexto, debes decir con cortesía que no cuentas con esa información en los documentos de la plataforma. NO inventes ni asumas datos. Formula tu respuesta en Español.";
+      
       const prompt = ChatPromptTemplate.fromMessages([
-        ["system", "Eres un asistente experto en acreditación de personal minero para RM3. Responde la pregunta del usuario utilizando UNICAMENTE el contexto proporcionado abajo. Si la información no está en el contexto, dí que no lo sabes con cortesía.\n\nCONTEXTO:\n{context}"],
+        ["system", `${baseSystemPrompt}\n\n${strictRules}\n\n--- CONTEXTO ---\n{context}`],
         ["user", "{input}"]
       ]);
 

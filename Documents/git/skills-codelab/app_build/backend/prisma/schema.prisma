@@ -41,6 +41,7 @@ model TenantConfig {
   temperature         Float    @default(0.2)
   rate_limit_user     Int      @default(30)
   rate_limit_tenant   Int      @default(200)
+  system_prompt       String?  @db.Text // Prompt corporativo personalizado opcional
   updated_at          DateTime @updatedAt
 
   @@map("tenant_configs")

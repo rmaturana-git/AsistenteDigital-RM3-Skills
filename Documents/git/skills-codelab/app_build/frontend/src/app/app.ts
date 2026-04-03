@@ -27,7 +27,7 @@ interface UiMessage {
               <div class="w-8 h-8 rounded-full bg-wm-orange flex items-center justify-center font-bold">WM</div>
               <div>
                 <div class="font-bold text-lg tracking-wide leading-tight">{{ assistantName }}</div>
-                <div class="text-wm-gray3 text-xs">Soporte Inteligente RM3</div>
+                <div class="text-wm-gray3 text-xs">Soporte Inteligente RM3 - {{ tenantName }}</div>
               </div>
             </div>
             <button (click)="toggleChat()" class="text-wm-gray3 hover:text-white transition-colors cursor-pointer p-1">
@@ -120,6 +120,7 @@ interface UiMessage {
 export class App {
   // Configuración Externa
   @Input('api-key') apiKey = 'test_key_rm3_2026'; // Forzado para compensar pérdida del Root Input
+  @Input('tenant') tenantName = 'Tenant de Prueba';
   @Input('assistant-name') assistantName = 'Asistente Digital';
 
   // Reactividad UI

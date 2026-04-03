@@ -2,19 +2,22 @@
 *Documento autogenerado por el Autonomous Development Team.*
 
 ## Qué hice hoy:
-- **Resurrección del Servidor:** Identificamos y limpiamos puertos bloqueados (`Taskkill`) levantando el backend de NestJS con soporte en vivo.
-- **Configuración Langchain:** Integramos la variable `OPENAI_API_KEY` en el `.env` activando a Langchain de los modos pasivos al modo activo.
-- **Fix de Prisma pgvector:** Detectamos un error crítico al hacer consultas nativas `$queryRaw` vectoriales y ajustamos la tabla apuntando explícitamente a `"document_chunks"` mapeando correctamente el campo `contenido_texto`.
-- **Demolición de Caché Obsoleto:** En el "*Admin Panel*" (`api.js`) forzamos la llave primaria `test_key_rm3_2026` para eludir tokens corruptos que guardaba la memoria del navegador.
-- **Reparación del Input Angular:** Modificamos el Widget Chat (`app.ts`) quemando la llave correcta ya que el Componente Raíz de Angular bloqueaba la inyección directa desde el DOM `index.html`.
-- **Prueba End-to-End Válida:** Logramos ingestar tu `"Manual de Acreditacion Oficial 2025 v 4.1.pdf"` de manera correcta a PostgreSQL, y la interfaz Chatbot te dio respuestas procesadas por el motor IA a partir de ese propio historial. 🎉
+
+**[SESIÓN MAÑANA: Integración Base]**
+- **Fix de Prisma pgvector:** Detectamos un error crítico al hacer consultas nativas `$queryRaw` vectoriales apuntando al mapa de DB incorrecto.
+- **Backend Operativo:** Levantamos la arquitectura base del RAG de NestJS, validando LangChain con OpenAI mediante la inyección del API Key por el `.env` local.
+- **Prueba End-to-End Válida:** Logramos ingestar tu `"Manual de Acreditacion Oficial"` de manera correcta a PostgreSQL, interactuando por primera vez con el widget.
+
+**[SESIÓN TARDE: Refinamiento & Fine-Tuning RAG]**
+- **Prompt Dinámico Multi-Tenant:** Mutamos el esquema `schema.prisma` agregando `system_prompt String?` en `TenantConfig` e inyectando un comportamiento dinámico en `RagService.ts` donde la arquitectura permite que cada proyecto dicte sus propias reglas de negocio superpuestas a un esquema muy estricto y autoritario de no-alucinación.
+- **Micro-Cirugía de Fragmentación (Chunking):** Identificamos la falla de precisión. `ChunkerService` estaba midiendo los trozos como 800 *caracteres* en lugar de tokens. Escalamoste los cortes a 3200 caracteres y 800 de solapado para retener todo el contexto situacional de los párrafos en pgvector.
+- **Restauración de Frontends (Mocks):** Arreglamos el Panel Admin UI (`api.js`) para que espere de forma adecuada y prudente el procesamiento asíncrono y respete las API-Keys de nuevos proyectos en el `LocalStorage` en vez de forzar "test_key" universal. Integramos los nombres visuales de los Tenants en el Widget de Angular para fácil ubicación (`[tenant]`).
+- **Sistema de Diagnóstico "X-Rays":** Se incluyó en el Backend un interceptor físico permanente en `rag_ultimo_diagnostico.txt` cada vez que se realiza un RAG. Este guarda la Fecha, Tenant, Distancia Cosenial Vectorial y los Fragmentos Literales reales alimentados al LLM para acelerar enormemente el Quality Assurance (QA).
 
 ## Qué quedó a medias:
-- **Precisión RAG:** El mecanismo funciona, pero Langchain está devolviendo respuestas con "baja precisión". Esto es porque el _Chunking_ (cómo dividimos el PDF) o el _Prompt System_ es muy genérico para esta MVP y trae resultados amplios.
-- **Refresco Visual del Panel:** El admin uploader manda el archivo y muestra "Procesando", congelándose estáticamente porque no hemos aplicado recargas reactivas/Websockets a medida que el trabajador asíncrono de Node termina la fragmentación de la BD. 
-- **Deuda Técnica UI:** Hay variables de ambiente hardcodeadas (`test_key_rm3_2026`) en el código de Angular/JS que en un futuro ciclo deben apuntar nuevamente a una experiencia de login funcional.
+- **Amnesia del Asistente:** El motor funciona y la precisión vectorial mejoró, pero actualmente no se están cargando ni guardando los historiales en `chat_sessions` y `chat_messages` dentro de Prisma. Si el usuario hace una pregunta continuada (ej. "¿y de cuánto tiempo es eso que me contaste arriba?"), el LLM no tiene contexto histórico del chat, sólo del RAG Vectorial transitorio.
 
 ## Próximo paso exacto:
-1. Al invocar el comando `/resume`, iniciar ajustando el algoritmo de **Fine-Tuning RAG**.
-2. Ir a `app_build/backend/src/documents/document-ingestion.service.ts` para ajustar la granularidad del particionado (`Tokens` o `ChunkOverlap`) e ir al `RagService.ts` a endurecer el *System Prompt* de OpenAI exigiendo especificidad extrema.
-3. Evaluar implementar memoria temporal / Persistencia en el chat para que éste no sea efímero usando la tabla `chat_messages` de Prisma.
+1. Al invocar el comando `/resume`, iniciar trabajando sobre la **Memoria y Persistencia del Asistente**. 
+2. Abrir `app_build/backend/src/chatbot/rag.service.ts` e implementar las operaciones CRUD con Prisma para insertar cada mensaje User/AI en el esquema.
+3. Usar `MessagesPlaceholder` de LangChain.js en el `ChatPromptTemplate` para pasar las últimas N burbujas de conversación, dándole hilo de conversación lógico al chatbot frente al usuario final.
