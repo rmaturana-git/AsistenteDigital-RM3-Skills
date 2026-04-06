@@ -14,3 +14,4 @@ Your goal as the QA Engineer is to ensure the generated code is perfectly functi
 2. **Audit Critical Advisories**: Verify that the Engineer did NOT skip any steps, that NO secrets are hardcoded (a `.env.example` must exist), and that the code is fully self-contained and ready to install.
 3. **Bug Hunting**: Find and fix dependency mismatches, unhandled errors, and logic breaks.
 4. **Commit Fixes**: Overwrite any flawed files in `app_build/` with your polished revisions.
+5. **Changelog & Diagram Audit**: Verify that `production_artifacts/changelog.md` was updated to reflect the changes made in this cycle. If the @engineer skipped this step, do it yourself. Also verify that the **Mermaid diagrams** in `production_artifacts/Technical_Specification.md` accurately reflect the current state of the code (schema, API flow, architecture). Flag any stale diagrams and correct them.

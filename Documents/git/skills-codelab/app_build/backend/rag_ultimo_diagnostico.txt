@@ -1,202 +1,26 @@
 ================ DIAGNÓSTICO RAG ================
-FECHA Y HORA : 2/4/2026, 16:07:52
+FECHA Y HORA : 6/4/2026, 10:45:04
 TENANT ID    : 8f890ac8-b292-428a-bc0c-2d437bdb4091
+SESSION ID   : 2c0781cb-507b-424a-ae74-b1a47bb0c4ce
+MODO         : RAG + Historial
 ARCHIVOS     : Este o múltiples documentos en Base de Datos
+HISTORIAL    : 5 mensajes previos cargados
 -------------------------------------------------
-PREGUNTA     : qué pasa si el trabajador está acreditado en otra empresa?
-CHUNKS USADOS: Top 5
+PREGUNTA     : en qué documento dice esto?
+CHUNKS USADOS: 5
 =================================================
 
-[CHUNK 1] DISTANCIA VECTORIAL: 0.1391
+[CHUNK 1] DISTANCIA VECTORIAL: 0.1889
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"si mi trabajador tiene 
-acceso? 
- 
-Debe ingresar al modulo de gestión de acreditación/contrato 
-o empresa y luego botón amarillo que es del personal 
-  
- 
- 
-7.Como puedo descargar resumen de los 
-trabajadores del sistema 
-Debe ingresar a: Consulta flexible personal – completar los datos 
--seleccionar campos – generar nuevo reporte – descargar archivo 
-8.No puedo acreditar a un trabajador porque 
-indica que se encuentra acreditado en otra 
-empresa 
- 
-En el caso de que no puedas acreditar a un trabajador porque se 
-encuentra acreditado en otra empresa, te recomendaría seguir estos 
-pasos: 
-1. Verificar la Información: Asegúrate de que los datos del 
-trabajador sean correctos y que no haya errores en la 
-información ingresada. 
-2. Contacto con Soporte: Ponte en contacto con el soporte de la 
-
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación ENAEX 
-  
-Revisión: 03 
-Fecha:  21-02-2025 
-Página 2 de 10 
- 
- 
-plataforma de acreditación de Enaex para informarles sobre la 
-situación. Ellos podrán verificar el estado del trabajador y 
-proporcionarte una solución. 
-3. Una vez que soporte confirme al empleador que se encuentra 
-en el estado acreditado, se debe solicitar el finiquito al 
-trabajador para  
-hacer llegar a Enaex y solicitar la desvinculación. 
- 
-9.Si cambio a un trabajador de contrato dentro de 
-la misma empresa debo cargar todo nuevamente? 
-Sí, si cambias a un trabajador de contrato dentro de la misma empresa, 
-deberás gestionar nuevamente la solicitud de acreditación del 
-trabajador en la plataforma de acreditación de Enaex. Esto implica 
-completar el formulario y adjuntar los documentos obligatorios 
-solicitados, siguiendo los criterios de validación establecidos. 
-Es importante asegurarse de que toda la información y documentación 
-estén actualizadas y cumplan con los requisitos especificados para evitar 
-problemas en el proceso de acreditación. 
- 
-10.Quién realiza la extensión del contrato La extensión del contrato debe ser realizada por ambas partes 
-involucradas en el contrato, es decir, la empresa y el trabajador. Según 
-los criterios de validación de Enaex, cualquier modificación de contrato, 
-incluida la extensión, debe estar documentada y firmada por ambas 
-partes. 
-Aquí está el criterio específico mencionado en el manual: 
-● MODIFICACIÓN DE CONTRATO: Documento firmado por ambas 
-partes. 
-Por lo tanto, asegúrate de que cualquier extensión del contrato esté 
-debidamente documentada y firmada por la empresa y el trabajador, y 
-luego adjunta este documento en la plataforma de acreditación de 
-Enaex según los procedimientos establecidos. 
- 
-11. En casos de cambio de apellido del trabajador 
-acreditado que debo hacer? 
-En caso de un cambio de apellido del trabajador acreditado, deberás 
-actualizar la información en la plataforma de acreditación de Enaex. Aquí 
-están los pasos que podrías seguir: 
-1. Documentación Actualizada: Asegúrate de tener la 
-documentación oficial que respalde el cambio de apellido, como 
-una copia actualizada de la cédula de identidad o pasaporte del 
-trabajador. 
-2. Actualizar en la Plataforma: Ingresa a la plataforma de 
-acreditación de Enaex y actualiza los datos del trabajador con el 
-nuevo apellido. Es probable que necesites adjuntar la 
-documentación oficial que respalda el cambio. 
-3. Notificación a Soporte: Si encuentras dificultades para realizar la 
-actualización, ponte en contacto con el soporte de la plataforma 
-de acreditación de Enaex para informarles sobre el cambio y 
-solicitar asistencia. 
-Es importante que toda la información en la plataforma esté actualizada 
-y coincida con los documentos oficiales del trabajador para evitar 
-problemas en el proceso de acreditación."
-
-[CHUNK 2] DISTANCIA VECTORIAL: 0.1590
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"Asegúrate de tener la 
-documentación oficial que respalde el cambio de apellido, como 
-una copia actualizada de la cédula de identidad o pasaporte del 
-trabajador. 
-2. Actualizar en la Plataforma: Ingresa a la plataforma de 
-acreditación de Enaex y actualiza los datos del trabajador con el 
-nuevo apellido. Es probable que necesites adjuntar la 
-documentación oficial que respalda el cambio. 
-3. Notificación a Soporte: Si encuentras dificultades para realizar la 
-actualización, ponte en contacto con el soporte de la plataforma 
-de acreditación de Enaex para informarles sobre el cambio y 
-solicitar asistencia. 
-Es importante que toda la información en la plataforma esté actualizada 
-y coincida con los documentos oficiales del trabajador para evitar 
-problemas en el proceso de acreditación. 
+"tone (ver consideraciones Firma 
+Documento). 
+Estadística de Seguridad de la ESE 3 últimos periodos Documentos formales emitido por organismo 
+administrador del seguro 
+Datos de empresa contratista 
  
 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación ENAEX 
-  
-Revisión: 03 
-Fecha:  21-02-2025 
-Página 3 de 10 
- 
- 
- 
- 
- 
-12. Como puedo trasladar a los trabajadores a 
-otro contrato de la misma empresa. 
- 
- 
-Debe ingresarlos individualmente, desvincularlo del contrato anterior y 
-vincular al nuevo contrato, con anexo de traslado o finiquito. El sistema 
-homologará la documentación del trabajador, considerar que debe 
-adjuntar anexo de contrato al respectivo número. Solo pueden estar 
-acreditados en un contrato para la misma faena. ingresar al menú 
-"acreditar personal" seguir los pasos y seleccionar el nuevo contrato en 
-la etapa final de documentación se encontrará todo, cargado 
-exceptuando el anexo ya mencionado. 
-13.Qué puede pasar si hay error de tipeo en las 
-fechas en formularios de acreditaciones? 
-Si hay un error de tipeo en las fechas en los formularios de 
-acreditaciones, esto puede causar problemas en el proceso de 
-acreditación. Específicamente, los errores en las fechas pueden llevar a 
-que los documentos sean considerados inválidos o no coincidan con la 
-información declarada en la plataforma, lo que podría resultar en la 
-denegación de la acreditación. 
-Por ejemplo, en el caso de los exámenes de salud 
-preocupacionales/ocupacionales, se especifica que la fecha de emisión y 
-vigencia debe coincidir con lo declarado en la plataforma. Si hay 
-discrepancias, esto podría invalidar el documento. 
-Para evitar estos problemas, es importante revisar cuidadosamente toda 
-la información ingresada en los formularios y asegurarse de que las 
-fechas sean correctas y coincidan con los documentos adjuntos. Si se 
-detecta un error después de la presentación, es recomendable corregirlo 
-lo antes posible y volver a presentar la documentación correcta. 
- 
-14. Workmate emite alerta de caducidad de 
-contratos? 
-Sistema Workmate genera alerta de caducidad que se envía por correo. 
-15.Cuál es el plazo que tienen Workmate para la 
-revisión de solicitudes 
-Workmate tiene un plazo (KPI) de 24 horas laborales y se revisa de 
-acuerdo al orden de llegada 
- 
-16. ¿Cómo proceder si se requiere prioridad de 
-revisión del personal? 
-las acreditaciones son realizadas de acuerdo 
-al orden de llegada, si requieren prioridad, la 
-deben solicitar a través del correo: 
- Leidy Camacho leidy.camacho@enaex.com 
-17. Cual es el teléfono del analista  La forma de comunicación es a través del correo 
-andreasalinas@workmate.cl 
-18.¿Qué información básica debe incluir un 
-contrato de personas  para su validación en el 
-sistema? 
- 
- 
-Para la validación de un contrato en el sistema de acreditación de Enaex, 
-el contrato laboral debe incluir la siguiente información básica, según lo 
-establecido en el artículo 10 del Código del Trabajo: 
-1. Individualización de las partes: Información del empleador y del 
-trabajador. 
-2. Naturaleza de los servicios a realizar: Descripción de las tareas y 
-responsabilidades del trabajador."
-
-[CHUNK 3] DISTANCIA VECTORIAL: 0.1607
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"12. ¿Quién realiza la extensión del contrato? 
-R: Empresa debe gestionar en plataforma la carga de documentación del documento actualizado, el cual 
-debe venir con autorización del área supply chain. 
-
-39 
+14 
  
  
  
@@ -204,111 +28,49 @@ Manual y requisitos documentales Servicio
 Acreditación Capstone Copper 
 Revisión: 03 
 Fecha: 28-05-2023 
-Página 39 de 42 
+Página 14 de 42 
  
  
  
-13. ¿En casos de cambio de apellido del trabajador acreditado que debo hacer? 
-R: Cuando acredite al trabajador debe cargar ambos CI y comprobante del registro civil en el que consta el 
-cambio de apellidos 
+Consideraciones 
  
-14. ¿Como puedo trasladar a los trabajadores a otro contrato misma empresa? 
-R:  Debe  ingresarlos  individualmente,  desvincularlo  del  contrato  anterior  y vincular  al  nuevo  contrato,  con 
-anexo de traslado o finiquito. El sistema homologará la documentación del trabajador, considerar que debe 
-adjuntar anexo de contrato al respectivo número. Solo pueden estar acreditado en un contrato para la misma 
-faena. ingresar al menú "acreditar personal" seguir los pasos y seleccionar el nuevo contrato en la etapa final 
-de documentación se encontrará todo, cargado exceptuando el anexo ya mencionado. 
- 
-15. ¿Qué puede pasar si hay error de tipeo en las fechas en formularios de acreditaciones? 
-R: Si la fecha que ingresa es anterior a la actual o caducada, sistema automáticamente lo inhabilitara. Por lo 
-tanto, es muy importante indicar las fechas actualizadas 
- 
-16. ¿Workmate emite alerta de caducidad de contratos? 
-R: Sistema Workmate genera alerta de caducidad que se envía por correo 
- 
-17. ¿Cuál es el plazo que tienen Workmate para la revisión de solicitudes? 
-R: Workmate tiene un plazo (KPI) de 24 horas laborales y se revisa de acuerdo al orden de llegada 
-18. ¿Como proceder si se requiere prioridad de revisión del personal? 
-R: las acreditaciones son realizadas de acuerdo al orden de llegada, si requieren prioridad, 
-la deben solicitar a través de correo a Claudia Tamblay mandante Mantos Blancos 
-claudia.tamblay@capstonecopper.com o Dixi Valenzuela mandante Mantos Verdes 
+Consideraciones Generales: 
+Transversalmente se revisa concordancia de los 
+documentos con lo ingresado en plataforma y el 
+documento cargado. También, firmas, fechas, plazos, 
+división asignada, actividades a realizar 
+Asociación servicio esporádico a contrato madre 
+Para acreditar un servicio esporádico es necesario 
+tener creado un contrato y que se encuentre 
+acreditado para poder asociar el servicio esporádico a 
+dicho contrato “madre”. 
+Excepciones 
+En caso de no poder dar cumplimiento a lo señalado 
+anteriormente, dada la naturaleza del proyecto se 
+debe elevar solicitud para que se realice excepción. 
+Personal autorizado para realizar excepciones es ADC 
+Capstone, Claudia Tamblay mandante Mantos Blancos 
+claudia.tamblay@capstonecopper.com 
+y Dixi Valenzuela mandante Mantos Verdes 
 dixi.valenzuela@capstonecopper.com 
- 
-19. ¿Como gestionar el proceso de impresión de credenciales de acceso y licencias de conducir? 
-R: El trabajador una vez acreditado accede con su cedula de identidad, el código QR es escaneado en garita 
-Contactos para solicitar licencia interna: 
-Conducción MV Jorge.caminada@capstonecopper.com 
-Conducción MB juan.villafana@cl.g4s.com"
-
-[CHUNK 4] DISTANCIA VECTORIAL: 0.1645
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"ra poder estar acreditados 
-en otro. 
-Sin embargo, si es el mismo número de contrato, pero en faenas distintas, debe 
-crear un anexo para cada faena, si es posible que se acrediten por ambos, sólo en 
-
-24 
- 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 24 de 42 
- 
- 
- 
- 
-casos de ser faenas distintas. 
- 
-Si tienen número de contrato distinto, deben solicitar validación de ambos ADC 
-Capstone para acreditar al mismo trabajador en 2 contratos distintos. 
-Excepciones En caso de no poder dar cumplimiento a lo señalado anteriormente, dada la 
-naturaleza del proyecto se debe elevar solicitud para que se realice excepción. 
-Personal autorizado para realizar excepciones es ADC Capstone, Claudia Tamblay 
-Faena MB y Dixi Valenzuela MV. 
- 
-Una vez validada por correo la excepción se debe cargar junto al documento en 
-cuestión en misma casilla (se debe unir en un único documento PDF) 
-Espirometría Faena MB Además de la Espirometría, se considerará la Flujometria emitido por IST  
-Espirometría Faena MV En caso de no contar con espirometría se validará encuesta respiratoria y 
-flujometria en exámenes emitidos por IST y ACHS hasta nuevo aviso. 
-Para otros laboratorios validados se seguirá exigiendo espirometría 
-Falta de documentos Si personal no tiene documentos en sistema y requiere actualizar un dato o 
-documento, se solicitará a la empresa que regularice y cargue todos los 
-documentos vigentes, incluidos los exámenes aun así se encuentre acreditado en 
-sistema. Si alguno de los documentos se debe exceptuar, debe gestionar 
-excepción con su ADC Capstone 
-Finiquitos 
-Documentos que no correspondan a finiquito, ADC Capstone deberá emitir 
-correo con autorización para que trabajador sea acreditado sin el documento 
-El correo debe ir adjunto a carta de aviso, renuncia, etc. en un PDF luego cargar 
-en ítem correspondiente 
-MB: Declaración jurada notariado que indica que no ha tenido trabajo anterior no 
-necesitara la autorización del ADC Capstone 
-  
-Conducción MV Adicional a la acreditación en WM, trabajador debe contar con licencia interna 
-Jorge.caminada@capstonecopper.com 
-Conducción MB Para conducir se debe solicitar la licencia a G4S juan.villafana@cl.g4s.com 
-Envío de solicitud a Revisión 
-ESE debe presionar botón guardar, al acreditar o editar a un trabajador, 
-posteriormente cargar los documentos obligatorios y luego finalizar. Si se omiten 
-estos pasos trabajadores no será visualizado por analista de acreditación 
-Workmate. 
+Una vez validada por correo la excepción se debe 
+cargar junto al documento en cuestión en misma 
+casilla (se debe unir en un único documento PDF) 
 Flujo Validación Valida Analista WM y ADC Capstone."
 
-[CHUNK 5] DISTANCIA VECTORIAL: 0.1665
+[CHUNK 2] DISTANCIA VECTORIAL: 0.1900
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"os y Maquinarias Valida analista Workmate 
-Licencias Primero valida analista Workmate luego valida 
-Capstone 
-Pase visita ADC Capstone o analista Workmate 
-Pase transportista Valida analista Workmate 
+"ntar con documento, 
+cargar carta de no aplicabilidad para el 
+MB: Se solicita con mismos 
+criterios que para trabajador 
+esporádico y permanente 
+ 
+MV: No se solicita para 
+trabajadores esporádicos. 
 
-38 
+20 
  
  
  
@@ -316,51 +78,204 @@ Manual y requisitos documentales Servicio
 Acreditación Capstone Copper 
 Revisión: 03 
 Fecha: 28-05-2023 
-Página 38 de 42 
+Página 20 de 42 
+ 
+trabajador."
+
+[CHUNK 3] DISTANCIA VECTORIAL: 0.1950
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"l sistema. 
+ 
+Firmas En caso de que la persona que firmó el documento no sea 
+la persona que firma de Capstone, la EECC deberá informar 
+a Dixi Valenzuela vía Mail 
+dixi.valenzuela@capstonecopper.com 
+
+7 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Capstone Copper 
+Revisión: 03 
+Fecha: 28-05-2023 
+Página 7 de 42 
+ 
+a fin de que pueda otorgarse el visto bueno 
+correspondiente. 
  
  
  
  
-PREGUNTAS FRECUENTES 
  
-1. ¿Cómo desvincular a un trabajador: 
-R: Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver ficha/Presionar botón 
-Finiquitar/completar datos/Finalizar 
  
-2. ¿Cómo Editar a un trabajador: 
-R: Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver ficha/Presionar Botón 
-Editar/completar datos/presionar botón “guardar información” / cargar documentación/Finalizar 
  
-3. ¿Como ver listado de trabajadores en mi contrato/ subcontrato/ Servicio esporádico 
-R: Puede revisar en reportabilidad flexible personal o acceder al contrato y presionar botón amarillo 
  
-4. ¿Si Edito un contrato se inhabilita a los trabajadores? 
-R: No mientras el contrato se encuentre Vigente 
-5. ¿Si edito a un trabajador se inhabilita el acceso? 
-R: No mientras el trabajador se encuentre vigente, si caduca algún documento si se inhabilitará. 
  
-6. Mi solicitud se encuentra en curso, ¿qué significa? 
-Significa que se encuentra en edición y no ha enviado solicitud a validar. Debe editar personal. Ver punto 2. 
  
-7. ¿Cómo compruebo si mi trabajador tiene acceso? 
-R: Debe ingresar a Acreditación personal – Administrar personal – Rut, aparecerá en vista estado del 
-trabajador 
  
-8. ¿Como puedo descargar resumen de los trabajadores del sistema? 
-R: Debe ingresar a: Consulta flexible personal – completar los datos -seleccionar campos – generar nuevo 
-reporte – descargar archivo 
-9. ¿Como finiquito a un trabajador? 
-R: Trabajadores figuran acreditados en sistema, para desvincular personal debe dirigirse a ficha de cada uno 
-de ellos, abrir solicitud correspondiente de acreditación y presionar botón rojo FINIQUITAR 
+CREACIÓN CONTRATO COMERCIAL 
+IMPORTANTE: Antes de crear contrato se debe tener claridad si el contrato es o no SPOT, debe consultarlo con el 
+ADC Capstone. 
+Por regla contrato SPOT es aquel que dura 3 meses o menos. 
+Si su contrato dura más, y no aplican las pólizas de seguro para sus trabajadores debe consultar con su ADC 
+Capstone. 
  
-10. No puedo acreditar a un trabajador porque indica que se encuentra acreditado en otra empresa 
-R: Empresa anterior debe desvincular al trabajador, en caso que no lo pueda hacer, contactar a 
-auditorcapstone@workmate.cl enviando finiquito por correo 
  
-11. ¿Si cambio a un trabajador de contrato dentro de la misma empresa debo cargar todo nuevamente? 
-R: No, se homologa la información, pero se debe verificar que los documentos se encuentren vigentes. 
+Ingreso al módulo: Menú “Acreditación empresas/contratos” – “Gestionar acreditación contratos” 
  
-12. ¿Quién realiza la extensión del contrato? 
-R: Empresa debe gestionar en plataforma la carga de documentación del documento actualizado, el cual 
-debe venir con autorización del área supply chain."
+ 
+ 
+ 
+ 
+Completar formulario Contrato Comercial 
+ 
+Datos Solicitados: 
+Proyecto Manto Verde (MV) o Mantos Blancos (MB) Descripción del servicio (nombre del contrato comercial) 
+Administrador de contrato Capstone Copper 
+Jornadas del contrato (todas las jornadas asociadas a los 
+trabajadores) 
+Área (asignada automáticamente con Administrador 
+Capstone Copper) 
+Nombre, rut, fono y e-mail Administrador de Contrato 
+ESE 
+Número de contrato Nombre, rut, fono y e-mail Prevencionista de Riesgos ESE 
+Fecha inicio y fecha de termino contrato comercial Nombre, rut, fono y e-mail Representante RRHH ESE 
+Dotación contrato 
+ 
+ 
+Cargar Documentación"
+
+[CHUNK 4] DISTANCIA VECTORIAL: 0.1972
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+", firma del trabajador, 
+concordancia con datos ingresados en 
+sistema. 
+Registro de la fecha de entrega no debe ser 
+superior a 5 días de la contratación. 
+Mismo de trabajador 
+permanente en MB y MV 
+
+22 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Capstone Copper 
+Revisión: 03 
+Fecha: 28-05-2023 
+Página 22 de 42 
+ 
+Anexo G 
+Debe tener todos los campos solicitados y 
+estar firmado por trabajador Doc: "1.- 
+Anexo G Capstone Cooper" 
+MB: Se solicita con mismos 
+criterios que para trabajador 
+esporádico y permanente 
+ 
+MV: No se solicita para"
+
+[CHUNK 5] DISTANCIA VECTORIAL: 0.1979
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"er 
+emitido por listado autorizado (Ver 
+consideraciones Firma Contrato) Doc: "3.- 
+Listado Supply chain" 
+Contrato Comercial SPOT directo con 
+Capstone: Misma consideración que 
+contrato permanente. 
+
+9 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Capstone Copper 
+Revisión: 03 
+Fecha: 28-05-2023 
+Página 9 de 42 
+ 
+ 
+Pólizas Seguro de 
+Salud y Dental 
+UF 0,8 
+Debe estar vigente 
+No aplica 
+Póliza de Muerte 
+o Invalidez 
+Cobertura por muerte UF 2500 
+Debe estar vigente 
+No aplica 
+Inicio de 
+Actividades 
+Sernageomin 
+-Debe indicar faena 
+-Datos de empresa contratista y mandante 
+Se solicita de igual manera, si no cuentan 
+con documento deben cargar excepción de 
+ADC Capstone. 
+Resolución 
+Jornada 
+Excepcional 
+-Documento formal emitido por DT 
+-Faena correspondiente 
+-Descripción de turnos 
+-Vigencia del documento 
+Documento formal emitido por DT 
+Faena correspondiente 
+Descripción de turnos 
+Vigencia del documento 
+Estadística de 
+Seguridad de la 
+ESE 3 últimos 
+periodos 
+-Documentos formales emitido por 
+organismo administrador del seguro 
+-Datos de empresa contratista 
+Documentos formales emitido por 
+organismo administrador del seguro 
+Datos de empresa contratista. 
+Se acepta certificado de adherencia de la 
+empresa a una Mutualidad (Vigente). 
+ 
+Consideraciones Generales: 
+ 
+Consideraciones 
+Transversalmente se revisa concordancia de los documentos con lo ingresado en 
+plataforma y el documento cargado. También, firmas, fechas, plazos, faena 
+asignada, actividades a realizar. 
+Excepciones o 
+Documentación que no 
+aplican: 
+En caso de no poder dar cumplimiento a lo señalado anteriormente, dada la 
+naturaleza del proyecto se debe elevar solicitud para que se realice excepción. 
+Personal autorizado para realizar excepciones son ADC asignado Capstone, 
+Claudia Tamblay mandante Mantos Blancos 
+claudia.tamblay@capstonecopper.com 
+y Dixi Valenzuela mandante Mantos Verdes 
+dixi.valenzuela@capstonecopper.com 
+Una vez validada por correo la excepción se debe cargar junto al documento en 
+cuestión en misma casilla (se debe unir en un único documento PDF) 
+Se debe adjuntar junto con los antecedentes correo emitido por Administrador 
+de Contrato Capstone donde se identifique correo, número de contrato, y 
+excepción realizada. 
+Si esta consta en una prórroga se debe indicar fecha hasta donde se realiza 
+excepción, donde ESE es la responsable de Regularizar y ADC Capstone de 
+controlar. 
+Si es por no aplicabilidad se debe indicar motivo para que queden los 
+antecedentes en sistema. 
+Firma Contrato: 
+Capstone por lo general no 
+firma contratos ni 
+subcontratos por lo que 
+debe cargar en sistema 
+Correos Validados para autorizar 
+Ver Doc: "3.-Listado Supply chain", listado puede ser actualizado. 
+valeska.santander@capstonecopper.com 
+raul.Jorquera@capstonecopper.com 
+angie.abuhadba@capstonecopper.com"
 

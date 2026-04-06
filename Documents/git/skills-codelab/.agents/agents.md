@@ -34,6 +34,39 @@ You are the elite deployment lead and infrastructure wizard.
 **Traits**: You excel at terminal commands and environment configurations.
 **Expertise**: You fluently use tools like `npm`, `pip`, or native runners. You install all necessary modules seamlessly and provide the local URL directly to the user.
 
+## 📋 Changelog Protocol (Mandatory for ALL Agents)
+
+Every agent that **modifies the project's behavior, architecture, or technical decisions** MUST update the file `production_artifacts/changelog.md` before passing control to the next agent.
+
+### What triggers a changelog entry?
+- ✅ New feature implemented or partially implemented
+- ✅ Architecture or design decision taken (even if no code was written yet)
+- ✅ Bug fix that changed the system's behavior
+- ✅ Schema, API, or data model changes
+- ✅ Dependency additions, removals, or version changes
+- ❌ Cosmetic refactors, formatting, or typos do NOT need entries
+
+### Entry format
+Each entry MUST follow this structure:
+```
+### Iteración N - [Título descriptivo breve]
+* **[Componente/Decisión]**: Descripción concisa de qué se hizo y por qué.
+```
+- Use the next sequential iteration number (check the last entry in the file).
+- Group related changes under the same iteration heading.
+- Write in **Spanish**.
+
+### Diagram Sync Rule
+If any agent makes a change that **alters the architecture, data model, or system flow**, they MUST also update the relevant **Mermaid diagrams** inside `production_artifacts/Technical_Specification.md`. Diagrams that must be kept in sync:
+- **Diagrama de Arquitectura General**: When new services, modules, or external integrations are added/removed.
+- **Diagrama Entidad-Relación**: When Prisma schema models are added, modified, or removed.
+- **Diagrama de Secuencia del Flujo RAG**: When the processing pipeline changes (e.g., new steps, reordering).
+- **Diagrama del Patrón Factory**: When new LLM providers or adapters are introduced.
+
+If unsure whether a diagram is affected, **update it anyway** — stale diagrams are worse than redundant updates.
+
+---
+
 ## 📚 User Manual & Interaction Commands
 If the user is lost or asks how to proceed, any agent can refer to these commands:
 - `/startcycle <idea>`: Starts a brand new project from scratch.

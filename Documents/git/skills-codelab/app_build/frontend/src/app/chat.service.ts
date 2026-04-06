@@ -4,11 +4,13 @@ import { Observable } from 'rxjs';
 
 export interface ChatRequest {
   query: string;
+  session_id?: string; // Opcional: undefined en la primera interacción
 }
 
 export interface ChatResponse {
+  session_id: string; // Backend siempre devuelve el ID de sesión activa
   respuesta: string;
-  tiempo_ms: number;
+  fuentes: string[];
 }
 
 @Injectable({
@@ -19,13 +21,18 @@ export class ChatService {
   // URI estricta del MVP Local Backend
   private API_URL = 'http://localhost:3000/chatbot/query';
 
-  enviarBurbuja(pregunta: string, apiKey: string): Observable<ChatResponse> {
+  enviarBurbuja(pregunta: string, apiKey: string, sessionId?: string): Observable<ChatResponse> {
     const cabeceras = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`, // Token Bearer
-      'x-api-key': apiKey // Header Directo
+      'Authorization': `Bearer ${apiKey}`,
+      'x-api-key': apiKey
     });
 
-    return this.http.post<ChatResponse>(this.API_URL, { query: pregunta }, { headers: cabeceras });
+    const body: ChatRequest = {
+      query: pregunta,
+      ...(sessionId ? { session_id: sessionId } : {}), // Solo incluir si existe
+    };
+
+    return this.http.post<ChatResponse>(this.API_URL, body, { headers: cabeceras });
   }
 }

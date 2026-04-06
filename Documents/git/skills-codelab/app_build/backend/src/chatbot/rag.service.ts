@@ -3,8 +3,12 @@ import { PrismaService } from '../prisma/prisma.service';
 import { LlmFactoryService } from './llm-factory.service';
 import { TokenTrackingService } from './token-tracking.service';
 import { TenantConfigCacheService } from '../tenant/tenant-config-cache.service';
-import { ChatPromptTemplate } from '@langchain/core/prompts';
+import { ChatPromptTemplate, MessagesPlaceholder } from '@langchain/core/prompts';
 import { StringOutputParser } from '@langchain/core/output_parsers';
+import { HumanMessage, AIMessage } from '@langchain/core/messages';
+
+// Cuántos mensajes previos (pares user/assistant) se inyectan al LLM como contexto histórico.
+const HISTORY_WINDOW = 6; // 3 pares de mensajes = 6 registros
 
 @Injectable()
 export class RagService {
@@ -18,24 +22,76 @@ export class RagService {
   ) {}
 
   /**
-   * Flujo Central de RAG con Búsqueda Vectorial por pgvector y Aislamiento de Tenant.
+   * Recupera o crea una sesión de chat para el par (tenantId, userId).
+   * Si se provee un sessionId válido y pertenece al tenant, se reutiliza.
+   * De lo contrario, se crea una sesión nueva.
    */
-  async processChat(tenantId: string, userId: string, question: string) {
-    this.logger.log(`Procesando consulta RAG para tenant ${tenantId}. Pregunta: ${question}`);
-    
+  private async findOrCreateSession(tenantId: string, userId: string, sessionId?: string): Promise<string> {
+    if (sessionId) {
+      const existing = await this.prisma.chatSession.findFirst({
+        where: { id: sessionId, tenant_id: tenantId },
+        select: { id: true },
+      });
+      if (existing) {
+        this.logger.debug(`Reutilizando sesión existente: ${sessionId}`);
+        return existing.id;
+      }
+    }
+
+    // Crear sesión nueva si no existe o el ID no es válido para este tenant
+    const newSession = await this.prisma.chatSession.create({
+      data: { tenant_id: tenantId, user_id: userId },
+      select: { id: true },
+    });
+    this.logger.log(`Nueva sesión creada: ${newSession.id} para tenant ${tenantId}`);
+    return newSession.id;
+  }
+
+  /**
+   * Carga los últimos N mensajes de una sesión y los convierte en
+   * objetos LangChain (HumanMessage / AIMessage) para el MessagesPlaceholder.
+   */
+  private async loadHistory(sessionId: string): Promise<(HumanMessage | AIMessage)[]> {
+    const records = await this.prisma.chatMessage.findMany({
+      where: { session_id: sessionId },
+      orderBy: { created_at: 'desc' },
+      take: HISTORY_WINDOW,
+      select: { role: true, content: true },
+    });
+
+    // Invertir para orden cronológico correcto
+    return records.reverse().map(r =>
+      r.role === 'user' ? new HumanMessage(r.content) : new AIMessage(r.content),
+    );
+  }
+
+  /**
+   * Flujo Central de RAG con Búsqueda Vectorial por pgvector,
+   * Aislamiento de Tenant y Memoria de Conversación (RF-04).
+   */
+  async processChat(tenantId: string, userId: string, question: string, sessionId?: string) {
+    this.logger.log(`Procesando consulta RAG para tenant ${tenantId}. Pregunta: "${question}"`);
+
     try {
-      // 1. Obtener la configuración del Tenant y el modelo
+      // 1. Resolver sesión activa (find-or-create)
+      const activeSessionId = await this.findOrCreateSession(tenantId, userId, sessionId);
+
+      // 2. Persistir el mensaje del usuario ANTES de invocar el LLM
+      await this.prisma.chatMessage.create({
+        data: { session_id: activeSessionId, role: 'user', content: question },
+      });
+
+      // 3. Obtener la configuración del Tenant y el modelo
       const config = await this.configCache.getConfig(tenantId);
       if (!config) throw new Error(`Configuración no encontrada para tenant ${tenantId}`);
 
       const chatModel = this.llmFactory.createChatModel(config);
       const embeddingModel = this.llmFactory.createEmbeddingModel();
 
-      // 2. Generar embedding de la pregunta
+      // 4. Generar embedding de la pregunta
       const queryVector = await embeddingModel.embedQuery(question);
 
-      // 3. Búsqueda Vectorial en pgvector vía Prisma (SQL raw por mayor control)
-      // Buscamos los fragmentos más similares aislados por tenant
+      // 5. Búsqueda Vectorial en pgvector vía Prisma (SQL raw por mayor control)
       const chunks: any[] = await this.prisma.$queryRaw`
         SELECT contenido_texto as content, metadata, (embedding <=> ${queryVector}::vector) as distance
         FROM "document_chunks"
@@ -44,75 +100,102 @@ export class RagService {
         LIMIT 5;
       `;
 
-      if (chunks.length === 0) {
-        return {
-          message: "No encontré información relevante en tus documentos para responder a esa pregunta.",
-          sources: []
-        };
-      }
+      // 6. Cargar historial previo de la sesión para el MessagesPlaceholder
+      const chatHistory = await this.loadHistory(activeSessionId);
+      // El historial incluye el mensaje del usuario recién guardado, así que lo removemos
+      // del final para evitar duplicarlo (LangChain lo agregará vía {input})
+      const historyForPrompt = chatHistory.slice(0, -1);
 
-      // 4. Preparar el Contexto para el LLM y extraer las Fuentes (Archivos)
-      const contextText = chunks.map(c => c.content).join('\n\n--- SEGMENTO ---\n\n');
-      const sources = Array.from(new Set(chunks.map(c => c.metadata?.source || 'Este o múltiples documentos en Base de Datos')));
+      // 7. Preparar contexto RAG (puede estar vacío si no hay chunks relevantes)
+      // IMPORTANTE: Aunque no haya chunks, el LLM SIEMPRE se invoca para que pueda
+      // responder preguntas de seguimiento usando el historial conversacional.
+      const hasDocs = chunks.length > 0;
+      const contextText = hasDocs
+        ? chunks.map(c => c.content).join('\n\n--- SEGMENTO ---\n\n')
+        : '';
+      const sources = hasDocs
+        ? Array.from(new Set(chunks.map(c => c.metadata?.source || 'Este o múltiples documentos en Base de Datos')))
+        : [];
 
       // --- LOG DEBUG: Diagnóstico Vectorial Físico ---
       const fechaActual = new Date().toLocaleString('es-ES');
       let debugText = `================ DIAGNÓSTICO RAG ================\n`;
       debugText += `FECHA Y HORA : ${fechaActual}\n`;
       debugText += `TENANT ID    : ${tenantId}\n`;
-      debugText += `ARCHIVOS     : ${sources.join(', ')}\n`;
+      debugText += `SESSION ID   : ${activeSessionId}\n`;
+      debugText += `MODO         : ${hasDocs ? 'RAG + Historial' : 'Solo Historial (sin chunks)'}\n`;
+      debugText += `ARCHIVOS     : ${hasDocs ? sources.join(', ') : 'N/A - pregunta de seguimiento'}\n`;
+      debugText += `HISTORIAL    : ${historyForPrompt.length} mensajes previos cargados\n`;
       debugText += `-------------------------------------------------\n`;
       debugText += `PREGUNTA     : ${question}\n`;
-      debugText += `CHUNKS USADOS: Top ${chunks.length}\n=================================================\n\n`;
+      debugText += `CHUNKS USADOS: ${chunks.length}\n=================================================\n\n`;
 
       chunks.forEach((c, idx) => {
         debugText += `[CHUNK ${idx + 1}] DISTANCIA VECTORIAL: ${c.distance.toFixed(4)}\n`;
         debugText += `(Mientras más cerca a 0.000, más perfecta es la similitud matemática)\n`;
         debugText += `EXTRACTO REAL ENVIADO A LA IA: \n"${c.content}"\n\n`;
       });
-      
+
       try {
         require('fs').writeFileSync('rag_ultimo_diagnostico.txt', debugText);
       } catch (e) {}
 
-      // 5. Chain de Respuesta (Prompt Engineering)
-      const baseSystemPrompt = config.system_prompt 
-        ? config.system_prompt 
-        : "Eres un asistente corporativo de la plataforma RM3 especializado en acreditación de personal.";
-      
-      const strictRules = "REGLA ESTRICTA: Responde a la pregunta del usuario utilizando UNICAMENTE la información del contexto proporcionado abajo. Si la información no está presente explícitamente en el contexto, debes decir con cortesía que no cuentas con esa información en los documentos de la plataforma. NO inventes ni asumas datos. Formula tu respuesta en Español.";
-      
+      // 8. Construir el system prompt adaptado al modo (con o sin contexto RAG)
+      const baseSystemPrompt = config.system_prompt
+        ? config.system_prompt
+        : 'Eres un asistente corporativo de la plataforma RM3 especializado en acreditación de personal.';
+
+      const strictRules = hasDocs
+        ? 'REGLA ESTRICTA: Responde a la pregunta del usuario utilizando UNICAMENTE la información del contexto proporcionado abajo. ' +
+          'Si la información no está presente explícitamente en el contexto, debes decir con cortesía que no cuentas con esa información en los documentos de la plataforma. ' +
+          'Puedes usar el historial de conversación para entender referencias como "eso que me dijiste antes" o "cuánto tiempo es eso". ' +
+          'NO inventes ni asumas datos. Formula tu respuesta en Español.'
+        : 'No encontraste documentos relevantes para esta pregunta específica. ' +
+          'Sin embargo, puedes responder ÚNICAMENTE si la respuesta se puede deducir claramente del historial de conversación anterior. ' +
+          'Si no puedes responderla con el historial, indícalo con cortesía pero SIN decir que no tienes documentos (ya lo sabe). ' +
+          'NO inventes datos. Formula tu respuesta en Español.';
+
+      const contextBlock = hasDocs
+        ? `\n\n--- CONTEXTO RAG ---\n${contextText}`
+        : '';
+
       const prompt = ChatPromptTemplate.fromMessages([
-        ["system", `${baseSystemPrompt}\n\n${strictRules}\n\n--- CONTEXTO ---\n{context}`],
-        ["user", "{input}"]
+        ['system', `${baseSystemPrompt}\n\n${strictRules}${contextBlock}`],
+        new MessagesPlaceholder('chat_history'),
+        ['human', '{input}'],
       ]);
 
+      // 9. Invocar el LLM siempre — con o sin chunks — para aprovechar el historial
       const chain = prompt.pipe(chatModel).pipe(new StringOutputParser());
       const responseText = await chain.invoke({
         context: contextText,
-        input: question
+        chat_history: historyForPrompt,
+        input: question,
       });
 
-      // 6. Registro de métricas de tokens (Estimación de tokens para el tracking asíncrono)
+      // 10. Registro de métricas de tokens (asíncrono, fire-and-forget)
       const inTokens = Math.ceil((contextText.length + question.length) / 4);
       const outTokens = Math.ceil(responseText.length / 4);
-      
-      this.tokenTracking.trackUsage(
-        tenantId, 
-        config.llm_provider, 
-        config.llm_model, 
-        inTokens, 
-        outTokens, 
-        'chat'
-      ); // Llamada asíncrona fire-and-forget
+      this.tokenTracking.trackUsage(tenantId, config.llm_provider, config.llm_model, inTokens, outTokens, 'chat');
+
+      // 11. Persistir respuesta del asistente con las fuentes citadas
+      await this.prisma.chatMessage.create({
+        data: {
+          session_id: activeSessionId,
+          role: 'assistant',
+          content: responseText,
+          sources: sources as any,
+        },
+      });
 
       return {
+        session_id: activeSessionId,
         message: responseText,
-        sources: sources,
+        sources,
       };
 
     } catch (error) {
-      this.logger.error(`Error crítico en RAG Service: ${error.message}`);
+      this.logger.error(`Error crítico en RAG Service: ${error.message}`, error.stack);
       throw error;
     }
   }

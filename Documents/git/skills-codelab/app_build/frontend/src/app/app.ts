@@ -6,6 +6,7 @@ import { ChatService } from './chat.service';
 interface UiMessage {
   text: string;
   sender: 'ai' | 'user';
+  sources?: string[]; // Fuentes documentales opcionales para mensajes del asistente
 }
 
 @Component({
@@ -30,11 +31,23 @@ interface UiMessage {
                 <div class="text-wm-gray3 text-xs">Soporte Inteligente RM3 - {{ tenantName }}</div>
               </div>
             </div>
-            <button (click)="toggleChat()" class="text-wm-gray3 hover:text-white transition-colors cursor-pointer p-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div class="flex items-center gap-2">
+              <!-- Botón Nueva Conversación -->
+              <button 
+                (click)="resetSession()"
+                title="Nueva conversación"
+                class="text-wm-gray3 hover:text-wm-orange transition-colors cursor-pointer p-1"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+              <button (click)="toggleChat()" class="text-wm-gray3 hover:text-white transition-colors cursor-pointer p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
           
           <!-- Historial de Conversación -->
@@ -57,6 +70,12 @@ interface UiMessage {
                       ? 'bg-white text-wm-gray1 p-3 rounded-2xl rounded-tl-sm shadow-sm border border-wm-gray4' 
                       : 'bg-wm-orange text-white p-3 rounded-2xl rounded-tr-sm shadow-md'">
                     {{ msg.text }}
+                  </div>
+
+                  <!-- Fuentes del mensaje IA -->
+                  <div *ngIf="msg.sender === 'ai' && msg.sources && msg.sources.length > 0" class="mt-1 ml-1">
+                    <div class="text-[10px] text-wm-gray2 font-medium mb-0.5">Fuentes consultadas:</div>
+                    <div *ngFor="let src of msg.sources" class="text-[10px] text-wm-gray3 truncate">• {{ src }}</div>
                   </div>
                 </div>
              </ng-container>
@@ -119,7 +138,7 @@ interface UiMessage {
 })
 export class App {
   // Configuración Externa
-  @Input('api-key') apiKey = 'test_key_rm3_2026'; // Forzado para compensar pérdida del Root Input
+  @Input('api-key') apiKey = 'test_key_rm3_2026';
   @Input('tenant') tenantName = 'Tenant de Prueba';
   @Input('assistant-name') assistantName = 'Asistente Digital';
 
@@ -129,10 +148,20 @@ export class App {
   messages = signal<UiMessage[]>([]);
   currentPrompt = '';
 
+  // Gestión de Sesión — persiste durante la vida del widget en la página
+  private sessionId = signal<string | undefined>(undefined);
+
   private chatSvc = inject(ChatService);
 
   toggleChat() {
     this.isOpen.set(!this.isOpen());
+  }
+
+  /** Resetea la conversación iniciando una sesión nueva en el próximo request */
+  resetSession() {
+    this.sessionId.set(undefined);
+    this.messages.set([]);
+    this.currentPrompt = '';
   }
 
   sendQuery() {
@@ -144,19 +173,24 @@ export class App {
     this.currentPrompt = '';
     this.isLoading.set(true);
 
-    // 2. Disparar Petición por el Servicio HttpClient hacia el LLM remoto
-    this.chatSvc.enviarBurbuja(userText, this.apiKey).subscribe({
+    // 2. Disparar Petición pasando el sessionId actual (undefined si es la primera)
+    this.chatSvc.enviarBurbuja(userText, this.apiKey, this.sessionId()).subscribe({
       next: (response) => {
-        // Respuesta del servidor RAG agregada al array
-        this.messages.update(msgs => [...msgs, { text: response.respuesta, sender: 'ai' }]);
+        // 3. Guardar el session_id retornado por el backend para continuidad
+        this.sessionId.set(response.session_id);
+
+        // 4. Agregar respuesta del asistente con sus fuentes al historial visual
+        this.messages.update(msgs => [
+          ...msgs,
+          { text: response.respuesta, sender: 'ai', sources: response.fuentes },
+        ]);
         this.isLoading.set(false);
       },
       error: (err) => {
-        // Fallback gráfico de caída
-        console.error("API Error", err);
-        const errMsg = err.status === 401 
-             ? 'Clave de seguridad Tenant_ID inválida o no provista en el widget.' 
-             : 'Ocurrió un error conectando a las bases de conocimiento locales.';
+        console.error('API Error', err);
+        const errMsg = err.status === 401
+          ? 'Clave de seguridad Tenant_ID inválida o no provista en el widget.'
+          : 'Ocurrió un error conectando a las bases de conocimiento locales.';
         this.messages.update(msgs => [...msgs, { text: errMsg, sender: 'ai' }]);
         this.isLoading.set(false);
       }

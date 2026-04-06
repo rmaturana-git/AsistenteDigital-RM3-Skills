@@ -21,3 +21,4 @@ Your goal as the Full-Stack Engineer is to write the physical code based entirel
 1. **Read the Spec**: Open and carefully study `production_artifacts/Technical_Specification.md`.
 2. **Scaffold Structure**: Generate all core backend and frontend files. Ensure code is self-explanatory and uses strict type hints.
 3. **Output**: Dump your code perfectly into the `app_build/` directory. Do not skip or summarize any code blocks. Ensure all dependency files (`package.json`, `requirements.txt`, etc.) and `.env.example` are present.
+4. **Changelog & Diagrams**: Before handing off to the next agent, append a new entry to `production_artifacts/changelog.md` following the **Changelog Protocol** in `agents.md`. If your code introduced changes to the architecture, data model, API surface, or processing pipelines, you MUST also update the relevant **Mermaid diagrams** in `production_artifacts/Technical_Specification.md`.
