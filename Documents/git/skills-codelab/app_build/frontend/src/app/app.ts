@@ -261,9 +261,8 @@ interface UiMessage {
 })
 export class App {
   // Configuración Externa
-  // Hardcode de la Master Key para evadir que Angular Elements WebComponent ignore el DOM
-  @Input('api-key') apiKey = 'rm3_856f1f4e1dbc065916bd11d080110896f016c58713af0175';
-  @Input('tenant') tenantName = 'Tenant de Prueba';
+  @Input('api-key') apiKey = '';
+  @Input('tenant') tenantName = '';
   @Input('assistant-name') assistantName = 'Asistente Digital';
  
   // Reactividad UI
