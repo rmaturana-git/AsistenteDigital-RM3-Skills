@@ -7,6 +7,7 @@ import { TenantModule } from './tenant/tenant.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { DocumentsModule } from './documents/documents.module';
 import { ChatbotModule } from './chatbot/chatbot.module';
+import { BillingModule } from './billing/billing.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ChatbotModule } from './chatbot/chatbot.module';
     TenantModule,
     DocumentsModule,
     ChatbotModule,
+    BillingModule,
     ScheduleModule.forRoot(),
     ThrottlerModule.forRoot([{
       ttl: Number(process.env.THROTTLE_TTL_MS) || 60000,

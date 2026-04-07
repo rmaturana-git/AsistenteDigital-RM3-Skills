@@ -1,23 +1,20 @@
-# Handoff Document - RM3 Digital Assistant
-*Documento autogenerado por el Autonomous Development Team.*
+# Handoff - Sistema RM3 RAG Chatbot 🛡️
 
-## Qué hice hoy:
+**Estado de la Sesión:** Pausado (Post-Analytics & Billing)
+**Fecha:** 2026-04-06
 
-**[SESIÓN MAÑANA: Integración Base]**
-- **Fix de Prisma pgvector:** Detectamos un error crítico al hacer consultas nativas `$queryRaw` vectoriales apuntando al mapa de DB incorrecto.
-- **Backend Operativo:** Levantamos la arquitectura base del RAG de NestJS, validando LangChain con OpenAI mediante la inyección del API Key por el `.env` local.
-- **Prueba End-to-End Válida:** Logramos ingestar tu `"Manual de Acreditacion Oficial"` de manera correcta a PostgreSQL, interactuando por primera vez con el widget.
+---
 
-**[SESIÓN TARDE: Refinamiento & Fine-Tuning RAG]**
-- **Prompt Dinámico Multi-Tenant:** Mutamos el esquema `schema.prisma` agregando `system_prompt String?` en `TenantConfig` e inyectando un comportamiento dinámico en `RagService.ts` donde la arquitectura permite que cada proyecto dicte sus propias reglas de negocio superpuestas a un esquema muy estricto y autoritario de no-alucinación.
-- **Micro-Cirugía de Fragmentación (Chunking):** Identificamos la falla de precisión. `ChunkerService` estaba midiendo los trozos como 800 *caracteres* en lugar de tokens. Escalamoste los cortes a 3200 caracteres y 800 de solapado para retener todo el contexto situacional de los párrafos en pgvector.
-- **Restauración de Frontends (Mocks):** Arreglamos el Panel Admin UI (`api.js`) para que espere de forma adecuada y prudente el procesamiento asíncrono y respete las API-Keys de nuevos proyectos en el `LocalStorage` en vez de forzar "test_key" universal. Integramos los nombres visuales de los Tenants en el Widget de Angular para fácil ubicación (`[tenant]`).
-- **Sistema de Diagnóstico "X-Rays":** Se incluyó en el Backend un interceptor físico permanente en `rag_ultimo_diagnostico.txt` cada vez que se realiza un RAG. Este guarda la Fecha, Tenant, Distancia Cosenial Vectorial y los Fragmentos Literales reales alimentados al LLM para acelerar enormemente el Quality Assurance (QA).
+## Qué hice hoy
+1. **Auditoría NPM**: Ejecución de mitigación en dependencias críticas en NestJS (`platform-express`, `xlsx`) mediante `npm audit fix`.
+2. **Módulo Billing/Analytics Backend**: Generación de `BillingModule`, `BillingController` y `BillingService`, exponiendo exitosamente el endpoint `GET /billing/usage/report`. Se aprovechó la agregación de Prisma (`groupBy`) para condensar eficientemente el consumo LLM.
+3. **Integración Frontend (Admin Panel)**: El Dashboard se conectó a los endpoints reales del backend mediante `js/api.js`.
+4. **Safeguard Matemático**: Se inyectaron defensas lógicas en `dashboard.view.js` para asegurar que el gráfico paramétrico nativo de Canvas 2D devuelva un render seguro y prevenga crasheos del tipo `-Infinity` frente a historiales de token nulos.
+5. **Reactivación DevOps**: Se levantaron en fondo las terminales de backend (puerto 3000) y de frontend (puerto 4300).
+6. **Mantenimiento**: Se mantuvo al día el archivo `changelog.md` con la Iteración 13.
 
-## Qué quedó a medias:
-- **Amnesia del Asistente:** El motor funciona y la precisión vectorial mejoró, pero actualmente no se están cargando ni guardando los historiales en `chat_sessions` y `chat_messages` dentro de Prisma. Si el usuario hace una pregunta continuada (ej. "¿y de cuánto tiempo es eso que me contaste arriba?"), el LLM no tiene contexto histórico del chat, sólo del RAG Vectorial transitorio.
+## Qué quedó a medias
+* **Validación asimétrica de JWT**: El backend sigue decodificando el JWT sin validar la firma.
 
-## Próximo paso exacto:
-1. Al invocar el comando `/resume`, iniciar trabajando sobre la **Memoria y Persistencia del Asistente**. 
-2. Abrir `app_build/backend/src/chatbot/rag.service.ts` e implementar las operaciones CRUD con Prisma para insertar cada mensaje User/AI en el esquema.
-3. Usar `MessagesPlaceholder` de LangChain.js en el `ChatPromptTemplate` para pasar las últimas N burbujas de conversación, dándole hilo de conversación lógico al chatbot frente al usuario final.
+## Próximo paso exacto
+**Obtener las llaves de seguridad asimétricas desde el proyecto host (RM3) y habilitar la validación genuina en `ApiKeyGuard`, blindando así toda puerta trasera (Backdoor) o acceso malicioso.**

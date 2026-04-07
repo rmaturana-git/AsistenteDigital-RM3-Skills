@@ -1,26 +1,28 @@
 ================ DIAGNÓSTICO RAG ================
-FECHA Y HORA : 6/4/2026, 10:45:04
+FECHA Y HORA : 6/4/2026, 11:06:43
 TENANT ID    : 8f890ac8-b292-428a-bc0c-2d437bdb4091
-SESSION ID   : 2c0781cb-507b-424a-ae74-b1a47bb0c4ce
+SESSION ID   : 2d198f5e-734d-458a-a572-023bf86a1071
 MODO         : RAG + Historial
 ARCHIVOS     : Este o múltiples documentos en Base de Datos
-HISTORIAL    : 5 mensajes previos cargados
+HISTORIAL    : 4 mensajes previos cargados
 -------------------------------------------------
-PREGUNTA     : en qué documento dice esto?
+PREGUNTA     : cuántas inspecciones pueden haber
 CHUNKS USADOS: 5
 =================================================
 
-[CHUNK 1] DISTANCIA VECTORIAL: 0.1889
+[CHUNK 1] DISTANCIA VECTORIAL: 0.1896
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"tone (ver consideraciones Firma 
-Documento). 
-Estadística de Seguridad de la ESE 3 últimos periodos Documentos formales emitido por organismo 
-administrador del seguro 
-Datos de empresa contratista 
- 
+"o por el mandante Desde la fecha de emisión del 
+certificado tienen un plazo 
+máximo de 1 mes para 
+acreditar, en caso contrario se 
+debe volver a pasar por 
+inspecciones. 
+MV(Mutual) 
+  MB(Metacero) 
 
-14 
+29 
  
  
  
@@ -28,254 +30,303 @@ Manual y requisitos documentales Servicio
 Acreditación Capstone Copper 
 Revisión: 03 
 Fecha: 28-05-2023 
-Página 14 de 42 
+Página 29 de 42 
  
+ 
+ 
+Certificado de Inspección para 
+Acreditación 
+Faena MB coordinar con 
+Guillermo.zapata@metacero.cl 
+ 
+Faena MV coordinar con 
+danilo.silva@mutualasesorias.cl 
+Nombre Firma 
+Formato MV y MB 
+Timbre del revisor para MV 
+Fecha de revisión 
+Nombre, firma y timbre del 
+superintendente aprobador. 
+En MB en caso de no tener timbre se 
+aceptará que se indique el rut del 
+superintendente aprobador en el 
+documento 
+Vigencia del documento es de 2 años 
+al momento de la validación 
+Observación : Para acreditaciones 
+nuevas la vigencia del certificado no 
+debe ser superior a 30 días. 
+Debe ser emitido por gerencia de 
+seguridad en caso de Manto Verde 
+o Mantos Blancos. 
  
  
 Consideraciones 
  
-Consideraciones Generales: 
-Transversalmente se revisa concordancia de los 
-documentos con lo ingresado en plataforma y el 
-documento cargado. También, firmas, fechas, plazos, 
-división asignada, actividades a realizar 
-Asociación servicio esporádico a contrato madre 
-Para acreditar un servicio esporádico es necesario 
-tener creado un contrato y que se encuentre 
-acreditado para poder asociar el servicio esporádico a 
-dicho contrato “madre”. 
+Consideraciones Generales: Transversalmente se Revisa concordancia de los documentos con lo ingresado en 
+plataforma y el documento cargado. También, firmas, fechas, plazos, división 
+asignada, actividades a realizar, fechas de término de contrato. 
 Excepciones 
-En caso de no poder dar cumplimiento a lo señalado 
-anteriormente, dada la naturaleza del proyecto se 
-debe elevar solicitud para que se realice excepción. 
-Personal autorizado para realizar excepciones es ADC 
-Capstone, Claudia Tamblay mandante Mantos Blancos 
-claudia.tamblay@capstonecopper.com 
-y Dixi Valenzuela mandante Mantos Verdes 
-dixi.valenzuela@capstonecopper.com 
-Una vez validada por correo la excepción se debe 
-cargar junto al documento en cuestión en misma 
-casilla (se debe unir en un único documento PDF) 
-Flujo Validación Valida Analista WM y ADC Capstone."
-
-[CHUNK 2] DISTANCIA VECTORIAL: 0.1900
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"ntar con documento, 
-cargar carta de no aplicabilidad para el 
-MB: Se solicita con mismos 
-criterios que para trabajador 
-esporádico y permanente 
- 
-MV: No se solicita para 
-trabajadores esporádicos. 
-
-20 
- 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 20 de 42 
- 
-trabajador."
-
-[CHUNK 3] DISTANCIA VECTORIAL: 0.1950
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"l sistema. 
- 
-Firmas En caso de que la persona que firmó el documento no sea 
-la persona que firma de Capstone, la EECC deberá informar 
-a Dixi Valenzuela vía Mail 
-dixi.valenzuela@capstonecopper.com 
-
-7 
- 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 7 de 42 
- 
-a fin de que pueda otorgarse el visto bueno 
-correspondiente. 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-CREACIÓN CONTRATO COMERCIAL 
-IMPORTANTE: Antes de crear contrato se debe tener claridad si el contrato es o no SPOT, debe consultarlo con el 
-ADC Capstone. 
-Por regla contrato SPOT es aquel que dura 3 meses o menos. 
-Si su contrato dura más, y no aplican las pólizas de seguro para sus trabajadores debe consultar con su ADC 
-Capstone. 
- 
- 
-Ingreso al módulo: Menú “Acreditación empresas/contratos” – “Gestionar acreditación contratos” 
- 
- 
- 
- 
- 
-Completar formulario Contrato Comercial 
- 
-Datos Solicitados: 
-Proyecto Manto Verde (MV) o Mantos Blancos (MB) Descripción del servicio (nombre del contrato comercial) 
-Administrador de contrato Capstone Copper 
-Jornadas del contrato (todas las jornadas asociadas a los 
-trabajadores) 
-Área (asignada automáticamente con Administrador 
-Capstone Copper) 
-Nombre, rut, fono y e-mail Administrador de Contrato 
-ESE 
-Número de contrato Nombre, rut, fono y e-mail Prevencionista de Riesgos ESE 
-Fecha inicio y fecha de termino contrato comercial Nombre, rut, fono y e-mail Representante RRHH ESE 
-Dotación contrato 
- 
- 
-Cargar Documentación"
-
-[CHUNK 4] DISTANCIA VECTORIAL: 0.1972
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-", firma del trabajador, 
-concordancia con datos ingresados en 
-sistema. 
-Registro de la fecha de entrega no debe ser 
-superior a 5 días de la contratación. 
-Mismo de trabajador 
-permanente en MB y MV 
-
-22 
- 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 22 de 42 
- 
-Anexo G 
-Debe tener todos los campos solicitados y 
-estar firmado por trabajador Doc: "1.- 
-Anexo G Capstone Cooper" 
-MB: Se solicita con mismos 
-criterios que para trabajador 
-esporádico y permanente 
- 
-MV: No se solicita para"
-
-[CHUNK 5] DISTANCIA VECTORIAL: 0.1979
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"er 
-emitido por listado autorizado (Ver 
-consideraciones Firma Contrato) Doc: "3.- 
-Listado Supply chain" 
-Contrato Comercial SPOT directo con 
-Capstone: Misma consideración que 
-contrato permanente. 
-
-9 
- 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 9 de 42 
- 
- 
-Pólizas Seguro de 
-Salud y Dental 
-UF 0,8 
-Debe estar vigente 
-No aplica 
-Póliza de Muerte 
-o Invalidez 
-Cobertura por muerte UF 2500 
-Debe estar vigente 
-No aplica 
-Inicio de 
-Actividades 
-Sernageomin 
--Debe indicar faena 
--Datos de empresa contratista y mandante 
-Se solicita de igual manera, si no cuentan 
-con documento deben cargar excepción de 
-ADC Capstone. 
-Resolución 
-Jornada 
-Excepcional 
--Documento formal emitido por DT 
--Faena correspondiente 
--Descripción de turnos 
--Vigencia del documento 
-Documento formal emitido por DT 
-Faena correspondiente 
-Descripción de turnos 
-Vigencia del documento 
-Estadística de 
-Seguridad de la 
-ESE 3 últimos 
-periodos 
--Documentos formales emitido por 
-organismo administrador del seguro 
--Datos de empresa contratista 
-Documentos formales emitido por 
-organismo administrador del seguro 
-Datos de empresa contratista. 
-Se acepta certificado de adherencia de la 
-empresa a una Mutualidad (Vigente). 
- 
-Consideraciones Generales: 
- 
-Consideraciones 
-Transversalmente se revisa concordancia de los documentos con lo ingresado en 
-plataforma y el documento cargado. También, firmas, fechas, plazos, faena 
-asignada, actividades a realizar. 
-Excepciones o 
-Documentación que no 
-aplican: 
 En caso de no poder dar cumplimiento a lo señalado anteriormente, dada la 
 naturaleza del proyecto se debe elevar solicitud para que se realice excepción. 
-Personal autorizado para realizar excepciones son ADC asignado Capstone, 
-Claudia Tamblay mandante Mantos Blancos 
-claudia.tamblay@capstonecopper.com 
+Personal autorizado para realizar excepciones es ADC Capstone, Claudia Tamblay 
+mandante Mantos Blancos claudia.tamblay@capstonecopper.com 
 y Dixi Valenzuela mandante Mantos Verdes 
 dixi.valenzuela@capstonecopper.com 
 Una vez validada por correo la excepción se debe cargar junto al documento en 
 cuestión en misma casilla (se debe unir en un único documento PDF) 
-Se debe adjuntar junto con los antecedentes correo emitido por Administrador 
-de Contrato Capstone donde se identifique correo, número de contrato, y 
-excepción realizada. 
-Si esta consta en una prórroga se debe indicar fecha hasta donde se realiza 
-excepción, donde ESE es la responsable de Regularizar y ADC Capstone de 
-controlar. 
-Si es por no aplicabilidad se debe indicar motivo para que queden los 
-antecedentes en sistema. 
-Firma Contrato: 
-Capstone por lo general no 
-firma contratos ni 
-subcontratos por lo que 
-debe cargar en sistema 
-Correos Validados para autorizar 
-Ver Doc: "3.-Listado Supply chain", listado puede ser actualizado. 
-valeska.santander@capstonecopper.com 
-raul.Jorquera@capstonecopper.com 
-angie.abuhadba@capstonecopper.com"
+Inspección de Vehículos 
+(No la realiza Workmate) 
+Inspección física de Vehículo no la realiza Workmate 
+MV: danilo.silva@mutualasesorias.cl 
+ 
+MB: Guillermo.zapata@metacero.cl 
+Flujo de Validación Valida Analista WM"
+
+[CHUNK 2] DISTANCIA VECTORIAL: 0.1987
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"de Circulación 
+Vigente 
+Identificación placa patente-Legible- 
+Vigente. 
+ 
+ 
+En caso de Aplicar 
+Copia póliza de Seguro Obligatorio Identificación placa patente-Legible- 
+Vigente 
+En caso de Aplicar 
+
+28 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Capstone Copper 
+Revisión: 03 
+Fecha: 28-05-2023 
+Página 28 de 42 
+ 
+Copia certificada de revisión 
+técnica o certificado de 
+homologación 
+Identificación placa patente-Legible- 
+Vigente 
+En caso de Aplicar 
+Certificado de Inspección para 
+acreditación 
+Certificado emitido por el mandante Desde la fecha de emisión del 
+certificado tienen un plazo máximo 
+de 1 mes para acreditar, en caso 
+contrario se debe volver a pasar por 
+inspecciones. 
+MV(Mutual) 
+MB(Metacero) 
+ 
+ 
+ 
+ 
+ 
+          2.- Vehículos y maquinarias sin patente 
+ 
+Documentos Solicitados Vehículo Consideraciones  Vigencia 
+Copia Permiso de Circulación 
+Vigente 
+En caso que no aplique debe cargar 
+certificado de inspección 
+2 años desde la acreditación o 
+termino de contrato comercial 
+(lo primero por vencer) 
+Copia póliza de Seguro Obligatorio En caso que no aplique debe cargar 
+certificado de inspección 
+2 años desde la acreditación o 
+termino de contrato comercial 
+(lo primero por vencer) 
+Copia certificada de revisión 
+técnica o certificado de 
+homologación 
+En caso que no aplique debe cargar 
+certificado de inspección 
+2 años desde la acreditación o 
+termino de contrato comercial 
+(lo primero por vencer) 
+Certificado de Inspección para 
+acreditación 
+Certificado emitido por el mandante Desde la fecha de emisión del 
+certificado tienen un plazo 
+máximo de 1 mes para 
+acreditar, en caso contrario se 
+debe volver a pasar por 
+inspecciones. 
+MV(Mutual) 
+  MB(Metacero)"
+
+[CHUNK 3] DISTANCIA VECTORIAL: 0.2002
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"ículos 
+(No la realiza Workmate) 
+Inspección física de Vehículo no la realiza Workmate 
+MV: danilo.silva@mutualasesorias.cl 
+ 
+MB: Guillermo.zapata@metacero.cl 
+Flujo de Validación Valida Analista WM 
+
+30 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Capstone Copper 
+Revisión: 03 
+Fecha: 28-05-2023 
+Página 30 de 42 
+ 
+ 
+ 
+PASES DE VISITA 
+ 
+Existen pases de visita que solicita la empresa y el ADC Capstone, los de empresa deben ser validados por Workmate 
+y los solicitados por ADC quedan automáticamente validados. 
+ 
+IMPORTANTE. Los pases de visita generados por el sistema son únicamente para personas que no están acreditadas 
+en Capstone, es decir, no es posible generar un pase de visita para el personal que ya está acreditado en Capstone, 
+no debe ser alusivo a trabajo. 
+Pase de visita debe ser utilizado para para reuniones, inducciones, visitas de observación, etc. 
+ 
+1. Acceder a módulo Visitas 
+ 
+ 
+ 
+2. Completar Formulario Pase de Visita 
+ 
+Datos Solicitados: 
+- Rut/ pasaporte - Áreas a visitar 
+- Nombre, Apellido - Fecha inicio Fecha término (no debe superar los 
+5 días), no pueden ser más de 4 pases al mes. 
+- Contrato - Motivo Visita, área a visitar, solicitante Capstone 
+- Proyecto (se autocompleta) - Equipo Portátil 
+- Responsable validación (se autocompleta) 
+ 
+ 
+3. Documentación Pase de Visita 
+ 
+Documentos Solicitados Pases de Visita Consideración 
+Fotocopia por ambas partes del carnet de identidad o 
+pasaporte 
+● Debe estar vigente y legible 
+● Deben estar ambas partes del CI"
+
+[CHUNK 4] DISTANCIA VECTORIAL: 0.2115
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"ra poder estar acreditados 
+en otro. 
+Sin embargo, si es el mismo número de contrato, pero en faenas distintas, debe 
+crear un anexo para cada faena, si es posible que se acrediten por ambos, sólo en 
+
+24 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Capstone Copper 
+Revisión: 03 
+Fecha: 28-05-2023 
+Página 24 de 42 
+ 
+ 
+ 
+ 
+casos de ser faenas distintas. 
+ 
+Si tienen número de contrato distinto, deben solicitar validación de ambos ADC 
+Capstone para acreditar al mismo trabajador en 2 contratos distintos. 
+Excepciones En caso de no poder dar cumplimiento a lo señalado anteriormente, dada la 
+naturaleza del proyecto se debe elevar solicitud para que se realice excepción. 
+Personal autorizado para realizar excepciones es ADC Capstone, Claudia Tamblay 
+Faena MB y Dixi Valenzuela MV. 
+ 
+Una vez validada por correo la excepción se debe cargar junto al documento en 
+cuestión en misma casilla (se debe unir en un único documento PDF) 
+Espirometría Faena MB Además de la Espirometría, se considerará la Flujometria emitido por IST  
+Espirometría Faena MV En caso de no contar con espirometría se validará encuesta respiratoria y 
+flujometria en exámenes emitidos por IST y ACHS hasta nuevo aviso. 
+Para otros laboratorios validados se seguirá exigiendo espirometría 
+Falta de documentos Si personal no tiene documentos en sistema y requiere actualizar un dato o 
+documento, se solicitará a la empresa que regularice y cargue todos los 
+documentos vigentes, incluidos los exámenes aun así se encuentre acreditado en 
+sistema. Si alguno de los documentos se debe exceptuar, debe gestionar 
+excepción con su ADC Capstone 
+Finiquitos 
+Documentos que no correspondan a finiquito, ADC Capstone deberá emitir 
+correo con autorización para que trabajador sea acreditado sin el documento 
+El correo debe ir adjunto a carta de aviso, renuncia, etc. en un PDF luego cargar 
+en ítem correspondiente 
+MB: Declaración jurada notariado que indica que no ha tenido trabajo anterior no 
+necesitara la autorización del ADC Capstone 
+  
+Conducción MV Adicional a la acreditación en WM, trabajador debe contar con licencia interna 
+Jorge.caminada@capstonecopper.com 
+Conducción MB Para conducir se debe solicitar la licencia a G4S juan.villafana@cl.g4s.com 
+Envío de solicitud a Revisión 
+ESE debe presionar botón guardar, al acreditar o editar a un trabajador, 
+posteriormente cargar los documentos obligatorios y luego finalizar. Si se omiten 
+estos pasos trabajadores no será visualizado por analista de acreditación 
+Workmate. 
+Flujo Validación Valida Analista WM y ADC Capstone."
+
+[CHUNK 5] DISTANCIA VECTORIAL: 0.2164
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"e de Visita 
+ 
+Documentos Solicitados Pases de Visita Consideración 
+Fotocopia por ambas partes del carnet de identidad o 
+pasaporte 
+● Debe estar vigente y legible 
+● Deben estar ambas partes del CI 
+
+31 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Capstone Copper 
+Revisión: 03 
+Fecha: 28-05-2023 
+Página 31 de 42 
+ 
+ 
+ 
+PASES DE TRANSPORTISTA 
+ 
+Pase transportista está enfocado para personal que ingresa de visita a faena con conducción 
+ 
+1. Acceder a módulo Pase transportista 
+ 
+ 
+ 
+2. Completar Formulario Pase de Transportista 
+ 
+Datos Solicitados: 
+Rut/ pasaporte Áreas a visitar 
+Nombre, Apellido Fecha inicio Fecha término (no debe superar los 5 
+días), no pueden ser más de 4 pases al mes. 
+Contrato Motivo Visita, área a visitar, solicitante Capstone 
+Proyecto (se autocompleta) Equipo Portátil 
+Responsable validación (se autocompleta) Conduce (si/no) 
+Patente Tipo Vehículo 
+Modelo Año 
+ 
+3. Documentación Pase de Transportista 
+ 
+Fotocopia por ambas partes del carnet de identidad o 
+pasaporte 
+Debe estar vigente y legible 
+Deben estar ambas partes del CI 
+Licencia de conducir Debe estar Vigente y Legible, tipo de licencia 
+Permiso de Circulación Debe figurar patente, vigencia y concordancia datos 
+Seguro Obligatorio Debe figurar patente, vigencia y concordancia datos 
+Revisión técnica Debe figurar patente, vigencia y concordancia datos"
 

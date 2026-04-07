@@ -163,9 +163,18 @@ const API = {
     return _ok({ deleted:true });
   },
 
-  // ── Usage & Billing (Mocks por ahora hasta implementar módulo billing) ──
+  // ── Usage & Billing ──
   async getUsageReport(from, to) {
-    return _ok({ from, to, total_tokens:0, by_tenant:[] });
+    let url = `${API_BASE_URL}/billing/usage/report`;
+    const params = new URLSearchParams();
+    if (from) params.append('from', from);
+    if (to) params.append('to', to);
+    if (params.toString()) url += `?${params.toString()}`;
+
+    const response = await fetch(url);
+    if (!response.ok) _err('Error cargando reporte de uso', response.status);
+    const data = await response.json();
+    return _ok(data);
   },
 
   async createBillingPeriod(data) {

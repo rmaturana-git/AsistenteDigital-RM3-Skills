@@ -129,8 +129,8 @@ async function renderDashboard() {
   const labels  = usage.by_tenant.map(u => u.tenant_nombre.split('—')[1]?.trim() || u.tenant_nombre);
   const values  = usage.by_tenant.map(u => u.tokens_total);
   const colors  = ['#6366f1','#10b981','#f59e0b','#8b5cf6'];
-  const max     = Math.max(...values);
-  const barW    = Math.floor((W - 60) / values.length) - 14;
+  const max     = values.length > 0 ? Math.max(...values) : 1;
+  const barW    = values.length > 0 ? Math.floor((W - 60) / values.length) - 14 : 0;
   const chartH  = 150;
   const baseY   = 170;
 

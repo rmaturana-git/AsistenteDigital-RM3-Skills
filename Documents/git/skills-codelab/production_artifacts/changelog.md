@@ -92,3 +92,23 @@
 * **Gestión de Sesión en el Widget Angular**: El componente `App` almacena el `sessionId` como signal Angular. La primera llamada lo envía como `undefined` (el backend crea la sesión). Las llamadas sucesivas reenvían el `session_id` recibido. Se añadió botón de "Nueva Conversación" que resetea el estado.
 * **Fuentes Visibles en el Widget**: Las fuentes documentales (`fuentes`) ahora se muestran bajo cada burbuja del asistente en la UI.
 * **Diagnóstico X-Rays actualizado**: El archivo `rag_ultimo_diagnostico.txt` ahora incluye el `SESSION ID` y la cantidad de mensajes históricos cargados en cada ciclo RAG.
+
+### Iteración 11 - Rediseño Premium y Modo "Epic View" (UI/UX)
+* **Estética de Alta Gama**: Implementación de **Glassmorphism** (efecto cristal con `backdrop-filter`) en el Topbar del panel y en el cuerpo del Chatbot. Se adoptó el Naranja RM3 (`#F15A24`) como color de acento principal.
+* **Modo "Epic View" (Expansión)**: Introducción de una funcionalidad de expansión en el widget (botón de maximizar). El chat escala de **380px** a **650px de ancho** con animaciones fluidas (`cubic-bezier`), permitiendo la lectura de textos extensos del RAG sin sacrificar la usabilidad.
+* **Funcionalidad de Copiado Rápido**: Se añadió un botón de "copiar al portapapeles" en cada burbuja de la IA, visible al hacer *hover*, facilitando el flujo de trabajo del usuario final.
+* **Micro-animaciones**: Inclusión de efectos "Spring" (elásticos) para la apertura del chat y estados de escritura animados con delay variable para mayor naturalidad.
+* **Tipografía Unificada**: Adopción de la fuente **Inter** en todos los componentes para una apariencia corporativa coherente.
+
+### Iteración 12 - Despliegue de Panel Administrativo y Servidor Estático
+* **Servidor de Producción Local**: El Panel Admin (construido como SPA en Vanilla JS) ahora se sirve de forma independiente mediante `npx serve` en el puerto **4300**.
+* **Infraestructura de Ingestión**: Se validó el flujo completo: Login (simulado) -> Conexión API -> Subida de Documentos -> Vectorización en PostgreSQL.
+* **Consistencia de Marca**: Se alinearon los estilos del Dashboard con el ADN visual de RM3, incluyendo gradientes vibrantes y cards de información con sombras de elevación profunda.
+* **Estado Actual**: Sistema funcional de extremo a extremo con visibilidad total (Chat RAG + Panel Admin + Memoria + Documentación Activa).
+
+### Iteración 13 - Módulo Analytics (Billing/Usage) en Tiempo Real
+* **Backend (`BillingModule`)**: Construcción del `BillingModule` en NestJS (Controller y Service) alojado en `src/billing/`. Este módulo levanta el endpoint `GET /billing/usage/report`.
+* **Prisma Aggregation**: El `BillingService` orquesta una agrupación asíncrona sobre la tabla `token_usage` valiéndose de `groupBy()` en Prisma (`_sum: tokens_total`), mapeando los volcados al instante hacia el ID respectivo del Tenant.
+* **Frontend Analytics**: Sustitución del mock estático en `admin-panel/js/api.js` por una petición `fetch()` dinámica contra el flujo RAG.
+* **Visualizador Resiliente Canvas**: En el dashboard (`dashboard.view.js`), el gráfico paramétrico de métricas (Canvas 2D) se protegió a nivel matemático previniendo colapsos tipo `-Infinity` si el RAG aún no contabiliza interacciones en disco.
+* **Auditoría de Seguridad NPM**: Ejecutados pipelines de mitigación de vulnerabilidades heredadas (12 reportes críticos en parsers/xlsx) vía `npm audit fix` asegurando un Core depurado en NestJS.
