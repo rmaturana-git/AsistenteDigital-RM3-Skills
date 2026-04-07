@@ -35,3 +35,15 @@ lerna-debug.log*
 
 # dotenv
 .env
+
+# Scratch / Debug scripts (created by AI agents during development)
+/_scratch/
+!/_scratch/.gitkeep
+
+# Uploaded files (transient, cleaned by CRON)
+/uploads/*
+!/uploads/.gitkeep
+
+# Diagnostic outputs
+*_diagnostico.txt
+parsed_*.txt

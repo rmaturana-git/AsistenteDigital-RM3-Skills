@@ -1,5 +1,13 @@
 # Skill: Resume Work
 
+## ⚡ Pre-flight Checklist (from agents.md — MANDATORY)
+> Before executing this skill, enforce ALL global protocols:
+> 1. **Identification Protocol**: Start your response with `**[@pm] 🤖 Product Manager**`
+> 2. **Spanish Reasoning**: All reasoning in `<razonamiento>`, all output in Spanish
+> 3. **Changelog Protocol**: Update `production_artifacts/changelog.md` if you modify behavior
+> 4. **Diagram Sync**: Update Mermaid diagrams if you alter architecture or data model
+> 5. **Scratch Files Protocol**: Temp/debug files go in `app_build/<project>/_scratch/`, NEVER in project root
+
 ## Objective
 Your goal as the Product Manager is to reconstruct the project's state, audit previous progress, and define the optimal path to resume development safely and accurately.
 
