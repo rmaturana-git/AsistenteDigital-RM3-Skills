@@ -1,338 +1,794 @@
 ================ DIAGNÓSTICO RAG ================
-FECHA Y HORA : 6/4/2026, 21:25:59
-TENANT ID    : 8f890ac8-b292-428a-bc0c-2d437bdb4091
-SESSION ID   : 9f8d0594-50d6-4fae-b961-6716923b8e5e
+FECHA Y HORA : 7/4/2026, 15:38:57
+TENANT ID    : 4bf8fac0-4857-4f4e-b616-b93b009e8de0
+SESSION ID   : 6875ff5a-793f-4e5b-96b8-bd40567e368d
 MODO         : RAG + Historial
 ARCHIVOS     : Este o múltiples documentos en Base de Datos
-HISTORIAL    : 2 mensajes previos cargados
+HISTORIAL    : 0 mensajes previos cargados
 -------------------------------------------------
-PREGUNTA     : y qué me puedes responder?
+PREGUNTA     : Horarios de Atención y correos?
 CHUNKS USADOS: 5
 =================================================
 
-[CHUNK 1] DISTANCIA VECTORIAL: 0.2384
+[CHUNK 1] DISTANCIA VECTORIAL: 0.2204
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"de con su cedula de identidad, el código QR es escaneado en garita 
-Contactos para solicitar licencia interna: 
-Conducción MV Jorge.caminada@capstonecopper.com 
-Conducción MB juan.villafana@cl.g4s.com
+"ores 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si si si 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Acta de 
+constitución y el 
+funcionamiento de 
+los Comités 
+Paritarios de 
+Higiene y 
+Seguridad y los 
+Departamentos de 
+Prevención de 
+Riesgos 
+Acta de 
+constitución con 
+los datos mínimos 
+exigidos por la 
+autoridad 
+competente 
+(Inspección del 
+Trabajo): 
+-Datos de la 
+empresa (nombre 
+y Rut) 
+-Referencia en el 
+encabezado de las 
+elecciones al 
+CPHS. 
+-Nombres y 
+apellidos de los 
+titulares y 
+suplentes de los 
+trabajadores, 
+señalando la 
+cantidad de votos 
+obtenidas por 
+cada 
+representante 
+-Nombres y 
+apellidos de los 
+titulares y 
+suplentes 
+designados por la 
+empresa 
+-Cantidad de 
+personas que 
+votaron 
+-Nombre y 
+apellidos del 
+presidente y 
+secretario elegido. 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
 
-40 
+ 
+ Manual y requisitos documentales 
+Servicio Acreditación Puerto 
+Angamos y TGN 
+Revisión:  
+Fecha:  
+Página 4 de 
  
  
+-Firma de 
+mutualidad 
+(ministro de fe), 
+firma del 
+presidente electo 
+del CPHS y firma 
+del secretario 
+electo del CPHS. 
  
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 40 de 42 
+Para empresas 
+extranjeras cargar 
+póliza de Seguro 
+de accidentes con 
+cobertura a los 
+trabajadores 
  
+Archivo PDF 
+Archivo 
+Word 
  
-Bitácora de Cambios 
+si no no 
+Para empresas 
+extranjeras cargar 
+póliza de Seguro 
+de accidentes con 
+cobertura a los 
+trabajadores 
  
-Descripción Fecha Pagina Realizado por 
-Actualización horarios de 
-atención 
-28-05-24 2 Viviana Ramirez 
-Creación de link acceso 
-directo a flujo de 
-acreditaciones 
-28-05-24 2 Viviana Ramirez 
-Creación de tipos de 
-acuerdos comerciales 
-28-05-24 4 Viviana Ramirez 
-En consideraciones 
-generales indicación para 
-que empresa señale si 
-corresponde a un 
-contrato Spot en ítem 
-Contrato Comercial 
-28-05-24 8 Viviana Ramirez 
-Actualización de 
-consideraciones para los 
-finiquitos 
-28-05-24 16 y 19 Viviana Ramirez 
-Actualización de 
-contactos Mutual 
-coordinación inducción A1 
-MV 
-28-05-24 17 Viviana Ramirez 
-En consideraciones 
-generales Acreditacion 
-personas indicación para 
-que empresa señale si 
-trabajador corresponde a 
-un contrato Spot 
-28-05-24 18 Viviana Ramirez 
-Nuevo tratamiento en MV 
-con respecto a exámenes 
-respiratorios 
-28-05-24 19 Viviana Ramirez 
-Consideración en MB para 
-la declaración jurada que 
-indique no haber 
-trabajado no necesitara 
-validación ADC Capstone 
-28-05-24 19 Viviana Ramirez"
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
+Registro 
+actualizado de 
+entrega del 
+Reglamento 
+Interno de Orden, 
+Higiene y 
+Seguridad a oficina 
+de partes de 
+Inspección del 
+Trabajo y Seremi 
+de Salud 
+Cargar evidencia 
+de entrega de un 
+ejemplar del riohs 
+en la Dirección 
+del Trabajo y 
+seremi de Salud. 
+Empresas con 
+menos de 10 
+trabajadores, no 
+existe obligación 
+de remitir copia a 
+ningún organismo 
+(artículo 67 de la 
+ley Nº 16.744 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
+Certificado de 
+siniestralidad y 
+accidentabilidad 
+Debe ser emitido 
+por el organismo 
+administrador del 
+seguro 
+(mutualidad). 
+ 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si si si 
+ Datos de la 
+empresa como 
+nombre y RUT 
+deben ser 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si si si"
 
-[CHUNK 2] DISTANCIA VECTORIAL: 0.2486
+[CHUNK 2] DISTANCIA VECTORIAL: 0.2232
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"tos personales trabajador 
-Datos Solicitados: 
-Nombres Dirección 
-Apellido Paterno/ Materno Ciudad/Provincia 
-Nacionalidad Comuna residencia 
-Sexo Teléfono 
-Estado civil E-mail 
-Fecha de nacimiento 
+"de accidentes con 
+cobertura a los 
+trabajadores 
  
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
+Registro 
+actualizado de 
+entrega del 
+Reglamento 
+Interno de Orden, 
+Higiene y 
+Seguridad a oficina 
+de partes de 
+Inspección del 
+Trabajo y Seremi 
+de Salud 
+Cargar evidencia 
+de entrega de un 
+ejemplar del riohs 
+en la Dirección 
+del Trabajo y 
+seremi de Salud. 
+Empresas con 
+menos de 10 
+trabajadores, no 
+existe obligación 
+de remitir copia a 
+ningún organismo 
+(artículo 67 de la 
+ley Nº 16.744 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
+Certificado de 
+siniestralidad y 
+accidentabilidad 
+Debe ser emitido 
+por el organismo 
+administrador del 
+seguro 
+(mutualidad). 
+ 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si si si 
+ Datos de la 
+empresa como 
+nombre y RUT 
+deben ser 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si si si 
 
-16 
+ 
+ Manual y requisitos documentales 
+Servicio Acreditación Puerto 
+Angamos y TGN 
+Revisión:  
+Fecha:  
+Página 5 de 
  
  
+concordantes con 
+los datos reflejados 
+en OC y ficha de la 
+empresa (F-SIG-
+067) 
+ Documento se 
+obtiene de forma 
+online en la página 
+de su respectiva 
+mutualidad. 
  
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 16 de 42 
+Archivo PDF 
+Archivo 
+Word 
  
+si si si 
+ Periodo de vigencia 
+últimos 6 meses. 
+Archivo PDF 
+Archivo 
+Word 
  
+si si si 
+ Documento no 
+aplica para 
+empresa 
+Extranjera (cargar 
+declaración de no 
+aplicabilidad 
+Archivo PDF 
+Archivo 
+Word 
  
+si si si 
+Registro de 
+recepción y toma 
+de conocimiento 
+del reglamento 
+especial de 
+seguridad para 
+empresas 
+contratistas y 
+subcontratistas (F-
+SIG-055) 
+Formato Puerto 
+Angamos-TGN (F-
+SIG-055), 
+actualizado 
+descargable desde 
+https://www.puer
+toangamos.cl/serv
+icios-descargas/ 
  
-Completar Formulario Información contractual del trabajador 
+Archivo PDF 
+Archivo 
+Word 
  
-Datos Solicitados: 
-Contrato comercial asociado Fecha inicio contrato individual 
-Tipo de contrato Fecha termino contrato individual (en caso de tipo de 
-contrato indefinido o por obra o faena sistema asocia 
-fecha de termino la del contrato comercial asociado) 
-Cargo Renta bruta total haberes 
-Turno Observaciones (solo si aplica) 
+si no no 
+Firmado por 
+representante de 
+Puerto (ADC o 
+Gerente/subgeren
+te del área), 
+incluyendo datos 
+de quien firma 
+(firma electrónica 
+mediante portal 
+autorizado o firma 
+digital legible 
+sobre puesta). 
+Archivo PDF 
+Archivo 
+Word 
  
-IMPORTANTE: Al finalizar formularios debe presionar el botón “Grabar/ Actualizar Información”, de lo contrario 
-cuando finalice quedará en estado “editado” y analista no podrá visualizar solicitud. 
+si no no 
+Firmado por 
+representante de 
+la empresa 
+contratista (ADC, 
+Archivo PDF 
+Archivo 
+Word 
  
- 
-Solicitud/ Acreditación Conductor 
- 
-Si se requiere acreditar conductor, debe encender 
-switch “¿Acreditar conducción ahora?” 
- 
-Carga Documental 
- 
-Documentos solicitados Acreditación Personal 
-Documento Trabajador Permanente Trabajador Esporádico / 
-Mantención 
-Fotocopia ambas partes del CI o 
-Pasaporte 
-Fotocopia por ambos lados, legible y 
-vigente. 
-Para casos de extranjeros se solicita 
-certificado de residencia definitiva en 
-trámite o el permiso de trabajo. 
-(comprobante) 
- 
-En caso de renovación de  CI solo se 
-puede adjuntar con el número del 
-documento  acreditado en plataforma   
-( cedula de identidad o pasaporte), más 
-el comprobante de solicitud de 
-renovación del registro civil. 
-Mismo que para trabajador 
-permanente en MV y MB 
-Datos Solicitados: 
-Áreas a circular 
-Clase de licencia 
-Tipo de vehículo a conducir 
-Fecha control licencia municipal 
-Restricciones de licencia municipal"
+si no no 
 
-[CHUNK 3] DISTANCIA VECTORIAL: 0.2519
+ 
+ Manual y requisitos documentales 
+Servicio Acreditación Puerto 
+Angamos y TGN 
+Revisión:  
+Fecha:  
+Página 6 de 
+ 
+ 
+Jefe o Gerencia del 
+área), incluyendo 
+datos de quien 
+firma (firma 
+electrónica 
+mediante portal 
+autorizado o firma 
+digital legible 
+sobre puesta) 
+Registro de 
+recepción y toma 
+de conocimiento 
+del plan d 
+emergencia de 
+puerto angamos y 
+/o TGN (F-SIG-061) 
+Formato Puerto 
+Angamos-TGN (F-
+SIG-061), 
+actualizado 
+descargable desde 
+https://www.puer
+toangamos.cl/serv
+icios-descargas/ 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
+ Completar datos 
+editables en color 
+rojo del 
+documento (fecha, 
+nombre y rut de la 
+empresa) 
+ 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
+ Firmado por 
+representante de 
+Puerto (ADC o 
+Gerente/subgeren
+te del área), 
+incluyendo datos 
+de quien firma 
+(firma electrónica 
+mediante portal 
+autorizado o firma 
+digital legible 
+sobre puesta). 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no 
+ Firmado por 
+representante de 
+la empresa 
+contratista (ADC, 
+Jefe o Gerencia del 
+área), incluyendo 
+datos de quien 
+firma (firma 
+electrónica 
+mediante portal 
+autorizado o firma 
+Archivo PDF 
+Archivo 
+Word 
+ 
+si no no"
+
+[CHUNK 3] DISTANCIA VECTORIAL: 0.2279
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"e para trabajador 
-permanente en MV y MB 
-Datos Solicitados: 
-Áreas a circular 
-Clase de licencia 
-Tipo de vehículo a conducir 
-Fecha control licencia municipal 
-Restricciones de licencia municipal 
- 
+"de Puerto Angamos y 
+TGN 
+(www.puertoangamos.cl/indu
+cciones y 
+www.puertotgn.cl/induccione
+s)  
+2. Todos los campos 
+completados, excepto firma 
+del relator dado que el 
+trabajador puede 
+autogestionar el proceso. 
+3. En caso de firma digital, ésta 
+deberá ser mediante un 
+sistema debidamente 
+validado. 
+4. La carta de responsabilidad 
+es individual (F-SIG-059). La 
+nómina de registro de 
+asistentes podrá ser individual 
+o masiva (F-SIG-006-A). 
+Ambos documentos completan 
+la inducción online, no 
+obstante, podría presentarse 
+solo la carta de 
+responsabilidad (F-SIG-059), 
+sin la nómina de asistentes (F-
+SIG-006-A) y se consideraría 
+válido, lo más relevante es la 
+carta de responsabilidad. 
+Todo 
+archivo 
+debe ser 
+cargado en 
+formato 
+PDF y con 
+un máximo 
+de 3 mb de 
+tamaño 
+si si si 
 
-17 
+ 
+ Manual y requisitos documentales 
+Servicio Acreditación Puerto 
+Angamos y TGN 
+Revisión:  
+Fecha:  
+Página 29 de 
  
  
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 17 de 42 
- 
-Foto Digital tamaño carnet (JPG, 
-JPEG) 
-En formato JPG y JPEG Mismo que para trabajador 
-permanente en MV y MB"
-
-[CHUNK 4] DISTANCIA VECTORIAL: 0.2536
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"menes 
-respiratorios 
-28-05-24 19 Viviana Ramirez 
-Consideración en MB para 
-la declaración jurada que 
-indique no haber 
-trabajado no necesitara 
-validación ADC Capstone 
-28-05-24 19 Viviana Ramirez 
-
-41 
- 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 41 de 42 
- 
- 
- 
-Descripción Fecha Pagina Realizado por 
-Actualización ADC Workmate 19-07-24 2 Viviana Ramirez 
-Flujo general de acreditación 19-07-24 31 
- 
-Actualización contacto para 
-desvinculación 
-19-07-24 32 Viviana Ramirez 
- 
-Actualización listado Supply 
-Chain 
-13-01-2025 10 Viviana Ramirez 
-Link directo acreditación 13-01-2025 2 Viviana Ramirez 
-Indicaciones para la 
-extensión de contratos 
-13-01-2025 8 Viviana Ramirez 
-Actualización   Contacto 
-Certificado de Inspección 
-para Acreditación 
-13-01-2025 23 Viviana Ramirez 
-Carpeta de arranque para 
-Manto Verde 
-15-04-2025 6 Viviana Ramirez 
-Se incorpora examen de 
-flujometria como opcional 
-para MB 
-20-05-2025 20 Silvana Diaz 
-Amparito Hernández  
-Viviana Ramirez 
-Se actualizan requisitos en 
-certificado educacional y/o 
-competencias laborales 
-20-05-2025 18 Silvana Diaz 
-Amparito Hernández  
-Viviana Ramirez 
-Se incorpora consideraciones 
-de CA de extensión 
-certificado emitido por 
-mutual 
-08-07-205 6 Silvana Diaz 
-Amparito Hernández  
-Viviana Ramirez 
-Se Incorpora observación e 
-carga documental Fotocopia 
-ambas partes del CI o 
-Pasaporte 
-08-07-205 16 Silvana Diaz 
-Amparito Hernández  
-Viviana Ramirez 
-Se incorpora observación 
-Examen Alcohol y Drogas 
-08-07-205 19 Silvana Diaz 
-Amparito Hernández  
-Viviana Ramírez 
-Se incorpora observación 
-Certificado de Inspección para 
-Acreditación 
-Faena MB y MV 
-08-07-205 28 Silvana Diaz 
-Amparito Hernández  
-Viviana Ramírez 
-Modificación de fechas 
-Certificado de Inspección 
-para acreditación 
-08-07-205 28 Marcelo Ramírez 
-Silvana Diaz 
-Amparito Hernández  
-Viviana Ramírez"
-
-[CHUNK 5] DISTANCIA VECTORIAL: 0.2580
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-"os y Maquinarias Valida analista Workmate 
-Licencias Primero valida analista Workmate luego valida 
-Capstone 
-Pase visita ADC Capstone o analista Workmate 
-Pase transportista Valida analista Workmate 
-
-38 
- 
- 
- 
-Manual y requisitos documentales Servicio 
-Acreditación Capstone Copper 
-Revisión: 03 
-Fecha: 28-05-2023 
-Página 38 de 42 
- 
- 
- 
- 
-PREGUNTAS FRECUENTES 
- 
-1. ¿Cómo desvincular a un trabajador: 
-R: Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver ficha/Presionar botón 
-Finiquitar/completar datos/Finalizar 
- 
-2. ¿Cómo Editar a un trabajador: 
-R: Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver ficha/Presionar Botón 
-Editar/completar datos/presionar botón “guardar información” / cargar documentación/Finalizar 
- 
-3. ¿Como ver listado de trabajadores en mi contrato/ subcontrato/ Servicio esporádico 
-R: Puede revisar en reportabilidad flexible personal o acceder al contrato y presionar botón amarillo 
- 
-4. ¿Si Edito un contrato se inhabilita a los trabajadores? 
-R: No mientras el contrato se encuentre Vigente 
-5. ¿Si edito a un trabajador se inhabilita el acceso? 
-R: No mientras el trabajador se encuentre vigente, si caduca algún documento si se inhabilitará. 
- 
-6. Mi solicitud se encuentra en curso, ¿qué significa? 
-Significa que se encuentra en edición y no ha enviado solicitud a validar. Debe editar personal. Ver punto 2. 
- 
-7. ¿Cómo compruebo si mi trabajador tiene acceso? 
-R: Debe ingresar a Acreditación personal – Administrar personal – Rut, aparecerá en vista estado del 
+Difusión de 
+estándares de 
+riesgos críticos 4 
+A+C a cada 
 trabajador 
  
-8. ¿Como puedo descargar resumen de los trabajadores del sistema? 
-R: Debe ingresar a: Consulta flexible personal – completar los datos -seleccionar campos – generar nuevo 
-reporte – descargar archivo 
-9. ¿Como finiquito a un trabajador? 
-R: Trabajadores figuran acreditados en sistema, para desvincular personal debe dirigirse a ficha de cada uno 
-de ellos, abrir solicitud correspondiente de acreditación y presionar botón rojo FINIQUITAR 
+1. Formato propio de la 
+empresa contratista donde 
+posea un encabezado con el 
+logo de la empresa y nombre 
+del documento. 
+2. Formato debe indicar: 
+tema tratado (ej. Difusión 
+estándar atropello Puerto 
+Angamos y TGN). Además, 
+fechas de difusión. 
+3. Formato debe indicar 
+nombre, apellidos, cargos y 
+firma de los trabajadores que 
+recibieron la difusión y 
+nombre, apellidos, cargo y 
+firma del relator.  
+3. Las difusiones pueden ser 
+masivas, es decir, en un 
+mismo formato se pueden 
+enlistar todos los 
+trabajadores que participaron 
+de la difusión o puede ser 
+una difusión individual por 
+cada trabajador. Ambas 
+difusiones son válidas. 
+4. La difusión debe 
+mencionar claramente cada 
+estándar 4 A+C, es decir, 
+deberán especificar en el 
+registro de difusión el nombre 
+de cada uno de los 
+estándares 4 A+C (Atropello, 
+Atrapamiento, Aplastamiento 
+y Contacto con Energías). El 
+registro de difusión podrá 
+validarse de 2 formas:  
+--- a) un único registro de 
+difusión donde se 
+especifiquen los 5 títulos de 
+los 5 estándares en un solo 
+documento, o bien; 
+--- b) un registro de difusión 
+por cada estándar, es decir,  
+5 registros de difusión 
+distintos, cada uno con el 
+respectivo nombre del 
+estándar difundido. 
+5. Cualquiera de las 2 formas 
+Todo 
+archivo 
+debe ser 
+cargado en 
+formato 
+PDF y con 
+un máximo 
+de 3 mb de 
+tamaño 
+si no no"
+
+[CHUNK 4] DISTANCIA VECTORIAL: 0.2308
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"Manual y requisitos documentales 
+Servicio Acreditación Puerto 
+Angamos y TGN 
+Revisión:  
+Fecha:  
+Página 1 de 
  
-10. No puedo acreditar a un trabajador porque indica que se encuentra acreditado en otra empresa 
-R: Empresa anterior debe desvincular al trabajador, en caso que no lo pueda hacer, contactar a 
-auditorcapstone@workmate.cl enviando finiquito por correo 
  
-11. ¿Si cambio a un trabajador de contrato dentro de la misma empresa debo cargar todo nuevamente? 
-R: No, se homologa la información, pero se debe verificar que los documentos se encuentren vigentes. 
  
-12. ¿Quién realiza la extensión del contrato? 
-R: Empresa debe gestionar en plataforma la carga de documentación del documento actualizado, el cual 
-debe venir con autorización del área supply chain."
+Criterios de Validación “PANG” 
+ 
+ 
+  1- Información del proyecto general 
+ 
+Sistema  RM  Workmate  es  un  sistema  único  de  acreditación  de  Empresas,  Contratos,  Personas, 
+Vehículos  y Pases de visita Puerto Angamos y TGN. A través de esta plataforma las ESE    podrán 
+acreditar y visualizar todo lo relacionado a sus contratos comerciales manteniendo trazabilidad 
+de sus movimientos y reportabilidad de los estados de acreditación. 
+Una  vez  adjudicado  un  contrato  se  debe  acreditar  la  empresa  y  el  contrato  para  comenzar  a 
+acreditar vehículos  y    personal. 
+ 
+ 
+2.-Ingreso a la plataforma: 
+ 
+Paso 1: 
+Los Usuarios se crean automáticamente cuando se crea una nueva Orden de Compra en en SAP  de Puerto Angamos 
+(PANG) o Terminal Graneles Norte (TGN) 
+Paso 2: 
+Usuarios adicionales se deben solicitar a “Mesa de Ayuda” al correo soportepang@workmate.cl, con la autorización de 
+Maurizzio Vicencio y/o Arturo Donoso 
+Paso 3: 
+Una vez cuente con los Usuarios y las claves, podrá acceder al sistema de Acreditación en Plataforma 
+Workmate. 
+ 
+3.- Creación de solicitudes: 
+ 
+Para acreditar personas, pases de visita de empresa y vehículos ; se requiere  que se realice la 
+acreditación de la empresa y contrato inicialmente. 
+Las solicitudes pueden ser nuevas o ediciones. Éstas últimas son para modificar o actualizar datos o 
+documentos en el sistema. 
+Al enviar una solicitud, esta no podrá ser editada hasta que analista realice revisión. 
+ 
+ 
+4.- Información Atención:  
+● Administrador de Contrato : Axel Jara Marjorie Tardón Marjorietardon@workmate.cl 
+● Encargada Acreditación: Patricia Bonilla  analistapang@workmate.cl 
+● Soporte técnico (plataforma) Soportepang@workmate.cl 
+● Horarios de Atención Lunes a Jueves 8:00 a 18:00 horas,  Viernes de 8:00 a 17:00 horas, no considera 
+festivos."
+
+[CHUNK 5] DISTANCIA VECTORIAL: 0.2332
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+"berá 
+contener las 
+actividades en 
+materia de 
+seguridad y salud 
+laboral establecidas, 
+los plazos en que 
+éstas se ejecutarán y 
+sus responsables, las 
+acciones de 
+información y 
+formación 
+establecidas en el 
+Reglamento Especial 
+de Contratratistas, 
+descargable en el 
+siguiente Link : 
+https://www.puerto
+angamos.cl/wp-
+content/uploads/20
+20/11/REG-SIG-
+004-Reglamento-
+Especial-de-
+Seguridad-para-
+Empresas-
+Contratistas-y-
+Subcontratistas_V.0
+5_octubre-2020.pdf 
+ 
+Archivo PDF 
+Archivo 
+Word 
+tamaño 3mb  
+ 
+si no no 
+Procedimientos de 
+Trabajo que incluyan 
+análisis de riesgos de 
+seguridad, salud 
+ocupacional y medio 
+ambiente. 
+1. Estar actualizados 
+(antigüedad igual o 
+inferior a 12 meses). 
+2. Firmados y con 
+los datos (nombre, 
+Archivo PDF 
+Archivo 
+Word 
+tamaño 3mb  
+ 
+si no no 
+
+ 
+ Manual y requisitos documentales 
+Servicio Acreditación Puerto 
+Angamos y TGN 
+Revisión:  
+Fecha:  
+Página 13 de 
+ 
+ 
+apellidos y cargo) de 
+quienes realizan, 
+revisan y aprueban 
+de la empresa 
+contratista. 
+3. Ser acordes a las 
+actividades a 
+ejecutar en Puerto, 
+describiendo el paso 
+a paso de la tarea. 
+4. Considerar la 
+evaluación de los 
+riesgos en cada 
+actividad, así como 
+también las medidas 
+de control para 
+evitar incidentes a 
+las personas, al 
+medio ambiente y a 
+las instalaciones o 
+equipos. 
+ 
+Certificado emitido por 
+Organismo Administrador 
+de incorporación a 
+Programa de Vigilancia 
+Médica por exposición a 
+agentes de riesgo (si 
+aplica) 
+Documento legible y 
+vigente 
+1. Estar actualizados 
+(antigüedad igual o 
+inferior a 12 meses). 
+2. Firmados y con 
+los datos (nombre, 
+apellidos y cargo) de 
+quienes realizan, 
+revisan y aprueban 
+de la empresa 
+contratista. 
+3. Ser acordes a las 
+actividades a 
+ejecutar en Puerto, 
+describiendo el paso 
+a paso de la tarea. 
+4. Considerar la 
+evaluación de los 
+riesgos en cada 
+actividad, así como 
+también las medidas 
+de control para 
+evitar incidentes a 
+las personas, al 
+Archivo PDF 
+Archivo 
+Word 
+tamaño 3mb  
+ 
+si no no 
+
+ 
+ Manual y requisitos documentales 
+Servicio Acreditación Puerto 
+Angamos y TGN 
+Revisión:  
+Fecha:  
+Página 14 de 
+ 
+ 
+medio ambiente y a 
+las instalaciones o 
+equipos. 
+ 
+Listado de Sustancias 
+peligrosas y su Hoja de 
+Datos de Seguridad 
+(HDS) 
+1. En caso de no 
+manejar sustancias, 
+indicar mediante 
+declaración simple, 
+no aplica, dado que 
+no se utilizarán 
+sustancias en el 
+servicio en el cual se 
+están acreditando. 
+Declaración deberá 
+contener el nombre 
+o logo y Rut de la 
+empresa contratista. 
+2. Listado simple, 
+bajo formato propio 
+de la empresa 
+contratista, la cual 
+además de la 
+nómina de 
+sustancias, deberá 
+tener los datos 
+mínimos de la 
+empresa contratista 
+en el encabezado o 
+cuerpo del 
+documento (nombre 
+o logo y Rut). 
+3. En caso de aplicar, 
+la nómina de 
+sustancias debe ser 
+acorde al servicio a 
+ejecutar y OC por la 
+cual se están 
+acreditando. No 
+deben hacer 
+referencia a la 
+nómina del total de 
+sustancias que 
+maneja la empresa, 
+sino que solo a 
+aquellas que se 
+utilizarán en el 
+servicio en puerto. 
+Archivo PDF 
+Archivo 
+Word 
+tamaño 3mb  
+ 
+si no no"
 

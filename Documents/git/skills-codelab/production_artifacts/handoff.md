@@ -1,21 +1,16 @@
-# Documento de Traspaso (Handoff)
+# Handoff - RM3 Project State
 
-**Qué hice hoy:**
-* Puesta en marcha exitosa de los contenedores de base de datos PostgreSQL/pgvector y de los servicios core del stack (NestJS backend, VanillaJS Admin Panel y Angular Frontend Widget). Todos alcanzables vía `localhost`.
-* Configuración del Admin Panel probada operativamente mediante `browser_subagent` y registro validado de tenant de pruebas.
-* Evolución masiva del **Sistema de Agentes y Roles locales**:
-  * Implementación total del rol **@sentinel** 🤖 (supervisor del sistema de instrucciones y guardián de la entropía) e inclusión de su trigger `/audit-agents`.
-  * Integración e inyección a 6 extensiones de agente de un `⚡ Pre-flight Checklist` forzando el marco referencial global sin excepción en la lectura técnica.
-  * Ampliación al _Identification Protocol_ a 3 variables estrictas: Formato (`🤖 Agent`), Modo Operativo del LLM IDE (`Planning` / `Fast`) y Manejo de Cotas (`Fallback models`).
-  * Aplicación del `Model Shift Pause Rule`, una instrucción dura que detiene ejecuciones técnicas hasta la confirmación de switch del motor de LLM subyacente. Todo orquestado desde la raíz de `agents.md`.
-  * Saneadora limpieza de archivos basura y directiva permanente de uso de `app_build/backend/_scratch/` para evitar rotura iterativa del pipeline por archivos botados.
-* Auto-backup enviado a GitHub a la rama de origen satisfactoriamente.
+## 📅 Qué hice hoy:
+- **Troubleshooting de API Key Frontend**: Se resolvió la anomalía de "Cruce de Tenants" en la demo. El widget Chatbot de Angular local estaba fallando al leer el atributo `api-key` del DOM huésped en el `index.html`, haciendo *fallback silente* a la clave `test_key_...` original (y enlazando al "Proyecto de Prueba" con base de datos de Techint).
+- **Hardcodeo Defensivo**: Para salvar la sesión de demostración de manera inmediata, se inyectó a fuego la llave de "Puerto Angamos" (`rm3_856...`) en el core del componente `app.ts`.
+- **Refactorización de Meta-Arquitectura (Agentes)**: Se crearon directivas explícitas de QA y se configuró una nueva Skill aislada en `.agents/skills/web-development/SKILL.md`. Establecimos las reglas *"Zero Hardcoded Fallbacks"* y *"E2E WebComponent Testing Protocol"* para prevenir que futuros Agentes usen flags locales que nublen la visibilidad de los binds en el navegador y limpiamos el `agents.md` (Separation of Concerns).
 
-**Qué quedó a medias:**
-* La cadena End-to-End del Chatbot y sistema RAG requiere que el documento `MANUAL WM .pdf` ingrese efectivamente a pgvector en NestJS desde el Admin, lo que se ha bloqueado al carecer de la característica nativa en emuladores del SO para usar ventanas "Browse file" y por pequeños crashes del scope en los comandos powershell/node durante el uso como alternativo de un bypass API.
+## ⚠️ Qué quedó a medias:
+- El parche de inyección en duro de la llave API en `frontend/src/app/app.ts` (`@Input('api-key') apiKey = 'rm3...';`) es extremadamente indeseable según nuestro propio SKILL.
+- **Flujo Pausado Antiguo:** Sigue inactiva la migración e implementación arquitectónica del multi-soporte LLM para el backend (LLM Factory: Gemini, Claude, Ollama) y el eventual `npx prisma migrate dev` para las dimensiones vectoriales variables.
+- Falta la conexión de ingesta definitiva (interfaz Web que reemplace nuestro `_scratch/upload.js`).
 
-**Próximo paso exacto:**
-1. Crear el entorno de archivo seguro `./app_build/backend/_scratch/upload.js` con las integraciones `fs`, `FormData` y `fetch` estándar de servidor (Nodev20+).
-2. Consultar el ID del Tenant mediante prisma y mandar un POST HTTP *multipart/form-data* del PDF hacia la ruta destino en `localhost:3000/documents/ingest`.
-3. Revisar vía visual si este ingest disparó exitosamente la indexación.
-4. Interactuar mediante un prompt al frontend widget del Chatbot en `localhost:4200` y certificar el rendimiento semántico real.
+## 🎯 Próximo paso exacto:
+Al ejecutar `/resume`:
+1. El Agente Principal (@engineer) DEBE purgar urgentemente el archivo `frontend/src/app/app.ts` para eliminar el hardcodeo de la API Key. Debe arreglarse el binding del WebComponent/Angular Elements para que atrape variables limpias de un `index.html` host tal cual opera en producción corporativa, probándolo en E2E puro si es necesario.
+2. Iniciar el rediseño del Multi-LLM provider en `llm-factory.service.ts` basándose en la pre-arquitectura debatida.

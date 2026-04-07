@@ -178,7 +178,17 @@ const API = {
   },
 
   async createBillingPeriod(data) {
-    return _ok({ id:'bp'+Date.now(), ...data, status:'closed', tenant_billing:[] });
+    const { data: usage } = await this.getUsageReport(data.period_start, data.period_end);
+    const tenant_billing = usage.by_tenant.map(t => {
+      const pct = usage.total_tokens ? (t.tokens_total / usage.total_tokens) : 0;
+      return {
+         tenant_nombre: t.tenant_nombre,
+         tokens_total: t.tokens_total,
+         usage_percentage: (pct * 100).toFixed(2),
+         allocated_cost: (pct * data.invoice_amount).toFixed(2)
+      };
+    });
+    return _ok({ id:'bp'+Date.now(), ...data, status:'closed', tenant_billing });
   },
 
   // ── Helpers ──

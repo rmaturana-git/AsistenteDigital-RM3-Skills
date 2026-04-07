@@ -2,8 +2,9 @@
 
 ## ⚡ Pre-flight Checklist (from agents.md — MANDATORY)
 > Before executing this skill, enforce ALL global protocols:
-> 1. **Identification Protocol**: Start your response with `**[@qa] 🤖 QA Engineer**`
-> 2. **Spanish Reasoning**: All reasoning in `<razonamiento>`, all output in Spanish
+> 1. **Identification Protocol**: Comienza con `**[@qa] 🤖 QA Engineer** *(Ver tabla de modelos/modos en agents.md)*`
+> 2. **Model Shift Pause Rule**: Si eres invocado por primera vez o cambias de rol, imprime tu encabezado, tu objetivo y **PAUSA** pidiendo confirmación de cambio de modelo.
+> 3. **Spanish Reasoning**: Todo el razonamiento en `<razonamiento>`, todo el output en Español.
 > 3. **Changelog Protocol**: Update `production_artifacts/changelog.md` if you modify behavior
 > 4. **Diagram Sync**: Update Mermaid diagrams if you alter architecture or data model
 > 5. **Scratch Files Protocol**: Temp/debug files go in `app_build/<project>/_scratch/`, NEVER in project root

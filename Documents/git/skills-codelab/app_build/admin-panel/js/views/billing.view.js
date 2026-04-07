@@ -5,7 +5,13 @@ async function renderBilling() {
   const el = document.getElementById('view-container');
   el.innerHTML = `<div class="loading-center"><div class="spinner"></div></div>`;
 
-  const { data: usage } = await API.getUsageReport('2026-03-01', '2026-03-31');
+  const today = new Date();
+  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).toISOString().split('T')[0];
+  const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString().split('T')[0];
+  const monthName = today.toLocaleDateString('es-ES', { month: 'long' });
+  const capMonthName = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+
+  const { data: usage } = await API.getUsageReport(firstDay, lastDay);
 
   el.innerHTML = `
     <div class="page-header">
@@ -23,8 +29,8 @@ async function renderBilling() {
     <div class="stats-grid" style="margin-bottom:22px">
       <div class="stat-card" style="--sc:var(--accent)">
         <div class="stat-content">
-          <span class="stat-label">Total Tokens (Marzo)</span>
-          <span class="stat-value">${(usage.total_tokens/1000).toFixed(0)}K</span>
+          <span class="stat-label">Total Tokens (${capMonthName})</span>
+          <span class="stat-value">${(usage.total_tokens/1000).toFixed(1)}K</span>
           <span class="stat-trend">todos los proveedores</span>
         </div>
         <span class="stat-icon">◈</span>
@@ -54,7 +60,7 @@ async function renderBilling() {
         <div class="card-header">
           <div>
             <div class="card-title">Consumo por Tenant</div>
-            <div class="card-subtitle">Marzo 2026 · tokens crudos (sin costo)</div>
+            <div class="card-subtitle">${capMonthName} ${today.getFullYear()} · tokens crudos (sin costo)</div>
           </div>
         </div>
         <div class="table-wrapper">
@@ -120,11 +126,11 @@ async function renderBilling() {
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Inicio del Periodo</label>
-              <input type="date" id="bill-from" class="form-control" value="2026-03-01" />
+              <input type="date" id="bill-from" class="form-control" value="${firstDay}" />
             </div>
             <div class="form-group">
               <label class="form-label">Fin del Periodo</label>
-              <input type="date" id="bill-to" class="form-control" value="2026-03-31" />
+              <input type="date" id="bill-to" class="form-control" value="${lastDay}" />
             </div>
           </div>
 

@@ -49,9 +49,14 @@ export class BillingService {
 
     const total_tokens = by_tenant.reduce((acc, curr) => acc + curr.tokens_total, 0);
 
+    const by_tenant_enriched = by_tenant.map(t => ({
+      ...t,
+      usage_percentage: total_tokens > 0 ? Number(((t.tokens_total / total_tokens) * 100).toFixed(2)) : 0
+    }));
+
     return {
       total_tokens,
-      by_tenant,
+      by_tenant: by_tenant_enriched,
     };
   }
 }
