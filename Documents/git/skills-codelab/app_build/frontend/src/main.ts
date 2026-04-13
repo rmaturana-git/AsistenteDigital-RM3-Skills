@@ -1,7 +1,14 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { createApplication } from '@angular/platform-browser';
+import { createCustomElement } from '@angular/elements';
 import { App } from './app/app';
 import { appConfig } from './app/app.config';
 
-// Para el entorno de desarrollo local y pre-visualización visual, empleamos el bootloader 
-// normal de Angular. Posteriormente para producción lo compactaremos con createCustomElement.
-bootstrapApplication(App, appConfig).catch(err => console.error('Error de Arranque Angular:', err));
+// Punto de entrada para producción como Web Component embebible.
+// Se usa createApplication (no bootstrapApplication) para obtener un ApplicationRef
+// sin montar nada en el DOM aún. Luego se registra el Custom Element globalmente.
+createApplication(appConfig)
+  .then(appRef => {
+    const ChatbotElement = createCustomElement(App, { injector: appRef.injector });
+    customElements.define('chatbot-widget', ChatbotElement);
+  })
+  .catch(err => console.error('[RM3] Error al registrar el Web Component:', err));

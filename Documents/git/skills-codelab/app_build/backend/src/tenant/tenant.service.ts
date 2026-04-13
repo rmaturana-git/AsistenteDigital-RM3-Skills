@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { TenantConfigCacheService } from './tenant-config-cache.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import * as crypto from 'crypto';
 
@@ -7,7 +8,10 @@ import * as crypto from 'crypto';
 export class TenantService {
   private readonly logger = new Logger(TenantService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly configCache: TenantConfigCacheService,
+  ) {}
 
   async createTenant(dto: CreateTenantDto) {
     // 1. Emisión de Cripto Llave "Limpia" temporal (formato parecido a 'rm3_axT71h...')
@@ -73,10 +77,16 @@ export class TenantService {
     // Evitamos que se pueda actualizar el api_key_hash o tenant_id por este medio directo
     const { api_key_hash, tenant_id, id, ...updateData } = data;
     
-    return this.prisma.tenantConfig.update({
+    const updated = await this.prisma.tenantConfig.update({
       where: { tenant_id: tenantId },
       data: updateData,
     });
+
+    // 🔑 Invalidar caché para que el cambio sea visible inmediatamente en el próximo request
+    this.configCache.invalidate(tenantId);
+    this.logger.log(`Configuración actualizada y caché purgado para Tenant ${tenantId}`);
+
+    return updated;
   }
 
   async regenerateApiKey(tenantId: string) {

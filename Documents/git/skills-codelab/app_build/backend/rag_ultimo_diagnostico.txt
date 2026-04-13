@@ -1,794 +1,497 @@
 ================ DIAGNÓSTICO RAG ================
-FECHA Y HORA : 7/4/2026, 15:38:57
-TENANT ID    : 4bf8fac0-4857-4f4e-b616-b93b009e8de0
-SESSION ID   : 6875ff5a-793f-4e5b-96b8-bd40567e368d
+FECHA Y HORA : 13/4/2026, 16:48:21
+TENANT ID    : 8f890ac8-b292-428a-bc0c-2d437bdb4091
+SESSION ID   : 277d9b67-bf41-4950-b6bb-6a97d4fe88c8
 MODO         : RAG + Historial
 ARCHIVOS     : Este o múltiples documentos en Base de Datos
 HISTORIAL    : 0 mensajes previos cargados
 -------------------------------------------------
-PREGUNTA     : Horarios de Atención y correos?
+PREGUNTA     : qué pasa si cambia el apellido del trabajador
 CHUNKS USADOS: 5
 =================================================
 
-[CHUNK 1] DISTANCIA VECTORIAL: 0.2204
+[CHUNK 1] DISTANCIA VECTORIAL: 0.1930
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"ores 
-Archivo PDF 
-Archivo 
-Word 
+"s o maquinarias debe ser  
+validado por  
+Chile Valora (Norma 2728)  
+debe estar vigente y debe ser del vehiculo que va a conducir el trabajador. 
+30. Que debo realizar para editar 
+acreditación y cambiar fechas de 
+documentos 
+Para editar una acreditación y cambiar las fechas de los documentos, debes 
+seguir estos pasos: 
  
-si si si 
+Acceder a la Plataforma: 
  
+Ingresa a la plataforma de acreditación con tu usuario y contraseña. 
+Buscar la Solicitud: 
  
+Utiliza la opción de búsqueda para encontrar la solicitud de acreditación que 
+deseas editar. Puedes buscar por Rut, pasaporte, nombre del empleado, o 
+número de contrato. 
+Editar la Solicitud: 
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-Acta de 
-constitución y el 
-funcionamiento de 
-los Comités 
-Paritarios de 
-Higiene y 
-Seguridad y los 
-Departamentos de 
-Prevención de 
-Riesgos 
-Acta de 
-constitución con 
-los datos mínimos 
-exigidos por la 
-autoridad 
-competente 
-(Inspección del 
-Trabajo): 
--Datos de la 
-empresa (nombre 
-y Rut) 
--Referencia en el 
-encabezado de las 
-elecciones al 
-CPHS. 
--Nombres y 
-apellidos de los 
-titulares y 
-suplentes de los 
-trabajadores, 
-señalando la 
-cantidad de votos 
-obtenidas por 
-cada 
-representante 
--Nombres y 
-apellidos de los 
-titulares y 
-suplentes 
-designados por la 
-empresa 
--Cantidad de 
-personas que 
-votaron 
--Nombre y 
-apellidos del 
-presidente y 
-secretario elegido. 
-Archivo PDF 
-Archivo 
-Word 
- 
-si no no 
+Selecciona la opción "Editar" en la ficha del personal o del contrato seleccionado. 
+Esto desplegará un formulario que se debe completar en varios pasos. 
 
- 
- Manual y requisitos documentales 
-Servicio Acreditación Puerto 
-Angamos y TGN 
-Revisión:  
-Fecha:  
-Página 4 de 
+4 
  
  
--Firma de 
-mutualidad 
-(ministro de fe), 
-firma del 
-presidente electo 
-del CPHS y firma 
-del secretario 
-electo del CPHS. 
  
-Para empresas 
-extranjeras cargar 
-póliza de Seguro 
-de accidentes con 
-cobertura a los 
-trabajadores 
+Manual y requisitos documentales Servicio 
+Acreditación Techint 
+Revisión: 01 
+Fecha: 26-02-2025 
+Página 4 de 10 
  
-Archivo PDF 
-Archivo 
-Word 
+Actualizar Datos Personales y Contractuales: 
  
-si no no 
-Para empresas 
-extranjeras cargar 
-póliza de Seguro 
-de accidentes con 
-cobertura a los 
-trabajadores 
+Verifica y, si es necesario, actualiza los datos personales del trabajador, como 
+dirección y comuna de residencia. 
+Presiona la opción "Siguiente" para continuar con el siguiente paso. 
+En el segundo paso, actualiza los datos del contrato, como cargo, tipo de 
+contrato, turno, entre otros. Puedes agregar observaciones si es necesario. 
+Presiona la opción "Actualizar información" antes de continuar. 
+Modificar Documentación: 
  
-Archivo PDF 
-Archivo 
-Word 
+Si necesitas modificar la documentación asociada, selecciona la opción 
+"Cancelar" y luego presiona el botón "Siguiente". 
+En el formulario desplegado, ingresa la nueva fecha de inicio y término de los 
+documentos, si es requerida. 
+Presiona la opción "Agregar" para elegir el documento a cargar. 
+Guardar y Enviar la Solicitud: 
  
-si no no 
-Registro 
-actualizado de 
-entrega del 
-Reglamento 
-Interno de Orden, 
-Higiene y 
-Seguridad a oficina 
-de partes de 
-Inspección del 
-Trabajo y Seremi 
-de Salud 
-Cargar evidencia 
-de entrega de un 
-ejemplar del riohs 
-en la Dirección 
-del Trabajo y 
-seremi de Salud. 
-Empresas con 
-menos de 10 
-trabajadores, no 
-existe obligación 
-de remitir copia a 
-ningún organismo 
-(artículo 67 de la 
-ley Nº 16.744 
-Archivo PDF 
-Archivo 
-Word 
+Una vez actualizados los documentos, presiona la opción "Finalizar Acreditación" 
+ubicada en la parte superior. 
+El sistema mostrará un mensaje de confirmación en el cual deberás seleccionar la 
+opción "Finalizar". 
+Confirmación del Proceso: 
  
-si no no 
-Certificado de 
-siniestralidad y 
-accidentabilidad 
-Debe ser emitido 
-por el organismo 
-administrador del 
-seguro 
-(mutualidad). 
+El sistema guardará automáticamente la información y enviará la solicitud de 
+acreditación. 
+Espera la revisión y aprobación de la solicitud. El sistema te notificará el cambio 
+de estado de la solicitud (Pendiente, Rechazada o Aprobada). 
+Recuerda que solo puedes editar la solicitud si esta se encuentra en estado 
+pendiente o rechazada. Si la solicitud ya ha sido aprobada, no podrás realizar 
+cambios. 
+31. Que se debe realizar en caso que la 
+plataforma obliga subir esos 
+documentos 
  
-Archivo PDF 
-Archivo 
-Word 
+En caso de que la plataforma obligue a subir documentos, se debe ingresar la 
+fecha de inicio y término antes de cargar cualquier documento. Si no se ingresan 
+estas fechas, la plataforma no permitirá la carga del documento mencionado, en 
+este caso si no es un requisito, puede subir una hoja que indique que no aplica. 
+32. Como finiquitar en workmate sin 
+finiquito. 
+Para finiquitar en la plataforma Workmate sin tener el finiquito, puedes seguir 
+estos pasos: 
+Declaración Jurada: 
  
-si si si 
- Datos de la 
-empresa como 
-nombre y RUT 
-deben ser 
-Archivo PDF 
-Archivo 
-Word 
+En caso de no tener el finiquito, puedes presentar una declaración que indique la 
+finalización de la relación laboral. Este documento debe ser firmado  por ambas 
+partes. 
+Acceder a la Plataforma: 
  
-si si si"
+Ingresa a la plataforma Workmate con tu usuario y contraseña. 
+Buscar al Trabajador: 
+ 
+Utiliza la opción de búsqueda para encontrar al trabajador que deseas finiquitar. 
+Puedes buscar por Rut, pasaporte, nombre del empleado, o número de contrato. 
+Editar Información del Contrato:"
 
-[CHUNK 2] DISTANCIA VECTORIAL: 0.2232
+[CHUNK 2] DISTANCIA VECTORIAL: 0.1980
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"de accidentes con 
-cobertura a los 
-trabajadores 
+"35 8736 
  
-Archivo PDF 
-Archivo 
-Word 
+19.Qué sucede si una persona intenta 
+ingresar a una zona no autorizada según 
+el sistema? 
+El sistema no se lo permitirá.  
+20. Mi solicitud se encuentra en curso, 
+¿qué significa? 
  
-si no no 
-Registro 
-actualizado de 
-entrega del 
-Reglamento 
-Interno de Orden, 
-Higiene y 
-Seguridad a oficina 
-de partes de 
-Inspección del 
-Trabajo y Seremi 
-de Salud 
-Cargar evidencia 
-de entrega de un 
-ejemplar del riohs 
-en la Dirección 
-del Trabajo y 
-seremi de Salud. 
-Empresas con 
-menos de 10 
-trabajadores, no 
-existe obligación 
-de remitir copia a 
-ningún organismo 
-(artículo 67 de la 
-ley Nº 16.744 
-Archivo PDF 
-Archivo 
-Word 
+Significa que se encuentra en edición y no ha enviado solicitud a validar. Debe 
+editar personal. 
+Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver 
+ficha/Presionar Botón Editar/completar datos/presionar botón “guardar 
+información” / cargar documentación/Finalizar 
  
-si no no 
-Certificado de 
-siniestralidad y 
-accidentabilidad 
-Debe ser emitido 
-por el organismo 
-administrador del 
-seguro 
-(mutualidad). 
  
-Archivo PDF 
-Archivo 
-Word 
+21. Como proceder si se requiere 
+prioridad de revisión del personal? 
  
-si si si 
- Datos de la 
-empresa como 
-nombre y RUT 
-deben ser 
-Archivo PDF 
-Archivo 
-Word 
+Las acreditaciones son realizadas de acuerdo al orden   de llegada, si requieren 
+prioridad, la deben solicitar a través de correo a Pascual Cortes o Eduardo 
+Oyarzua a los correos eoyarzua@techint.com; pcortesmonardez@techint.com 
  
-si si si 
+ 
 
- 
- Manual y requisitos documentales 
-Servicio Acreditación Puerto 
-Angamos y TGN 
-Revisión:  
-Fecha:  
-Página 5 de 
+3 
  
  
-concordantes con 
-los datos reflejados 
-en OC y ficha de la 
-empresa (F-SIG-
-067) 
- Documento se 
-obtiene de forma 
-online en la página 
-de su respectiva 
-mutualidad. 
  
-Archivo PDF 
-Archivo 
-Word 
+Manual y requisitos documentales Servicio 
+Acreditación Techint 
+Revisión: 01 
+Fecha: 26-02-2025 
+Página 3 de 10 
  
-si si si 
- Periodo de vigencia 
-últimos 6 meses. 
-Archivo PDF 
-Archivo 
-Word 
  
-si si si 
- Documento no 
-aplica para 
-empresa 
-Extranjera (cargar 
-declaración de no 
-aplicabilidad 
-Archivo PDF 
-Archivo 
-Word 
+22. Como gestionar el proceso de 
+impresión de credenciales de acceso y 
+licencias de conducir? 
  
-si si si 
-Registro de 
-recepción y toma 
-de conocimiento 
-del reglamento 
-especial de 
-seguridad para 
-empresas 
-contratistas y 
-subcontratistas (F-
-SIG-055) 
-Formato Puerto 
-Angamos-TGN (F-
-SIG-055), 
-actualizado 
-descargable desde 
-https://www.puer
-toangamos.cl/serv
-icios-descargas/ 
+Se debe contactar con el área de impresión de 
+credenciales de Techint o con Pascual Cortes o Eduardo 
+Oyarzua a los correos eoyarzua@techint.com ; 
+pcortesmonardez@techint.com para solicitar 
+impresión y retiro. 
  
-Archivo PDF 
-Archivo 
-Word 
  
-si no no 
-Firmado por 
-representante de 
-Puerto (ADC o 
-Gerente/subgeren
-te del área), 
-incluyendo datos 
-de quien firma 
-(firma electrónica 
-mediante portal 
-autorizado o firma 
-digital legible 
-sobre puesta). 
-Archivo PDF 
-Archivo 
-Word 
+23. Qué alertas genera el sistema si una 
+persona supera el límite de horas 
+laborales permitidas? 
  
-si no no 
-Firmado por 
-representante de 
-la empresa 
-contratista (ADC, 
-Archivo PDF 
-Archivo 
-Word 
  
-si no no 
+El sistema no menciona específicamente alertas generadas si una persona supera 
+el límite de horas laborales permitidas. La documentación proporcionada no 
+incluye detalles sobre la gestión de alertas relacionadas con el límite de horas 
+laborales. Si el trabajador tiene más de 44 horas según Ley 21561, tendría que 
+adjuntar anexo de reducción de jornada laboral. 
+24.Que debo hacer si me equivoco al 
+ingresar el número del acuerdo 
+comercial para acreditar empresa y 
+necesito editarlo, ¿cómo lo hago? 
+ 
+Para editar la información de un contrato, debes seguir estos pasos: 
+Se debe solicitar a soporte: techintsoporte@workmate.cl que edite el número de 
+contrato comercial. 
+  
+ 
+25. No puedo actualizar numero de 
+contrato? 
+Para actualizar el número de contrato en la plataforma de acreditación, sigue 
+estos pasos: 
+Enviar correo a soporte solicitando edición del  número de contrato a 
+techintsoporte@workmate.cl 
+26. Me falta un documento, como debo 
+hacerlo para que realicen una excepción 
+Para solicitar una excepción debido a la falta de un documento, debe hablar 
+directamente con Relaciones Laborales de Techint, ya sea Pascual Cortes o 
+Eduardo Oyarzua. 
+27.Pases de visita sirven para realizar 
+inspecciones 
+No, los pases de visita no pueden ser utilizados para realizar inspecciones. 
+28. Curso manejo a la defensiva, sirve 
+certificado de una otec? 
+No, el certificado de un curso de manejo a la defensiva debe ser de mutualidad. 
+29. Que requisitos debe cumplir el 
+certificado de competencias para 
+conducir vehículos o maquinarias 
+El certificado de competencias para conducir vehículos o maquinarias debe ser  
+validado por  
+Chile Valora (Norma 2728)  
+debe estar vigente y debe ser del vehiculo que va a conducir el trabajador. 
+30. Que debo realizar para editar 
+acreditación y cambiar fechas de 
+documentos 
+Para editar una acreditación y cambiar las fechas de los documentos, debes 
+seguir estos pasos: 
+ 
+Acceder a la Plataforma: 
+ 
+Ingresa a la plataforma de acreditación con tu usuario y contraseña. 
+Buscar la Solicitud: 
+ 
+Utiliza la opción de búsqueda para encontrar la solicitud de acreditación que 
+deseas editar. Puedes buscar por Rut, pasaporte, nombre del empleado, o 
+número de contrato. 
+Editar la Solicitud: 
+ 
+Selecciona la opción "Editar" en la ficha del personal o del contrato seleccionado. 
+Esto desplegará un formulario que se debe completar en varios pasos."
 
- 
- Manual y requisitos documentales 
-Servicio Acreditación Puerto 
-Angamos y TGN 
-Revisión:  
-Fecha:  
-Página 6 de 
- 
- 
-Jefe o Gerencia del 
-área), incluyendo 
-datos de quien 
-firma (firma 
-electrónica 
-mediante portal 
-autorizado o firma 
-digital legible 
-sobre puesta) 
-Registro de 
-recepción y toma 
-de conocimiento 
-del plan d 
-emergencia de 
-puerto angamos y 
-/o TGN (F-SIG-061) 
-Formato Puerto 
-Angamos-TGN (F-
-SIG-061), 
-actualizado 
-descargable desde 
-https://www.puer
-toangamos.cl/serv
-icios-descargas/ 
-Archivo PDF 
-Archivo 
-Word 
- 
-si no no 
- Completar datos 
-editables en color 
-rojo del 
-documento (fecha, 
-nombre y rut de la 
-empresa) 
- 
-Archivo PDF 
-Archivo 
-Word 
- 
-si no no 
- Firmado por 
-representante de 
-Puerto (ADC o 
-Gerente/subgeren
-te del área), 
-incluyendo datos 
-de quien firma 
-(firma electrónica 
-mediante portal 
-autorizado o firma 
-digital legible 
-sobre puesta). 
-Archivo PDF 
-Archivo 
-Word 
- 
-si no no 
- Firmado por 
-representante de 
-la empresa 
-contratista (ADC, 
-Jefe o Gerencia del 
-área), incluyendo 
-datos de quien 
-firma (firma 
-electrónica 
-mediante portal 
-autorizado o firma 
-Archivo PDF 
-Archivo 
-Word 
- 
-si no no"
-
-[CHUNK 3] DISTANCIA VECTORIAL: 0.2279
+[CHUNK 3] DISTANCIA VECTORIAL: 0.1982
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"de Puerto Angamos y 
-TGN 
-(www.puertoangamos.cl/indu
-cciones y 
-www.puertotgn.cl/induccione
-s)  
-2. Todos los campos 
-completados, excepto firma 
-del relator dado que el 
-trabajador puede 
-autogestionar el proceso. 
-3. En caso de firma digital, ésta 
-deberá ser mediante un 
-sistema debidamente 
-validado. 
-4. La carta de responsabilidad 
-es individual (F-SIG-059). La 
-nómina de registro de 
-asistentes podrá ser individual 
-o masiva (F-SIG-006-A). 
-Ambos documentos completan 
-la inducción online, no 
-obstante, podría presentarse 
-solo la carta de 
-responsabilidad (F-SIG-059), 
-sin la nómina de asistentes (F-
-SIG-006-A) y se consideraría 
-válido, lo más relevante es la 
-carta de responsabilidad. 
-Todo 
-archivo 
-debe ser 
-cargado en 
-formato 
-PDF y con 
-un máximo 
-de 3 mb de 
-tamaño 
-si si si 
+"omo puedo descargar resumen de los 
+trabajadores del sistema? 
+ 
+Debe ingresar a: Consulta flexible personal – completar los datos -seleccionar 
+campos – generar nuevo reporte – descargar archivo  
+8. Como finiquito a un trabajador ? Trabajadores figuran acreditados en sistema, para desvincular personal debe 
+dirigirse a ficha de cada uno de ellos a través del módulo administrar personal, 
+abrir solicitud correspondiente de acreditación y presionar botón rojo 
+FINIQUITAR, completar formulario y adjuntar documento. 
+9.No puedo acreditar a un trabajador 
+porque indica que se encuentra 
+acreditado en otra empresa? 
+ 
+Empresa anterior debe desvincular al trabajador, en caso que no lo 
+pueda hacer, contactar eoyarzua@techint.com ; 
+pcortesmonardez@techint.com enviando finiquito por correo 
+ 
+  
 
- 
- Manual y requisitos documentales 
-Servicio Acreditación Puerto 
-Angamos y TGN 
-Revisión:  
-Fecha:  
-Página 29 de 
+2 
  
  
-Difusión de 
-estándares de 
-riesgos críticos 4 
-A+C a cada 
-trabajador 
  
-1. Formato propio de la 
-empresa contratista donde 
-posea un encabezado con el 
-logo de la empresa y nombre 
-del documento. 
-2. Formato debe indicar: 
-tema tratado (ej. Difusión 
-estándar atropello Puerto 
-Angamos y TGN). Además, 
-fechas de difusión. 
-3. Formato debe indicar 
-nombre, apellidos, cargos y 
-firma de los trabajadores que 
-recibieron la difusión y 
-nombre, apellidos, cargo y 
-firma del relator.  
-3. Las difusiones pueden ser 
-masivas, es decir, en un 
-mismo formato se pueden 
-enlistar todos los 
-trabajadores que participaron 
-de la difusión o puede ser 
-una difusión individual por 
-cada trabajador. Ambas 
-difusiones son válidas. 
-4. La difusión debe 
-mencionar claramente cada 
-estándar 4 A+C, es decir, 
-deberán especificar en el 
-registro de difusión el nombre 
-de cada uno de los 
-estándares 4 A+C (Atropello, 
-Atrapamiento, Aplastamiento 
-y Contacto con Energías). El 
-registro de difusión podrá 
-validarse de 2 formas:  
---- a) un único registro de 
-difusión donde se 
-especifiquen los 5 títulos de 
-los 5 estándares en un solo 
-documento, o bien; 
---- b) un registro de difusión 
-por cada estándar, es decir,  
-5 registros de difusión 
-distintos, cada uno con el 
-respectivo nombre del 
-estándar difundido. 
-5. Cualquiera de las 2 formas 
-Todo 
-archivo 
-debe ser 
-cargado en 
-formato 
-PDF y con 
-un máximo 
-de 3 mb de 
-tamaño 
-si no no"
+Manual y requisitos documentales Servicio 
+Acreditación Techint 
+Revisión: 01 
+Fecha: 26-02-2025 
+Página 2 de 10 
+ 
+10.Si cambio a un trabajador de contrato 
+dentro de la misma empresa debo cargar 
+todo nuevamente? 
+No, se homologa la información, pero se debe verificar que los documentos se 
+encuentren vigentes. 
+ 
+ 
+11.Quién realiza la extensión del 
+contrato? 
+Empresa debe gestionar en plataforma la carga de documentación del 
+documento actualizado, el cual debe venir firmado por empresa y 
+Techint(ambas partes), ingresando a través del módulo gestión de 
+acreditación empresa /contrato, ir a gestionar  contrato y editar. 
+ 
+12.Como puedo trasladar a los 
+trabajadores a otro contrato misma 
+empresa? 
+Debe ingresarlos individualmente, desvincularlo del contrato anterior y 
+vincular al nuevo contrato, con anexo de traslado o finiquito. El sistema 
+homologará la documentación del trabajador, considerar que  debe 
+adjuntar anexo de contrato al respectivo número. Ingresar al menú 
+"acreditar personal" seguir los pasos y seleccionar el nuevo contrato en 
+la etapa final   de   documentación   se   encontrará   todo,   cargado 
+exceptuando el anexo ya mencionado. 
+ 
+ 
+13.En casos de cambio de apellido del 
+trabajador acreditado que debo hacer? 
+Cuando acredite al trabajador debe cargar ambos CI y comprobante del registro 
+civil en el que consta el cambio de apellidos 
+14.Qué puede pasar si hay error de tipeo 
+en las fechas en formularios de 
+acreditaciones? 
+Si la fecha que ingresa es anterior a la actual o caducada, sistema 
+automáticamente lo inhabilitara. Por lo tanto, es muy importante indicar las 
+fechas actualizadas 
+15.Workmate emite alerta de caducidad 
+de contratos? 
+Sistema Workmate genera alerta de caducidad que se envía por correo 
+16.Cuál es el plazo que tienen Workmate 
+para la revisión de solicitudes? 
+Workmate tiene un plazo de 24 horas laborales y se revisa de acuerdo al orden de 
+llegada 
+17.Cómo proceder si se requiere 
+prioridad de revisión del personal? 
+Las acreditaciones son realizadas de acuerdo al orden de llegada, si requieren 
+prioridad, la deben solicitar a través de correo a Pascual Cortes o Eduardo 
+Oyarzua a los correos eoyarzua@techint.com ; pcortesmonardez@techint.com 
+18.Cuál es el teléfono del analista? 
+Teléfono de analista es +56 9 3435 8736 
+ 
+19.Qué sucede si una persona intenta 
+ingresar a una zona no autorizada según 
+el sistema? 
+El sistema no se lo permitirá.  
+20. Mi solicitud se encuentra en curso, 
+¿qué significa? 
+ 
+Significa que se encuentra en edición y no ha enviado solicitud a validar. Debe 
+editar personal. 
+Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver 
+ficha/Presionar Botón Editar/completar datos/presionar botón “guardar 
+información” / cargar documentación/Finalizar 
+ 
+ 
+21. Como proceder si se requiere 
+prioridad de revisión del personal? 
+ 
+Las acreditaciones son realizadas de acuerdo al orden   de llegada, si requieren 
+prioridad, la deben solicitar a través de correo a Pascual Cortes o Eduardo 
+Oyarzua a los correos eoyarzua@techint.com; pcortesmonardez@techint.com"
 
-[CHUNK 4] DISTANCIA VECTORIAL: 0.2308
+[CHUNK 4] DISTANCIA VECTORIAL: 0.2038
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"Manual y requisitos documentales 
-Servicio Acreditación Puerto 
-Angamos y TGN 
-Revisión:  
-Fecha:  
-Página 1 de 
+"ción con tu usuario y contraseña. 
+Buscar al Trabajador: 
  
+Dirígete al menú "Administrar Personal". 
+Utiliza el buscador para encontrar al trabajador ingresando su Rut o Pasaporte. 
+Editar Información del Trabajador: 
  
+Una vez encontrado el trabajador, selecciona la opción "Editar" en la ficha del 
+personal. 
+El sistema desplegará un formulario que se debe completar en tres pasos. 
+Actualizar Información Contractual: 
  
-Criterios de Validación “PANG” 
+En el segundo paso del formulario, actualiza los datos del contrato, incluyendo el 
+nuevo número de contrato. 
+Puedes agregar observaciones si es necesario. 
+Asegúrate de presionar la opción "Actualizar información" antes de continuar con 
+el siguiente paso. 
+Cargar el Anexo del Contrato: 
  
- 
-  1- Información del proyecto general 
- 
-Sistema  RM  Workmate  es  un  sistema  único  de  acreditación  de  Empresas,  Contratos,  Personas, 
-Vehículos  y Pases de visita Puerto Angamos y TGN. A través de esta plataforma las ESE    podrán 
-acreditar y visualizar todo lo relacionado a sus contratos comerciales manteniendo trazabilidad 
-de sus movimientos y reportabilidad de los estados de acreditación. 
-Una  vez  adjudicado  un  contrato  se  debe  acreditar  la  empresa  y  el  contrato  para  comenzar  a 
-acreditar vehículos  y    personal. 
- 
- 
-2.-Ingreso a la plataforma: 
- 
-Paso 1: 
-Los Usuarios se crean automáticamente cuando se crea una nueva Orden de Compra en en SAP  de Puerto Angamos 
-(PANG) o Terminal Graneles Norte (TGN) 
-Paso 2: 
-Usuarios adicionales se deben solicitar a “Mesa de Ayuda” al correo soportepang@workmate.cl, con la autorización de 
-Maurizzio Vicencio y/o Arturo Donoso 
-Paso 3: 
-Una vez cuente con los Usuarios y las claves, podrá acceder al sistema de Acreditación en Plataforma 
-Workmate. 
- 
-3.- Creación de solicitudes: 
- 
-Para acreditar personas, pases de visita de empresa y vehículos ; se requiere  que se realice la 
-acreditación de la empresa y contrato inicialmente. 
-Las solicitudes pueden ser nuevas o ediciones. Éstas últimas son para modificar o actualizar datos o 
-documentos en el sistema. 
-Al enviar una solicitud, esta no podrá ser editada hasta que analista realice revisión. 
- 
- 
-4.- Información Atención:  
-● Administrador de Contrato : Axel Jara Marjorie Tardón Marjorietardon@workmate.cl 
-● Encargada Acreditación: Patricia Bonilla  analistapang@workmate.cl 
-● Soporte técnico (plataforma) Soportepang@workmate.cl 
-● Horarios de Atención Lunes a Jueves 8:00 a 18:00 horas,  Viernes de 8:00 a 17:00 horas, no considera 
-festivos."
+Si es necesario modificar la documentación contractual, el sistema desplegará un 
 
-[CHUNK 5] DISTANCIA VECTORIAL: 0.2332
+9 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Techint 
+Revisión: 01 
+Fecha: 26-02-2025 
+Página 9 de 10 
+ 
+formulario adicional. 
+Ingresa la fecha de inicio y término del anexo de contrato, si corresponde. 
+Selecciona la opción "Agregar" para elegir el documento del anexo de contrato 
+que deseas cargar. 
+Carga el documento en formato PDF. 
+Guardar y Enviar la Solicitud: 
+ 
+Una vez cargada la documentación, selecciona la opción "Guardar" para registrar 
+la información ingresada. 
+El sistema mostrará una ventana emergente preguntando si deseas finalizar la 
+actualización de datos. Selecciona "Finalizar" si has completado el proceso. 
+Esperar la Revisión: 
+ 
+La solicitud de actualización será enviada automáticamente para su revisión. 
+Posteriormente, se informará el resultado de la actualización (pendiente, 
+rechazada o aprobada). 
+Consideraciones: 
+Asegúrate de que todos los documentos estén en formato PDF y que las 
+imágenes sean en formato JPG o JPEG. 
+Si el documento requiere fecha de inicio y término, estas deben ser ingresadas 
+antes de cargar el documento. 
+Siguiendo estos pasos, podrás subir el anexo de contrato por modificación del 
+número de contrato del proyecto para un trabajador ya acreditado 
+43. Hay capacitación de plataforma? 
+ 
+Sí, hay capacitación disponible para el uso de la plataforma de acreditación de 
+Techint. A continuación, se detalla la información relevante sobre la capacitación: 
+ 
+ 
+Información Adicional: 
+Contacto para Coordinación: Para coordinar la capacitación, puedes contactar a 
+los responsables del área de acreditación o a la persona encargada de la 
+capacitación en Techint. 
+Procedimiento: 
+Coordinar la Capacitación: 
+ 
+Contacta a la persona encargada de la capacitación para programar tu asistencia 
+en uno de los días disponibles. 
+Asegúrate de confirmar tu participación con antelación. 
+Asistir a la Capacitación: 
+ 
+Asiste a la capacitación en la fecha y hora programadas. 
+La capacitación cubrirá el uso de la plataforma, incluyendo la carga de 
+documentación, la gestión de contratos y la acreditación de personal. 
+44. Cuál es el plazo de revisión? El plazo de revisión para la acreditación de trabajadores en la plataforma de 
+Techint es de 48 horas. 
+45. se puede cargar comprobante se 
+solicitud de cedula de identidad, en 
+reemplazo de la cedula, que fechas debo 
+ingresar 
+Si se puede, en fechas de cedula e identidad debe ingresar la fecha de entrega 
+que indica el documento"
+
+[CHUNK 5] DISTANCIA VECTORIAL: 0.2065
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"berá 
-contener las 
-actividades en 
-materia de 
-seguridad y salud 
-laboral establecidas, 
-los plazos en que 
-éstas se ejecutarán y 
-sus responsables, las 
-acciones de 
-información y 
-formación 
-establecidas en el 
-Reglamento Especial 
-de Contratratistas, 
-descargable en el 
-siguiente Link : 
-https://www.puerto
-angamos.cl/wp-
-content/uploads/20
-20/11/REG-SIG-
-004-Reglamento-
-Especial-de-
-Seguridad-para-
-Empresas-
-Contratistas-y-
-Subcontratistas_V.0
-5_octubre-2020.pdf 
+", la plataforma no permitirá la carga del documento mencionado, en 
+este caso si no es un requisito, puede subir una hoja que indique que no aplica. 
+32. Como finiquitar en workmate sin 
+finiquito. 
+Para finiquitar en la plataforma Workmate sin tener el finiquito, puedes seguir 
+estos pasos: 
+Declaración Jurada: 
  
-Archivo PDF 
-Archivo 
-Word 
-tamaño 3mb  
+En caso de no tener el finiquito, puedes presentar una declaración que indique la 
+finalización de la relación laboral. Este documento debe ser firmado  por ambas 
+partes. 
+Acceder a la Plataforma: 
  
-si no no 
-Procedimientos de 
-Trabajo que incluyan 
-análisis de riesgos de 
-seguridad, salud 
-ocupacional y medio 
-ambiente. 
-1. Estar actualizados 
-(antigüedad igual o 
-inferior a 12 meses). 
-2. Firmados y con 
-los datos (nombre, 
-Archivo PDF 
-Archivo 
-Word 
-tamaño 3mb  
+Ingresa a la plataforma Workmate con tu usuario y contraseña. 
+Buscar al Trabajador: 
  
-si no no 
+Utiliza la opción de búsqueda para encontrar al trabajador que deseas finiquitar. 
+Puedes buscar por Rut, pasaporte, nombre del empleado, o número de contrato. 
+Editar Información del Contrato: 
 
- 
- Manual y requisitos documentales 
-Servicio Acreditación Puerto 
-Angamos y TGN 
-Revisión:  
-Fecha:  
-Página 13 de 
+5 
  
  
-apellidos y cargo) de 
-quienes realizan, 
-revisan y aprueban 
-de la empresa 
-contratista. 
-3. Ser acordes a las 
-actividades a 
-ejecutar en Puerto, 
-describiendo el paso 
-a paso de la tarea. 
-4. Considerar la 
-evaluación de los 
-riesgos en cada 
-actividad, así como 
-también las medidas 
-de control para 
-evitar incidentes a 
-las personas, al 
-medio ambiente y a 
-las instalaciones o 
-equipos. 
  
-Certificado emitido por 
-Organismo Administrador 
-de incorporación a 
-Programa de Vigilancia 
-Médica por exposición a 
-agentes de riesgo (si 
-aplica) 
-Documento legible y 
-vigente 
-1. Estar actualizados 
-(antigüedad igual o 
-inferior a 12 meses). 
-2. Firmados y con 
-los datos (nombre, 
-apellidos y cargo) de 
-quienes realizan, 
-revisan y aprueban 
-de la empresa 
-contratista. 
-3. Ser acordes a las 
-actividades a 
-ejecutar en Puerto, 
-describiendo el paso 
-a paso de la tarea. 
-4. Considerar la 
-evaluación de los 
-riesgos en cada 
-actividad, así como 
-también las medidas 
-de control para 
-evitar incidentes a 
-las personas, al 
-Archivo PDF 
-Archivo 
-Word 
-tamaño 3mb  
+Manual y requisitos documentales Servicio 
+Acreditación Techint 
+Revisión: 01 
+Fecha: 26-02-2025 
+Página 5 de 10 
  
-si no no 
-
+33. Cuál es el plazo de revision de 
+acreditaciones 
+El plazo de revisión de las acreditaciones en el Proyecto Suministro de Agua 
+Desalinizada Distrito Norte (SADDN) es de 48 horas. Este plazo aplica tanto para 
+la revisión de la documentación cargada como para la validación de la 
+acreditación por parte de los responsables designados en el proceso. 
+34. Con cuanto tiempo de anticipacion 
+se solicitan los pases 
+Los pases de visita deben solicitarse con al menos 48 horas de anticipación. Este 
+plazo es necesario para que se realicen las validaciones correspondientes y se 
+notifiquen a las áreas involucradas. 
  
- Manual y requisitos documentales 
-Servicio Acreditación Puerto 
-Angamos y TGN 
-Revisión:  
-Fecha:  
-Página 14 de 
+Aquí está el detalle del proceso de solicitud de pases de visita: 
  
+Solicitud de Pase de Visita: La empresa solicitante debe ingresar la solicitud en la 
+plataforma Workmate con al menos 48 horas de anticipación. 
+Selección del Tipo de Pase: Seleccionar en la plataforma Workmate el tipo de 
+pase (reunión o técnica). 
+Revisión y Aprobación: La solicitud será revisada y aprobada por el área de 
+Relaciones Laborales de TECHINT y, posteriormente, por la Gerencia de Techint. 
+Notificación: Una vez aprobada, se notificará a las áreas correspondientes y se 
+autorizará el ingreso al proyecto SADDN. 
+Es importante cumplir con este plazo para asegurar que todas las validaciones y 
+notificaciones se realicen de manera adecuada. 
+35. Cuál es el certificado de cabina para 
+maquinarias 
+El certificado de cabina para maquinarias es el de normas Rops y Fops. 
+36. Que es el certificado de frenado El certificado de frenado es un documento que indica la capacidad de frenado 
+que tiene el vehículo, este debe ser de PRT. 
+37. cual check list se debe subir para 
+acreditar vehículos o maquinarias 
+Para acreditar vehículos o maquinarias en el Proyecto Suministro de Agua 
+Desalinizada Distrito Norte (SADDN) deben adjuntar Check List emitido por 
+Techint. 
+38. Como obtengo mi contraseña? Para obtener tu contraseña en la plataforma de acreditación debe solicitar a 
+Pascual Cortes o Eduardo Oyarzua Solicitud de Usuario Nuevo: 
+Una vez que la solicitud de usuario nuevo sea procesada, recibirás un correo 
+electrónico con los datos de acceso generados por el sistema. Estos datos 
+incluyen tu usuario y contraseña. 
+Ingreso al Sistema: 
+Utiliza el usuario y la contraseña proporcionados en el correo electrónico para 
+ingresar en los campos correspondientes en la página de inicio de sesión. 
+Finalmente, presiona la opción “Entrar” para acceder al sistema. 
+Si no has recibido el correo electrónico con tus datos de acceso o tienes 
+problemas para ingresar, te recomiendo contactar al soporte técnico de la 
+plataforma para obtener asistencia adicional. 
+39. No puedo acceder al sistema Si no puedes acceder al sistema, aquí hay algunos pasos que puedes seguir para 
+resolver el problema: 
  
-medio ambiente y a 
-las instalaciones o 
-equipos. 
+Verificar Credenciales: 
  
-Listado de Sustancias 
-peligrosas y su Hoja de 
-Datos de Seguridad 
-(HDS) 
-1. En caso de no 
-manejar sustancias, 
-indicar mediante 
-declaración simple, 
-no aplica, dado que 
-no se utilizarán 
-sustancias en el 
-servicio en el cual se 
-están acreditando. 
-Declaración deberá 
-contener el nombre 
-o logo y Rut de la 
-empresa contratista. 
-2. Listado simple, 
-bajo formato propio 
-de la empresa 
-contratista, la cual 
-además de la 
-nómina de 
-sustancias, deberá 
-tener los datos 
-mínimos de la 
-empresa contratista 
-en el encabezado o 
-cuerpo del 
-documento (nombre 
-o logo y Rut). 
-3. En caso de aplicar, 
-la nómina de 
-sustancias debe ser 
-acorde al servicio a 
-ejecutar y OC por la 
-cual se están 
-acreditando. No 
-deben hacer 
-referencia a la 
-nómina del total de 
-sustancias que 
-maneja la empresa, 
-sino que solo a 
-aquellas que se 
-utilizarán en el 
-servicio en puerto. 
-Archivo PDF 
-Archivo 
-Word 
-tamaño 3mb  
- 
-si no no"
+Asegúrate de que estás ingresando correctamente tu usuario y contraseña. 
+Verifica que no haya errores tipográficos y que las mayúsculas y minúsculas estén 
+correctamente ingresadas. 
+Restablecer Contraseña:"
 

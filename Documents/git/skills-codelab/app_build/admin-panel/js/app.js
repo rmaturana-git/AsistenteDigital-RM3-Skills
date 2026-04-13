@@ -61,10 +61,11 @@ overlay.addEventListener('click', () => {
 });
 
 // ── Router setup ──────────────────────────────────────────────────
-Router.register('/',            () => renderDashboard());
-Router.register('/tenants',     () => renderTenants());
-Router.register('/config/:id',  (p) => renderTenantConfig(p));
-Router.register('/documents',   (p) => renderDocuments(p));
-Router.register('/billing',     () => renderBilling());
+Router.register('/',             () => renderDashboard());
+Router.register('/tenants',      () => renderTenants());
+Router.register('/config/:id',   (p) => renderTenantConfig(p));
+Router.register('/documents',    (p) => renderDocuments(p));
+Router.register('/billing',      () => renderBilling());
+Router.register('/widget-demo',  () => WidgetDemoView.render());
 
 Router.init();

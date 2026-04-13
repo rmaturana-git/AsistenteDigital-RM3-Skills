@@ -18,7 +18,7 @@ export class LlmFactoryService {
     if (provider === 'gemini') {
       return new ChatGoogleGenerativeAI({
         apiKey: process.env.GOOGLE_API_KEY || '',
-        model: model || 'gemini-pro',
+        model: model || 'gemini-1.5-flash',
         temperature: temperature,
       });
     }

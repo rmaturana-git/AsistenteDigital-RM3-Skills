@@ -25,8 +25,9 @@ You MUST ruthlessly audit frontend code to ensure we NEVER use default valid fal
 1. **Never Trust Live-Reload Exclusively**: You must periodically verify that standard inputs (e.g. `<chatbot-widget api-key="x">`) correctly bind to the host's DOM in a clean HTML context *without* the Live-Reload server interfering (Dev Servers often cache `index.html` static wrappers).
 2. **True DOM Verification**: Ensure we test the final bundled WebComponent in a raw `index.html` file to guarantee the bundle doesn't silently ignore dynamic parameters due to missing polyfills (like Zone.js in Angular).
 
-## 3. Pre-flight Checklist for Frontend Tasks
+## 3. Frontend Execution/Finalization Checklist
 Before declaring any Web Widget task done:
 - [ ] Variables depend on Host inputs, not static fallbacks.
 - [ ] Error messages for missing attributes are visible and descriptive.
 - [ ] Manual refresh (`F5` or hard compile) proves the property reading is robust.
+- [ ] **QA Validation Header**: If the QA role (@qa) detects a validation failure, they MUST print their header before rejecting the component completion.

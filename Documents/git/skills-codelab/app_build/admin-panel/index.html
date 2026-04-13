@@ -11,35 +11,39 @@
 </head>
 <body>
 
-  <!-- ── Sidebar ──────────────────────────────────────────── -->
+  <!-- ═══ Sidebar ══════════════════════════════════════════════════════ -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-logo">
-        <span class="logo-icon">⬡</span>
+        <span class="logo-icon">🤖</span>
         <div class="logo-text">
           <span class="logo-title">RM3 Admin</span>
           <span class="logo-subtitle">Panel de Control</span>
         </div>
       </div>
-      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Colapsar menú">‹</button>
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Colapsar menú">◀</button>
     </div>
 
     <nav class="sidebar-nav" role="navigation" aria-label="Menú principal">
       <a href="#/" class="nav-item active" id="nav-dashboard" data-view="dashboard">
-        <span class="nav-icon">◈</span>
+        <span class="nav-icon">📊</span>
         <span class="nav-label">Dashboard</span>
       </a>
       <a href="#/tenants" class="nav-item" id="nav-tenants" data-view="tenants">
-        <span class="nav-icon">⬡</span>
+        <span class="nav-icon">🏢</span>
         <span class="nav-label">Tenants</span>
       </a>
       <a href="#/documents" class="nav-item" id="nav-documents" data-view="documents">
-        <span class="nav-icon">◫</span>
+        <span class="nav-icon">📄</span>
         <span class="nav-label">Documentos</span>
       </a>
       <a href="#/billing" class="nav-item" id="nav-billing" data-view="billing">
-        <span class="nav-icon">◎</span>
+        <span class="nav-icon">💳</span>
         <span class="nav-label">Facturación</span>
+      </a>
+      <a href="#/widget-demo" class="nav-item" id="nav-widget-demo" data-view="widget-demo">
+        <span class="nav-icon">🧪</span>
+        <span class="nav-label">Widget Demo</span>
       </a>
     </nav>
 
@@ -54,7 +58,7 @@
     </div>
   </aside>
 
-  <!-- ── Main Content ──────────────────────────────────────── -->
+  <!-- ═══ Main Content ══════════════════════════════════════════════════ -->
   <main class="main-content" id="main-content">
 
     <header class="topbar">
@@ -76,13 +80,13 @@
 
   </main>
 
-  <!-- ── Toast Notifications ──────────────────────────────── -->
+  <!-- ═══ Toast Notifications ═══════════════════════════════════════════ -->
   <div class="toast-container" id="toast-container" aria-live="polite"></div>
 
-  <!-- ── Overlay for mobile sidebar ──────────────────────── -->
+  <!-- ═══ Overlay for mobile sidebar ═══════════════════════════════════ -->
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-  <!-- ── Scripts (orden importante) ──────────────────────── -->
+  <!-- ═══ Scripts (orden importante) ════════════════════════════════════ -->
   <script src="js/api.js"></script>
   <script src="js/router.js"></script>
   <script src="js/views/dashboard.view.js"></script>
@@ -90,6 +94,7 @@
   <script src="js/views/tenant-config.view.js"></script>
   <script src="js/views/documents.view.js"></script>
   <script src="js/views/billing.view.js"></script>
+  <script src="js/views/widget-demo.view.js"></script>
   <script src="js/app.js"></script>
 
 </body>

@@ -115,3 +115,8 @@
 
 ### Iteración 14 - Desbloqueo de Ingesta y Certificación RAG E2E
 * **[Ingestión/Testing]**: Se generó un script temporal nativo upload.js aislando FormData del browser para bypassear la interfaz gráfica y asegurar el pipeline de ingestión. Para sortear el ApiKeyGuard, el script inyecta asíncronamente un Fake JWT firmado on-the-fly (jsonwebtoken) que satisface el tenant_id. Se comprobó la indexación vectorial y se testeó el rendimiento semántico real (Respuesta y fuentes retornadas correctamente por el RAG local sobre el PDF).
+
+### Iteración 15 - Solución de Build Angular, Switch Multi-LLM y Widget Demo
+* **[Angular Build Fix]**: Solucionado el fallo de empaquetado crítico de Angular Elements y Tailwind v3 resolviendo configuraciones heredadas. El proceso de construcción ahora compila de forma exitosa y limpia los artefactos del Web Component (`main.js` y `styles.css`).
+* **[Dynamic LLM Switcher (Gemini)]**: Completada y validada exitosamente la refactorización `LlmFactoryService` que hace puente oficial a \`@langchain/google-genai\`. Verificada mediante tests E2E la capacidad del sistema para cambiar de OpenAI a Gemini "en caliente" al vuelo leyendo desde caché la directriz `llm_provider` en la base de datos sin necesitar reinicio.
+* **[Test E2E Frontend-Backend]**: Construcción de una vista dedicada (`#/widget-demo`) en el admin-panel mediante la inclusión dinámica de scripts. Este dashboard sirve como campo de pruebas Smoke Test real para testar la trazabilidad final inyectando el Custom Element `<chatbot-widget>` en la página validando CORS y comunicación RAG sobre el Tenant.
