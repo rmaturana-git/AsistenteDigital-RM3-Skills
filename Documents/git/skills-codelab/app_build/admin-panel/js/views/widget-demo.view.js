@@ -28,7 +28,7 @@ const WidgetDemoView = (() => {
         const link = document.createElement('link');
         link.id   = 'chatbot-widget-styles';
         link.rel  = 'stylesheet';
-        link.href = '../widget-dist/styles.css';
+        link.href = `../widget-dist/styles.css?t=${Date.now()}`;
         document.head.appendChild(link);
       }
 
@@ -36,7 +36,7 @@ const WidgetDemoView = (() => {
       if (!document.getElementById('chatbot-widget-bundle')) {
         const script  = document.createElement('script');
         script.id     = 'chatbot-widget-bundle';
-        script.src    = '../widget-dist/main.js';
+        script.src    = `../widget-dist/main.js?t=${Date.now()}`;
         script.onload = () => { bundleLoaded = true; resolve(); };
         script.onerror = () => {
           console.error('[WidgetDemo] Error cargando main.js del widget.');

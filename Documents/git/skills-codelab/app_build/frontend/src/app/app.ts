@@ -1,12 +1,17 @@
-import { Component, ChangeDetectionStrategy, signal, Input, inject } from '@angular/core';
+import {
+  Component, ChangeDetectionStrategy, signal, Input, inject,
+  ViewChild, ElementRef, effect
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ChatService } from './chat.service';
 
 interface UiMessage {
-  text: string;
+  html: SafeHtml;
+  raw: string;
   sender: 'ai' | 'user';
-  sources?: string[]; // Fuentes documentales opcionales para mensajes del asistente
+  sources?: string[];
 }
 
 @Component({
@@ -17,317 +22,450 @@ interface UiMessage {
   styles: [`
     :host {
       --rm3-orange: #F15A24;
-      --rm3-orange-hover: #ff7e47;
-      --glass-bg: rgba(255, 255, 255, 0.85);
-      --ai-bubble: rgba(243, 244, 246, 0.9);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --ai-bubble: rgba(243, 244, 246, 0.95);
       --user-gradient: linear-gradient(135deg, #F15A24 0%, #ff8c42 100%);
       font-family: 'Inter', sans-serif;
+      display: block;
     }
 
-    .glass-panel {
+    /*
+     * Panel principal: overflow:hidden + border-radius recorta todos los hijos.
+     * Se fuerza la aceleración GPU con will-change para que el clip funcione
+     * correctamente en combinación con CSS transform (scale, translate).
+     */
+    .chat-panel {
       background: var(--glass-bg);
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+      border-radius: 24px;
+      overflow: hidden;
+      will-change: transform;
+      isolation: isolate;               /* nuevo contexto de apilamiento */
+      transition: all 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+      display: flex;
+      flex-direction: column;
+      transform-origin: bottom right;
     }
 
+    /* Header: esquinas superiores redondeadas explícitas como respaldo visual */
     .chat-header {
-      background: linear-gradient(90deg, #121212 0%, #2a2a2a 100%);
+      flex-shrink: 0;
+      background: linear-gradient(90deg, #111111 0%, #272727 100%);
       border-bottom: 2px solid var(--rm3-orange);
+      border-radius: 22px 22px 0 0;     /* coincide con panel -2px de borde */
+    }
+
+    /* Zona de scroll */
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      scroll-behavior: smooth;
+    }
+
+    /* Footer input */
+    .chat-footer {
+      flex-shrink: 0;
+      padding: 1.1rem 1.25rem 1rem;
+      background: rgba(255,255,255,0.55);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      backdrop-filter: blur(8px);
     }
 
     .bubble-user {
       background: var(--user-gradient);
-      box-shadow: 0 4px 15px rgba(241, 90, 36, 0.3);
+      box-shadow: 0 4px 15px rgba(241, 90, 36, 0.28);
       border-radius: 18px 18px 4px 18px;
+      color: #fff;
     }
 
     .bubble-ai {
       background: var(--ai-bubble);
       border: 1px solid rgba(0,0,0,0.05);
       border-radius: 18px 18px 18px 4px;
+      color: #1f2937;
+      line-height: 1.6;
     }
+
+    /* Markdown dentro de la burbuja IA */
+    .bubble-ai strong { font-weight: 700; }
+    .bubble-ai em     { font-style: italic; }
+    .bubble-ai code   { background: rgba(0,0,0,0.07); padding: 1px 5px; border-radius: 3px; font-size: 0.88em; font-family: monospace; }
 
     .animate-in {
-      animation: springIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation: springIn 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
     }
-
     @keyframes springIn {
-      from { opacity: 0; transform: scale(0.9) translateY(20px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      from { opacity: 0; transform: scale(0.9) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0);      }
     }
 
     .typing-dot {
-      width: 6px; height: 6px; background: #999; border-radius: 50%;
-      animation: typingJump 0.6s infinite alternate;
+      width: 6px; height: 6px; background: #9ca3af; border-radius: 50%;
+      animation: jump 0.6s infinite alternate;
     }
-    @keyframes typingJump { to { transform: translateY(-4px); opacity: 0.4; } }
-    .delay-1 { animation-delay: 0.2s; }
-    .delay-2 { animation-delay: 0.4s; }
+    @keyframes jump { to { transform: translateY(-4px); opacity: 0.4; } }
+    .d1 { animation-delay: 0.15s; }
+    .d2 { animation-delay: 0.30s; }
 
     .source-tag {
-      background: rgba(0,0,0,0.03);
-      border-radius: 4px;
-      padding: 2px 6px;
-      font-size: 9px;
-      color: #666;
-      border: 1px solid rgba(0,0,0,0.05);
-      margin-top: 2px;
-      display: inline-block;
-      max-width: 100%;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 0.7rem;
+      color: #6b7280;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      max-width: 100%;
     }
 
-    .btn-action {
+    .btn-header {
       background: rgba(255,255,255,0.1);
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 8px;
       padding: 6px;
       color: white;
-      transition: all 0.2s ease;
       cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      line-height: 1;
     }
-    .btn-action:hover { background: rgba(255,255,255,0.25); border-color: white; }
+    .btn-header:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.5); }
 
     .btn-copy {
+      position: absolute;
+      top: 4px; right: -32px;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      padding: 5px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 6px;
+      color: #6b7280;
+      cursor: pointer;
+      transition: opacity 0.25s, color 0.2s;
     }
-    .group:hover .btn-copy {
-      opacity: 1;
+    .bubble-wrap:hover .btn-copy { opacity: 1; }
+    .btn-copy:hover { color: #F15A24; }
+
+    .chat-input {
+      width: 100%;
+      background: rgba(243,244,246,0.85);
+      border: 2px solid transparent;
+      border-radius: 18px;
+      padding: 0.75rem 3.5rem 0.75rem 1.1rem;
+      font-size: 0.875rem;
+      color: #111827;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+    }
+    .chat-input:focus {
+      background: #fff;
+      border-color: rgba(241,90,36,0.35);
+      box-shadow: 0 0 0 3px rgba(241,90,36,0.08);
+    }
+    .chat-input:disabled { opacity: 0.5; }
+
+    .btn-send {
+      position: absolute;
+      right: 6px; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px;
+      background: #F15A24;
+      border-radius: 14px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(241,90,36,0.3);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-send:hover  { background: #d44d1c; }
+    .btn-send:active { transform: translateY(-50%) scale(0.9); }
+    .btn-send:disabled { background: #d1d5db; box-shadow: none; cursor: not-allowed; }
+
+    .fab {
+      width: 72px; height: 72px;
+      background: #F15A24;
+      border-radius: 24px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 30px rgba(241,90,36,0.35);
+      transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.3s;
+      position: relative;
+    }
+    .fab:hover  { transform: scale(1.1) rotate(-3deg); box-shadow: 0 12px 40px rgba(241,90,36,0.45); }
+    .fab:active { transform: scale(0.95); }
+
+    .fab-badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      width: 18px; height: 18px;
+      background: #111;
+      border: 3px solid #f3f4f6;
+      border-radius: 50%;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-4px); }
     }
   `],
   template: `
-    <div class="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-5">
-      
-      <!-- Panel Expansivo de Chat -->
-      <div 
-        class="glass-panel rounded-[24px] overflow-hidden flex flex-col transform origin-bottom-right shadow-2xl max-h-[calc(100vh-100px)]"
-        [ngClass]="[
-           isOpen() ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 translate-y-10 pointer-events-none',
-           isExpanded() ? 'w-[680px] h-[780px]' : 'w-[380px] h-[580px]'
-        ]"
+    <div style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:20px">
+
+      <!-- ░░ Panel de Chat ░░ -->
+      <div
+        class="chat-panel"
+        [style.width]="isExpanded() ? '680px' : '380px'"
+        [style.height]="isExpanded() ? '760px' : '560px'"
+        [style.maxHeight]="'calc(100vh - 100px)'"
+        [style.opacity]="isOpen() ? '1' : '0'"
+        [style.transform]="isOpen() ? 'scale(1) translateY(0)' : 'scale(0.88) translateY(20px)'"
+        [style.pointerEvents]="isOpen() ? 'all' : 'none'"
       >
-          <!-- Chat Header Dinámico -->
-          <div class="chat-header text-white p-5 flex justify-between items-center shadow-lg relative overflow-hidden">
-            <!-- Brillo de fondo sutil -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-wm-orange opacity-10 blur-3xl rounded-full"></div>
-            
-            <div class="flex items-center gap-3.5 z-10">
-              <div class="w-10 h-10 rounded-xl bg-wm-orange flex items-center justify-center shadow-inner overflow-hidden">
-                <span class="text-white font-black text-xl tracking-tighter">RM3</span>
+        <!-- Header -->
+        <div class="chat-header text-white p-4 flex justify-between items-center relative" style="overflow:hidden">
+          <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:#F15A24;opacity:0.08;filter:blur(30px);border-radius:50%"></div>
+
+          <div style="display:flex;align-items:center;gap:12px;z-index:1">
+            <div style="width:40px;height:40px;background:#F15A24;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <span style="color:white;font-weight:900;font-size:1rem;letter-spacing:-1px">RM3</span>
+            </div>
+            <div>
+              <div style="font-weight:700;font-size:0.95rem;line-height:1.2">{{ assistantName }}</div>
+              <div style="font-size:0.68rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.08em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px">{{ tenantName }}</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:8px;z-index:1">
+            <button class="btn-header" (click)="toggleExpand($event)" [title]="isExpanded() ? 'Reducir' : 'Expandir'">
+              <svg *ngIf="!isExpanded()" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+              <svg *ngIf="isExpanded()"  width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 9L4 4m0 0h5m-5 0v5m16-5l-5 5m5-5v5m0 0h-5M9 15l-5 5m0 0h5m-5 0v-5m16 5l-5-5m5 5v-5m0 5h-5"/></svg>
+            </button>
+            <button class="btn-header" (click)="resetSession()" title="Nueva conversación">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+            </button>
+            <button class="btn-header" (click)="toggleChat()">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mensajes -->
+        <div #chatMessages class="chat-messages">
+
+          <div class="self-start animate-in" style="max-width:90%">
+            <div class="bubble-ai" style="padding:14px 16px;font-size:0.875rem">
+              ¡Hola! Soy tu asistente de RM3. Estoy conectado a tu base de conocimientos para resolver dudas sobre acreditación.
+            </div>
+          </div>
+
+          <ng-container *ngFor="let msg of messages()">
+            <div [ngClass]="msg.sender === 'ai' ? 'self-start animate-in' : 'self-end animate-in'"
+                 [style.maxWidth]="msg.sender === 'ai' ? '92%' : '86%'"
+                 [style.alignSelf]="msg.sender === 'ai' ? 'flex-start' : 'flex-end'">
+
+              <div class="bubble-wrap" style="position:relative">
+                <div [ngClass]="msg.sender === 'ai' ? 'bubble-ai' : 'bubble-user'"
+                     style="padding:12px 15px;font-size:0.875rem"
+                     [innerHTML]="msg.html">
+                </div>
+                <button *ngIf="msg.sender === 'ai'" class="btn-copy" (click)="copyToClipboard(msg.raw)">
+                  <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                </button>
               </div>
-              <div class="flex flex-col">
-                <div class="font-bold text-base tracking-tight leading-none mb-1">{{ assistantName }}</div>
-                <div class="text-[11px] text-gray-400 font-medium uppercase tracking-widest">{{ tenantName }}</div>
+
+              <div *ngIf="msg.sender === 'ai' && msg.sources?.length" style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px">
+                <span *ngFor="let src of msg.sources" class="source-tag">📄 {{ src }}</span>
               </div>
             </div>
+          </ng-container>
 
-            <div class="flex items-center gap-2.5 z-10">
-              <!-- Botón Expandir -->
-              <button 
-                (click)="toggleExpand($event)"
-                class="btn-action"
-                [attr.title]="isExpanded() ? 'Reducir tamaño' : 'Expandir vista'"
-              >
-                <svg *ngIf="!isExpanded()" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                </svg>
-                <svg *ngIf="isExpanded()" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12m-6 3l-3-3m0 0l3-3m-3 3h12M9 6l3 3m0 0l-3 3m3-3H3" />
-                </svg>
-              </button>
-
-              <button 
-                (click)="resetSession()"
-                title="Nueva conversación"
-                class="btn-action"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
-                </svg>
-              </button>
-              <button (click)="toggleChat()" class="btn-action">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+          <!-- Typing indicator -->
+          <div *ngIf="isLoading()" style="align-self:flex-start;margin-top:4px">
+            <div style="display:inline-flex;gap:5px;padding:10px 16px;background:rgba(243,244,246,0.9);border-radius:30px;align-items:center">
+              <div class="typing-dot"></div>
+              <div class="typing-dot d1"></div>
+              <div class="typing-dot d2"></div>
             </div>
           </div>
-          
-          <!-- Historial de Conversación -->
-          <div class="flex-1 p-5 overflow-y-auto flex flex-col gap-5 scroll-smooth custom-scrollbar">
-             <!-- Mensaje de Bienvenida -->
-             <div class="self-start max-w-[88%] animate-in">
-                <div class="bubble-ai text-gray-800 text-sm p-4 shadow-sm leading-relaxed">
-                  ¡Hola! Soy tu asistente inteligente de RM3. Estoy conectado a tu base de conocimientos corporativa para resolver tus dudas sobre acreditación.
-                </div>
-             </div>
+        </div>
 
-             <!-- Array de Burbujas Dinámicas -->
-             <ng-container *ngFor="let msg of messages()">
-                <div [ngClass]="msg.sender === 'ai' ? 'self-start max-w-[92%] animate-in group' : 'self-end max-w-[88%] animate-in'">
-                  <!-- Burbuja Principal -->
-                  <div class="relative">
-                    <div [ngClass]="msg.sender === 'ai' 
-                        ? 'bubble-ai text-gray-800 p-4 shadow-sm leading-relaxed text-sm' 
-                        : 'bubble-user text-white p-4 shadow-lg text-sm font-medium tracking-tight'">
-                      {{ msg.text }}
-                    </div>
-
-                    <!-- Botón de Copia sutil (solo en IA) -->
-                    <button 
-                      *ngIf="msg.sender === 'ai'"
-                      (click)="copyToClipboard(msg.text)"
-                      class="btn-copy absolute -right-8 top-1 p-1.5 bg-white/60 hover:bg-white text-gray-400 hover:text-wm-orange rounded-md shadow-sm border border-black/5"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  <!-- Fuentes del mensaje IA -->
-                  <div *ngIf="msg.sender === 'ai' && msg.sources && msg.sources.length > 0" class="mt-2 flex flex-wrap gap-1 slide-in opacity-80 hover:opacity-100 transition-opacity">
-                    <div *ngFor="let src of msg.sources" class="source-tag">
-                      {{ src }}
-                    </div>
-                  </div>
-                </div>
-             </ng-container>
-
-             <!-- Indicador de Cargando -->
-             <div *ngIf="isLoading()" class="self-start mt-2 ml-1">
-                <div class="flex gap-1.5 p-3 rounded-full bg-gray-100/80 items-center px-4">
-                  <div class="typing-dot"></div>
-                  <div class="typing-dot delay-1"></div>
-                  <div class="typing-dot delay-2"></div>
-                </div>
-             </div>
+        <!-- Input Footer -->
+        <div class="chat-footer">
+          <div style="position:relative">
+            <input
+              #queryInput
+              class="chat-input"
+              type="text"
+              [(ngModel)]="currentPrompt"
+              (keydown.enter)="sendQuery()"
+              [disabled]="isLoading()"
+              placeholder="Escribe tu consulta aquí..."
+            >
+            <button class="btn-send" (click)="sendQuery()" [disabled]="isLoading() || !currentPrompt.trim()">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="transform:rotate(-15deg)">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+              </svg>
+            </button>
           </div>
-
-          <!-- Input Footer -->
-          <div class="p-5 bg-white/50 border-t border-gray-100 backdrop-blur-sm">
-            <div class="relative flex items-center">
-              <input 
-                type="text" 
-                [(ngModel)]="currentPrompt"
-                (keydown.enter)="sendQuery()"
-                [disabled]="isLoading()"
-                placeholder="Escribe tu consulta aquí..." 
-                class="w-full bg-gray-100/80 border-2 border-transparent rounded-[18px] py-3.5 pl-5 pr-14 text-sm text-gray-900 focus:bg-white focus:border-wm-orange/30 focus:shadow-lg focus:outline-none transition-all disabled:opacity-50 placeholder:text-gray-400 font-medium"
-              >
-              <button 
-                (click)="sendQuery()"
-                [disabled]="isLoading() || !currentPrompt.trim()"
-                class="absolute right-1.5 w-11 h-11 bg-wm-orange shadow-[0_4px_12px_rgba(241,90,36,0.3)] disabled:bg-gray-300 disabled:shadow-none hover:bg-orange-600 rounded-2xl flex items-center justify-center text-white transition-all cursor-pointer active:scale-90">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform -rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
-              </button>
-            </div>
-            <div class="text-center mt-3 text-[10px] text-gray-400 font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-              <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-              RM3 RAG ENGINE • SECURITY READY
-            </div>
+          <div style="text-align:center;margin-top:10px;font-size:0.62rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;justify-content:center;gap:6px">
+            <span style="width:6px;height:6px;background:#22c55e;border-radius:50%;animation:pulse 2s infinite"></span>
+            RM3 RAG Engine · Powered by Gemini
           </div>
-
+        </div>
       </div>
 
-      <!-- Botón Flotante Invocador -->
-      <button 
-        (click)="toggleChat()"
-        class="w-20 h-20 bg-wm-orange rounded-[28px] shadow-2xl flex items-center justify-center text-white hover:scale-110 hover:-rotate-3 active:scale-95 transition-all duration-300 group cursor-pointer relative"
-        [ngClass]="{'ring-8 ring-wm-orange/10': !isOpen()}"
-      >
-        <svg *ngIf="!isOpen()" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-        </svg>
-
-        <svg *ngIf="isOpen()" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        
-        <!-- Badge de notificación sutil -->
-        <div *ngIf="!isOpen()" class="absolute -top-1 -right-1 w-6 h-6 bg-wm-superblack border-4 border-gray-100 rounded-full animate-bounce"></div>
+      <!-- ░░ FAB ░░ -->
+      <button class="fab" (click)="toggleChat()">
+        <svg *ngIf="!isOpen()" width="36" height="36" fill="none" stroke="white" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+        <svg *ngIf="isOpen()"  width="36" height="36" fill="none" stroke="white" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        <div *ngIf="!isOpen()" class="fab-badge"></div>
       </button>
 
     </div>
   `
 })
 export class App {
-  // Configuración Externa
-  @Input('api-key') apiKey = '';
-  @Input('tenant') tenantName = '';
+  @Input('api-key')        apiKey        = '';
+  @Input('tenant')         tenantName    = '';
   @Input('assistant-name') assistantName = 'Asistente Digital';
- 
-  // Reactividad UI
-  isOpen = signal(false);
+
+  isOpen     = signal(false);
   isExpanded = signal(false);
-  isLoading = signal(false);
-  messages = signal<UiMessage[]>([]);
+  isLoading  = signal(false);
+  messages   = signal<UiMessage[]>([]);
   currentPrompt = '';
 
-  // Gestión de Sesión — persiste durante la vida del widget en la página
+  @ViewChild('chatMessages') private chatMessagesRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('queryInput')   private queryInputRef!:   ElementRef<HTMLInputElement>;
+
+  private chatSvc   = inject(ChatService);
+  private sanitizer = inject(DomSanitizer);
   private sessionId = signal<string | undefined>(undefined);
 
-  private chatSvc = inject(ChatService);
+  constructor() {
+    // Auto-scroll confiable: se ejecuta DESPUÉS de que Angular pinta los nuevos mensajes.
+    // El doble requestAnimationFrame garantiza que el DOM esté completamente pintado.
+    effect(() => {
+      this.messages();    // suscripción al signal
+      this.isLoading();   // también cuando aparece/desaparece el typing indicator
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const el = this.chatMessagesRef?.nativeElement;
+          if (el) el.scrollTop = el.scrollHeight;
+        });
+      });
+    });
+  }
 
   toggleChat() {
     this.isOpen.set(!this.isOpen());
+    if (this.isOpen()) this.focusInput(150);
   }
 
-  toggleExpand(event: Event) {
-    event.stopPropagation();
+  toggleExpand(e: Event) {
+    e.stopPropagation();
     this.isExpanded.set(!this.isExpanded());
   }
 
   copyToClipboard(text: string) {
-    navigator.clipboard.writeText(text);
-    // TODO: Mostrar algún mini-toast si es necesario
+    navigator.clipboard.writeText(text).catch(() => {});
   }
 
-  /** Resetea la conversación iniciando una sesión nueva en el próximo request */
   resetSession() {
     this.sessionId.set(undefined);
     this.messages.set([]);
     this.currentPrompt = '';
+    this.focusInput(50);
   }
- 
-  sendQuery() {
-    if (!this.currentPrompt.trim()) return;
 
-    // 1. Mostrar burbuja del usuario inmediatamente e indicar cargando
-    const userText = this.currentPrompt.trim();
-    this.messages.update(msgs => [...msgs, { text: userText, sender: 'user' }]);
+  sendQuery() {
+    const text = this.currentPrompt.trim();
+    if (!text || this.isLoading()) return;
+
+    this.messages.update(m => [...m, { html: this.renderText(text, false), raw: text, sender: 'user' }]);
     this.currentPrompt = '';
     this.isLoading.set(true);
 
-    // 2. Disparar Petición pasando el sessionId actual (undefined si es la primera)
-    this.chatSvc.enviarBurbuja(userText, this.apiKey, this.sessionId()).subscribe({
-      next: (response) => {
-        // 3. Guardar el session_id retornado por el backend para continuidad
-        this.sessionId.set(response.session_id);
-
-        // 4. Agregar respuesta del asistente con sus fuentes al historial visual
-        this.messages.update(msgs => [
-          ...msgs,
-          { text: response.respuesta, sender: 'ai', sources: response.fuentes },
-        ]);
+    this.chatSvc.enviarBurbuja(text, this.apiKey, this.sessionId()).subscribe({
+      next: (res) => {
+        this.sessionId.set(res.session_id);
+        this.messages.update(m => [...m, {
+          html:    this.renderText(res.respuesta, true),
+          raw:     res.respuesta,
+          sender:  'ai',
+          sources: res.fuentes
+        }]);
         this.isLoading.set(false);
+        this.focusInput(50);
       },
       error: (err) => {
-        console.error('API Error', err);
-        const errMsg = err.status === 401
-          ? 'Clave de seguridad Tenant_ID inválida o no provista en el widget.'
-          : 'Ocurrió un error conectando a las bases de conocimiento locales.';
-        this.messages.update(msgs => [...msgs, { text: errMsg, sender: 'ai' }]);
+        const msg = err.status === 401
+          ? 'Clave de seguridad inválida o no provista.'
+          : 'Error al conectar con el servidor RAG.';
+        this.messages.update(m => [...m, { html: this.renderText(msg, true), raw: msg, sender: 'ai' }]);
         this.isLoading.set(false);
+        this.focusInput(50);
       }
     });
+  }
+
+  /**
+   * Convierte texto plano (con markdown básico) a SafeHtml.
+   * - Nunca usa `*text*` → em (evita romper listas con asterisco)
+   * - `**texto**` → <strong>
+   * - `* ítem` o `- ítem` al inicio de línea → "• ítem"
+   * - backticks → <code>
+   * - \n → <br>
+   */
+  private renderText(raw: string, isAi: boolean): SafeHtml {
+    if (!raw) return this.sanitizer.bypassSecurityTrustHtml('');
+
+    // 1. Escapar HTML primero para evitar XSS
+    let s = raw
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    if (!isAi) {
+      // Mensaje del usuario: preservar saltos de línea, sin formato extra
+      return this.sanitizer.bypassSecurityTrustHtml(s.replace(/\n/g, '<br>'));
+    }
+
+    // 2. Bold: **texto** (debe preceder al manejo de asteriscos simples)
+    s = s.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
+
+    // 3. Bullets: líneas que empiezan con "* " o "- " → "• "
+    //    Funciona tanto si están al inicio de línea como tras \n
+    s = s.replace(/(^|\n)\*\s+/g, '$1• ');
+    s = s.replace(/(^|\n)-\s+/g,  '$1• ');
+
+    // 4. Inline code
+    s = s.replace(/`([^`\n]+)`/g,
+      '<code>$1</code>');
+
+    // 5. Saltos de línea
+    s = s.replace(/\n/g, '<br>');
+
+    return this.sanitizer.bypassSecurityTrustHtml(s);
+  }
+
+  private focusInput(delayMs = 80): void {
+    setTimeout(() => {
+      this.queryInputRef?.nativeElement?.focus();
+    }, delayMs);
   }
 }

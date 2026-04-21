@@ -1,16 +1,105 @@
 ================ DIAGNÓSTICO RAG ================
-FECHA Y HORA : 13/4/2026, 16:48:21
+FECHA Y HORA : 21/4/2026, 13:18:58
 TENANT ID    : 8f890ac8-b292-428a-bc0c-2d437bdb4091
-SESSION ID   : 277d9b67-bf41-4950-b6bb-6a97d4fe88c8
+SESSION ID   : b60ec0d9-6669-4708-a45d-6a3023343802
 MODO         : RAG + Historial
-ARCHIVOS     : Este o múltiples documentos en Base de Datos
-HISTORIAL    : 0 mensajes previos cargados
+ARCHIVOS     : TECHINT_ PREGUNTAS FRECUENTES v1.pdf
+HISTORIAL    : 2 mensajes previos cargados
 -------------------------------------------------
-PREGUNTA     : qué pasa si cambia el apellido del trabajador
+PREGUNTA     : Qué mandante es este
 CHUNKS USADOS: 5
 =================================================
 
-[CHUNK 1] DISTANCIA VECTORIAL: 0.1930
+[CHUNK 1] DISTANCIA VECTORIAL: 0.2425
+(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
+EXTRACTO REAL ENVIADO A LA IA: 
+", la plataforma no permitirá la carga del documento mencionado, en 
+este caso si no es un requisito, puede subir una hoja que indique que no aplica. 
+32. Como finiquitar en workmate sin 
+finiquito. 
+Para finiquitar en la plataforma Workmate sin tener el finiquito, puedes seguir 
+estos pasos: 
+Declaración Jurada: 
+ 
+En caso de no tener el finiquito, puedes presentar una declaración que indique la 
+finalización de la relación laboral. Este documento debe ser firmado  por ambas 
+partes. 
+Acceder a la Plataforma: 
+ 
+Ingresa a la plataforma Workmate con tu usuario y contraseña. 
+Buscar al Trabajador: 
+ 
+Utiliza la opción de búsqueda para encontrar al trabajador que deseas finiquitar. 
+Puedes buscar por Rut, pasaporte, nombre del empleado, o número de contrato. 
+Editar Información del Contrato: 
+
+5 
+ 
+ 
+ 
+Manual y requisitos documentales Servicio 
+Acreditación Techint 
+Revisión: 01 
+Fecha: 26-02-2025 
+Página 5 de 10 
+ 
+33. Cuál es el plazo de revision de 
+acreditaciones 
+El plazo de revisión de las acreditaciones en el Proyecto Suministro de Agua 
+Desalinizada Distrito Norte (SADDN) es de 48 horas. Este plazo aplica tanto para 
+la revisión de la documentación cargada como para la validación de la 
+acreditación por parte de los responsables designados en el proceso. 
+34. Con cuanto tiempo de anticipacion 
+se solicitan los pases 
+Los pases de visita deben solicitarse con al menos 48 horas de anticipación. Este 
+plazo es necesario para que se realicen las validaciones correspondientes y se 
+notifiquen a las áreas involucradas. 
+ 
+Aquí está el detalle del proceso de solicitud de pases de visita: 
+ 
+Solicitud de Pase de Visita: La empresa solicitante debe ingresar la solicitud en la 
+plataforma Workmate con al menos 48 horas de anticipación. 
+Selección del Tipo de Pase: Seleccionar en la plataforma Workmate el tipo de 
+pase (reunión o técnica). 
+Revisión y Aprobación: La solicitud será revisada y aprobada por el área de 
+Relaciones Laborales de TECHINT y, posteriormente, por la Gerencia de Techint. 
+Notificación: Una vez aprobada, se notificará a las áreas correspondientes y se 
+autorizará el ingreso al proyecto SADDN. 
+Es importante cumplir con este plazo para asegurar que todas las validaciones y 
+notificaciones se realicen de manera adecuada. 
+35. Cuál es el certificado de cabina para 
+maquinarias 
+El certificado de cabina para maquinarias es el de normas Rops y Fops. 
+36. Que es el certificado de frenado El certificado de frenado es un documento que indica la capacidad de frenado 
+que tiene el vehículo, este debe ser de PRT. 
+37. cual check list se debe subir para 
+acreditar vehículos o maquinarias 
+Para acreditar vehículos o maquinarias en el Proyecto Suministro de Agua 
+Desalinizada Distrito Norte (SADDN) deben adjuntar Check List emitido por 
+Techint. 
+38. Como obtengo mi contraseña? Para obtener tu contraseña en la plataforma de acreditación debe solicitar a 
+Pascual Cortes o Eduardo Oyarzua Solicitud de Usuario Nuevo: 
+Una vez que la solicitud de usuario nuevo sea procesada, recibirás un correo 
+electrónico con los datos de acceso generados por el sistema. Estos datos 
+incluyen tu usuario y contraseña. 
+Ingreso al Sistema: 
+Utiliza el usuario y la contraseña proporcionados en el correo electrónico para 
+ingresar en los campos correspondientes en la página de inicio de sesión. 
+Finalmente, presiona la opción “Entrar” para acceder al sistema. 
+Si no has recibido el correo electrónico con tus datos de acceso o tienes 
+problemas para ingresar, te recomiendo contactar al soporte técnico de la 
+plataforma para obtener asistencia adicional. 
+39. No puedo acceder al sistema Si no puedes acceder al sistema, aquí hay algunos pasos que puedes seguir para 
+resolver el problema: 
+ 
+Verificar Credenciales: 
+ 
+Asegúrate de que estás ingresando correctamente tu usuario y contraseña. 
+Verifica que no haya errores tipográficos y que las mayúsculas y minúsculas estén 
+correctamente ingresadas. 
+Restablecer Contraseña:"
+
+[CHUNK 2] DISTANCIA VECTORIAL: 0.2488
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
 "s o maquinarias debe ser  
@@ -102,35 +191,31 @@ Utiliza la opción de búsqueda para encontrar al trabajador que deseas finiquit
 Puedes buscar por Rut, pasaporte, nombre del empleado, o número de contrato. 
 Editar Información del Contrato:"
 
-[CHUNK 2] DISTANCIA VECTORIAL: 0.1980
+[CHUNK 3] DISTANCIA VECTORIAL: 0.2503
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"35 8736 
+"ción con tu usuario y contraseña. 
+Buscar al Trabajador: 
  
-19.Qué sucede si una persona intenta 
-ingresar a una zona no autorizada según 
-el sistema? 
-El sistema no se lo permitirá.  
-20. Mi solicitud se encuentra en curso, 
-¿qué significa? 
+Dirígete al menú "Administrar Personal". 
+Utiliza el buscador para encontrar al trabajador ingresando su Rut o Pasaporte. 
+Editar Información del Trabajador: 
  
-Significa que se encuentra en edición y no ha enviado solicitud a validar. Debe 
-editar personal. 
-Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver 
-ficha/Presionar Botón Editar/completar datos/presionar botón “guardar 
-información” / cargar documentación/Finalizar 
+Una vez encontrado el trabajador, selecciona la opción "Editar" en la ficha del 
+personal. 
+El sistema desplegará un formulario que se debe completar en tres pasos. 
+Actualizar Información Contractual: 
  
+En el segundo paso del formulario, actualiza los datos del contrato, incluyendo el 
+nuevo número de contrato. 
+Puedes agregar observaciones si es necesario. 
+Asegúrate de presionar la opción "Actualizar información" antes de continuar con 
+el siguiente paso. 
+Cargar el Anexo del Contrato: 
  
-21. Como proceder si se requiere 
-prioridad de revisión del personal? 
- 
-Las acreditaciones son realizadas de acuerdo al orden   de llegada, si requieren 
-prioridad, la deben solicitar a través de correo a Pascual Cortes o Eduardo 
-Oyarzua a los correos eoyarzua@techint.com; pcortesmonardez@techint.com 
- 
- 
+Si es necesario modificar la documentación contractual, el sistema desplegará un 
 
-3 
+9 
  
  
  
@@ -138,84 +223,62 @@ Manual y requisitos documentales Servicio
 Acreditación Techint 
 Revisión: 01 
 Fecha: 26-02-2025 
-Página 3 de 10 
+Página 9 de 10 
+ 
+formulario adicional. 
+Ingresa la fecha de inicio y término del anexo de contrato, si corresponde. 
+Selecciona la opción "Agregar" para elegir el documento del anexo de contrato 
+que deseas cargar. 
+Carga el documento en formato PDF. 
+Guardar y Enviar la Solicitud: 
+ 
+Una vez cargada la documentación, selecciona la opción "Guardar" para registrar 
+la información ingresada. 
+El sistema mostrará una ventana emergente preguntando si deseas finalizar la 
+actualización de datos. Selecciona "Finalizar" si has completado el proceso. 
+Esperar la Revisión: 
+ 
+La solicitud de actualización será enviada automáticamente para su revisión. 
+Posteriormente, se informará el resultado de la actualización (pendiente, 
+rechazada o aprobada). 
+Consideraciones: 
+Asegúrate de que todos los documentos estén en formato PDF y que las 
+imágenes sean en formato JPG o JPEG. 
+Si el documento requiere fecha de inicio y término, estas deben ser ingresadas 
+antes de cargar el documento. 
+Siguiendo estos pasos, podrás subir el anexo de contrato por modificación del 
+número de contrato del proyecto para un trabajador ya acreditado 
+43. Hay capacitación de plataforma? 
+ 
+Sí, hay capacitación disponible para el uso de la plataforma de acreditación de 
+Techint. A continuación, se detalla la información relevante sobre la capacitación: 
  
  
-22. Como gestionar el proceso de 
-impresión de credenciales de acceso y 
-licencias de conducir? 
+Información Adicional: 
+Contacto para Coordinación: Para coordinar la capacitación, puedes contactar a 
+los responsables del área de acreditación o a la persona encargada de la 
+capacitación en Techint. 
+Procedimiento: 
+Coordinar la Capacitación: 
  
-Se debe contactar con el área de impresión de 
-credenciales de Techint o con Pascual Cortes o Eduardo 
-Oyarzua a los correos eoyarzua@techint.com ; 
-pcortesmonardez@techint.com para solicitar 
-impresión y retiro. 
+Contacta a la persona encargada de la capacitación para programar tu asistencia 
+en uno de los días disponibles. 
+Asegúrate de confirmar tu participación con antelación. 
+Asistir a la Capacitación: 
  
- 
-23. Qué alertas genera el sistema si una 
-persona supera el límite de horas 
-laborales permitidas? 
- 
- 
-El sistema no menciona específicamente alertas generadas si una persona supera 
-el límite de horas laborales permitidas. La documentación proporcionada no 
-incluye detalles sobre la gestión de alertas relacionadas con el límite de horas 
-laborales. Si el trabajador tiene más de 44 horas según Ley 21561, tendría que 
-adjuntar anexo de reducción de jornada laboral. 
-24.Que debo hacer si me equivoco al 
-ingresar el número del acuerdo 
-comercial para acreditar empresa y 
-necesito editarlo, ¿cómo lo hago? 
- 
-Para editar la información de un contrato, debes seguir estos pasos: 
-Se debe solicitar a soporte: techintsoporte@workmate.cl que edite el número de 
-contrato comercial. 
-  
- 
-25. No puedo actualizar numero de 
-contrato? 
-Para actualizar el número de contrato en la plataforma de acreditación, sigue 
-estos pasos: 
-Enviar correo a soporte solicitando edición del  número de contrato a 
-techintsoporte@workmate.cl 
-26. Me falta un documento, como debo 
-hacerlo para que realicen una excepción 
-Para solicitar una excepción debido a la falta de un documento, debe hablar 
-directamente con Relaciones Laborales de Techint, ya sea Pascual Cortes o 
-Eduardo Oyarzua. 
-27.Pases de visita sirven para realizar 
-inspecciones 
-No, los pases de visita no pueden ser utilizados para realizar inspecciones. 
-28. Curso manejo a la defensiva, sirve 
-certificado de una otec? 
-No, el certificado de un curso de manejo a la defensiva debe ser de mutualidad. 
-29. Que requisitos debe cumplir el 
-certificado de competencias para 
-conducir vehículos o maquinarias 
-El certificado de competencias para conducir vehículos o maquinarias debe ser  
-validado por  
-Chile Valora (Norma 2728)  
-debe estar vigente y debe ser del vehiculo que va a conducir el trabajador. 
-30. Que debo realizar para editar 
-acreditación y cambiar fechas de 
-documentos 
-Para editar una acreditación y cambiar las fechas de los documentos, debes 
-seguir estos pasos: 
- 
-Acceder a la Plataforma: 
- 
-Ingresa a la plataforma de acreditación con tu usuario y contraseña. 
-Buscar la Solicitud: 
- 
-Utiliza la opción de búsqueda para encontrar la solicitud de acreditación que 
-deseas editar. Puedes buscar por Rut, pasaporte, nombre del empleado, o 
-número de contrato. 
-Editar la Solicitud: 
- 
-Selecciona la opción "Editar" en la ficha del personal o del contrato seleccionado. 
-Esto desplegará un formulario que se debe completar en varios pasos."
+Asiste a la capacitación en la fecha y hora programadas. 
+La capacitación cubrirá el uso de la plataforma, incluyendo la carga de 
+documentación, la gestión de contratos y la acreditación de personal. 
+44. Cuál es el plazo de revisión? El plazo de revisión para la acreditación de trabajadores en la plataforma de 
+Techint es de 48 horas. 
+45. se puede cargar comprobante se 
+solicitud de cedula de identidad, en 
+reemplazo de la cedula, que fechas debo 
+ingresar 
+Si se puede, en fechas de cedula e identidad debe ingresar la fecha de entrega 
+que indica el documento"
 
-[CHUNK 3] DISTANCIA VECTORIAL: 0.1982
+[CHUNK 4] DISTANCIA VECTORIAL: 0.2503
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
 "omo puedo descargar resumen de los 
@@ -319,31 +382,10 @@ Las acreditaciones son realizadas de acuerdo al orden   de llegada, si requieren
 prioridad, la deben solicitar a través de correo a Pascual Cortes o Eduardo 
 Oyarzua a los correos eoyarzua@techint.com; pcortesmonardez@techint.com"
 
-[CHUNK 4] DISTANCIA VECTORIAL: 0.2038
+[CHUNK 5] DISTANCIA VECTORIAL: 0.2527
 (Mientras más cerca a 0.000, más perfecta es la similitud matemática)
 EXTRACTO REAL ENVIADO A LA IA: 
-"ción con tu usuario y contraseña. 
-Buscar al Trabajador: 
- 
-Dirígete al menú "Administrar Personal". 
-Utiliza el buscador para encontrar al trabajador ingresando su Rut o Pasaporte. 
-Editar Información del Trabajador: 
- 
-Una vez encontrado el trabajador, selecciona la opción "Editar" en la ficha del 
-personal. 
-El sistema desplegará un formulario que se debe completar en tres pasos. 
-Actualizar Información Contractual: 
- 
-En el segundo paso del formulario, actualiza los datos del contrato, incluyendo el 
-nuevo número de contrato. 
-Puedes agregar observaciones si es necesario. 
-Asegúrate de presionar la opción "Actualizar información" antes de continuar con 
-el siguiente paso. 
-Cargar el Anexo del Contrato: 
- 
-Si es necesario modificar la documentación contractual, el sistema desplegará un 
-
-9 
+"1 
  
  
  
@@ -351,147 +393,55 @@ Manual y requisitos documentales Servicio
 Acreditación Techint 
 Revisión: 01 
 Fecha: 26-02-2025 
-Página 9 de 10 
- 
-formulario adicional. 
-Ingresa la fecha de inicio y término del anexo de contrato, si corresponde. 
-Selecciona la opción "Agregar" para elegir el documento del anexo de contrato 
-que deseas cargar. 
-Carga el documento en formato PDF. 
-Guardar y Enviar la Solicitud: 
- 
-Una vez cargada la documentación, selecciona la opción "Guardar" para registrar 
-la información ingresada. 
-El sistema mostrará una ventana emergente preguntando si deseas finalizar la 
-actualización de datos. Selecciona "Finalizar" si has completado el proceso. 
-Esperar la Revisión: 
- 
-La solicitud de actualización será enviada automáticamente para su revisión. 
-Posteriormente, se informará el resultado de la actualización (pendiente, 
-rechazada o aprobada). 
-Consideraciones: 
-Asegúrate de que todos los documentos estén en formato PDF y que las 
-imágenes sean en formato JPG o JPEG. 
-Si el documento requiere fecha de inicio y término, estas deben ser ingresadas 
-antes de cargar el documento. 
-Siguiendo estos pasos, podrás subir el anexo de contrato por modificación del 
-número de contrato del proyecto para un trabajador ya acreditado 
-43. Hay capacitación de plataforma? 
- 
-Sí, hay capacitación disponible para el uso de la plataforma de acreditación de 
-Techint. A continuación, se detalla la información relevante sobre la capacitación: 
+Página 1 de 10 
  
  
-Información Adicional: 
-Contacto para Coordinación: Para coordinar la capacitación, puedes contactar a 
-los responsables del área de acreditación o a la persona encargada de la 
-capacitación en Techint. 
-Procedimiento: 
-Coordinar la Capacitación: 
- 
-Contacta a la persona encargada de la capacitación para programar tu asistencia 
-en uno de los días disponibles. 
-Asegúrate de confirmar tu participación con antelación. 
-Asistir a la Capacitación: 
- 
-Asiste a la capacitación en la fecha y hora programadas. 
-La capacitación cubrirá el uso de la plataforma, incluyendo la carga de 
-documentación, la gestión de contratos y la acreditación de personal. 
-44. Cuál es el plazo de revisión? El plazo de revisión para la acreditación de trabajadores en la plataforma de 
-Techint es de 48 horas. 
-45. se puede cargar comprobante se 
-solicitud de cedula de identidad, en 
-reemplazo de la cedula, que fechas debo 
-ingresar 
-Si se puede, en fechas de cedula e identidad debe ingresar la fecha de entrega 
-que indica el documento"
-
-[CHUNK 5] DISTANCIA VECTORIAL: 0.2065
-(Mientras más cerca a 0.000, más perfecta es la similitud matemática)
-EXTRACTO REAL ENVIADO A LA IA: 
-", la plataforma no permitirá la carga del documento mencionado, en 
-este caso si no es un requisito, puede subir una hoja que indique que no aplica. 
-32. Como finiquitar en workmate sin 
-finiquito. 
-Para finiquitar en la plataforma Workmate sin tener el finiquito, puedes seguir 
-estos pasos: 
-Declaración Jurada: 
- 
-En caso de no tener el finiquito, puedes presentar una declaración que indique la 
-finalización de la relación laboral. Este documento debe ser firmado  por ambas 
-partes. 
-Acceder a la Plataforma: 
- 
-Ingresa a la plataforma Workmate con tu usuario y contraseña. 
-Buscar al Trabajador: 
- 
-Utiliza la opción de búsqueda para encontrar al trabajador que deseas finiquitar. 
-Puedes buscar por Rut, pasaporte, nombre del empleado, o número de contrato. 
-Editar Información del Contrato: 
-
-5 
+PREGUNTAS FRECUENTES PROYECTO TECHINT 
  
  
  
-Manual y requisitos documentales Servicio 
-Acreditación Techint 
-Revisión: 01 
-Fecha: 26-02-2025 
-Página 5 de 10 
+Preguntas  Respuestas 
+1.Cómo desvincular a un trabajador? Debe ingresar Acreditación personal/administrar personal/ingresar rut/ver 
+ficha/Presionar botón Finiquitar/completar datos/Finalizar  
+2. ¿Cómo Editar a un trabajador? 
  
-33. Cuál es el plazo de revision de 
-acreditaciones 
-El plazo de revisión de las acreditaciones en el Proyecto Suministro de Agua 
-Desalinizada Distrito Norte (SADDN) es de 48 horas. Este plazo aplica tanto para 
-la revisión de la documentación cargada como para la validación de la 
-acreditación por parte de los responsables designados en el proceso. 
-34. Con cuanto tiempo de anticipacion 
-se solicitan los pases 
-Los pases de visita deben solicitarse con al menos 48 horas de anticipación. Este 
-plazo es necesario para que se realicen las validaciones correspondientes y se 
-notifiquen a las áreas involucradas. 
+Puede revisar en reportabilidad flexible personal o acceder al contrato y presionar 
+botón amarillo. 
+3.- Horarios de Atención y correos? Los horarios de atención son los siguientes: 
+● De lunes a viernes de 08:00 a 18:00 sábados, domingos y festivos de 
+09:00 a 19:00Los correos de contacto son: 
+● Administrador de Contrato: gabrielasilva@workmate.cl 
+● Encargada de Acreditación Analista de Lunes a Viernes 
+andreasalinas@workmate.cl  
+● Encargo de Acreditación fin de semana: analistatechint@workmate.cl 
+● Soporte técnico (plataforma):  techintsoporte@workmate.cl 
  
-Aquí está el detalle del proceso de solicitud de pases de visita: 
  
-Solicitud de Pase de Visita: La empresa solicitante debe ingresar la solicitud en la 
-plataforma Workmate con al menos 48 horas de anticipación. 
-Selección del Tipo de Pase: Seleccionar en la plataforma Workmate el tipo de 
-pase (reunión o técnica). 
-Revisión y Aprobación: La solicitud será revisada y aprobada por el área de 
-Relaciones Laborales de TECHINT y, posteriormente, por la Gerencia de Techint. 
-Notificación: Una vez aprobada, se notificará a las áreas correspondientes y se 
-autorizará el ingreso al proyecto SADDN. 
-Es importante cumplir con este plazo para asegurar que todas las validaciones y 
-notificaciones se realicen de manera adecuada. 
-35. Cuál es el certificado de cabina para 
-maquinarias 
-El certificado de cabina para maquinarias es el de normas Rops y Fops. 
-36. Que es el certificado de frenado El certificado de frenado es un documento que indica la capacidad de frenado 
-que tiene el vehículo, este debe ser de PRT. 
-37. cual check list se debe subir para 
-acreditar vehículos o maquinarias 
-Para acreditar vehículos o maquinarias en el Proyecto Suministro de Agua 
-Desalinizada Distrito Norte (SADDN) deben adjuntar Check List emitido por 
-Techint. 
-38. Como obtengo mi contraseña? Para obtener tu contraseña en la plataforma de acreditación debe solicitar a 
-Pascual Cortes o Eduardo Oyarzua Solicitud de Usuario Nuevo: 
-Una vez que la solicitud de usuario nuevo sea procesada, recibirás un correo 
-electrónico con los datos de acceso generados por el sistema. Estos datos 
-incluyen tu usuario y contraseña. 
-Ingreso al Sistema: 
-Utiliza el usuario y la contraseña proporcionados en el correo electrónico para 
-ingresar en los campos correspondientes en la página de inicio de sesión. 
-Finalmente, presiona la opción “Entrar” para acceder al sistema. 
-Si no has recibido el correo electrónico con tus datos de acceso o tienes 
-problemas para ingresar, te recomiendo contactar al soporte técnico de la 
-plataforma para obtener asistencia adicional. 
-39. No puedo acceder al sistema Si no puedes acceder al sistema, aquí hay algunos pasos que puedes seguir para 
-resolver el problema: 
+4. Si Edito un contrato se inhabilita a los 
+trabajadores? 
+Si, al estar en estado editado se inhabilitan los trabajadores hasta que 
+nuevamente quede en estado acreditado 
+5 ¿Cómo compruebo si mi trabajador 
+tiene acceso? 
  
-Verificar Credenciales: 
+Debe ingresar al módulo de gestión de acreditaciones/ buscar contrato o 
+empresa y luego ir al botón amarillo que indica personal. 
  
-Asegúrate de que estás ingresando correctamente tu usuario y contraseña. 
-Verifica que no haya errores tipográficos y que las mayúsculas y minúsculas estén 
-correctamente ingresadas. 
-Restablecer Contraseña:"
+ 
+6.Como puedo descargar resumen de los 
+trabajadores del sistema? 
+ 
+Debe ingresar a: Consulta flexible personal – completar los datos -seleccionar 
+campos – generar nuevo reporte – descargar archivo  
+8. Como finiquito a un trabajador ? Trabajadores figuran acreditados en sistema, para desvincular personal debe 
+dirigirse a ficha de cada uno de ellos a través del módulo administrar personal, 
+abrir solicitud correspondiente de acreditación y presionar botón rojo 
+FINIQUITAR, completar formulario y adjuntar documento. 
+9.No puedo acreditar a un trabajador 
+porque indica que se encuentra 
+acreditado en otra empresa? 
+ 
+Empresa anterior debe desvincular al trabajador, en caso que no lo 
+pueda hacer, contactar eoyarzua@techint.com ; 
+pcortesmonardez@techint.com enviando finiquito por correo"
 

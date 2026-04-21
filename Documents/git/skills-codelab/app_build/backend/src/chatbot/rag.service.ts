@@ -93,9 +93,10 @@ export class RagService {
 
       // 5. Búsqueda Vectorial en pgvector vía Prisma (SQL raw por mayor control)
       const chunks: any[] = await this.prisma.$queryRaw`
-        SELECT contenido_texto as content, metadata, (embedding <=> ${queryVector}::vector) as distance
-        FROM "document_chunks"
-        WHERE tenant_id = ${tenantId}::uuid
+        SELECT dc.contenido_texto as content, d.titulo as source_title, (dc.embedding <=> ${queryVector}::vector) as distance
+        FROM "document_chunks" dc
+        JOIN "documents" d ON dc.document_id = d.id
+        WHERE dc.tenant_id = ${tenantId}::uuid
         ORDER BY distance ASC
         LIMIT 5;
       `;
@@ -114,7 +115,7 @@ export class RagService {
         ? chunks.map(c => c.content).join('\n\n--- SEGMENTO ---\n\n')
         : '';
       const sources = hasDocs
-        ? Array.from(new Set(chunks.map(c => c.metadata?.source || 'Este o múltiples documentos en Base de Datos')))
+        ? Array.from(new Set(chunks.map(c => c.source_title || 'Documento en Base de Datos')))
         : [];
 
       // --- LOG DEBUG: Diagnóstico Vectorial Físico ---
